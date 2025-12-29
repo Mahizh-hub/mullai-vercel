@@ -1,0 +1,185 @@
+"use client";
+
+import {
+  BookUser,
+  CalendarDays,
+  LayoutDashboard,
+  NotebookPen,
+  ReceiptIndianRupee,
+  School,
+  Settings,
+  ShieldUser,
+  SquareUser,
+  UserRoundPen,
+  Users,
+} from "lucide-react";
+import Image from "next/image";
+import SidebarItem from "./SidebarItem";
+import { useAppStore } from "@/lib/store";
+import { TooltipProvider } from "../ui/tooltip";
+import { useSidebar } from "./SidebarContext";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+
+const navigation = [
+  {
+    name: "Dashboard",
+    href: "/dashboard/",
+    icon: LayoutDashboard,
+  },
+  {
+    name: "Campuses",
+    href: "/dashboard/campuses",
+    icon: School,
+    adminOnly: true,
+  },
+  {
+    name: "Admin Management",
+    href: "/dashboard/admin-management",
+    icon: ShieldUser,
+    adminOnly: true,
+  },
+  {
+    name: "Teachers",
+    href: "/dashboard/teachers",
+    icon: SquareUser,
+  },
+  {
+    name: "Staffs",
+    href: "/dashboard/staffs",
+    icon: Users,
+  },
+  {
+    name: "Students",
+    href: "/dashboard/students",
+    icon: UserRoundPen,
+  },
+  {
+    name: "Timetables",
+    href: "/dashboard/timetables",
+    icon: CalendarDays,
+  },
+  {
+    name: "Exams",
+    href: "/dashboard/exams",
+    icon: NotebookPen,
+  },
+  {
+    name: "Admissions",
+    href: "/dashboard/admissions",
+    icon: BookUser,
+  },
+  {
+    name: "Fees",
+    href: "/dashboard/fees",
+    icon: ReceiptIndianRupee,
+  },
+  {
+    name: "Settings",
+    href: "/dashboard/settings",
+    icon: Settings,
+  },
+];
+
+export default function Sidebar() {
+  const { currentUserRole } = useAppStore();
+  const { collapsed } = useSidebar();
+  const pathname = usePathname();
+
+  const isHome = pathname === "/dashboard";
+
+  const filteredNavigation = navigation.filter(
+    (item) => !item.adminOnly || currentUserRole === "admin",
+  );
+
+  return (
+    <TooltipProvider delayDuration={0}>
+      <aside
+        className={cn(
+          "h-full bg-white flex flex-col border-r border-gray-100 transition-all duration-300",
+          collapsed ? "w-22.5" : "w-62",
+          collapsed ? "justify-center items-center" : "",
+          isHome ? "" : "drop-shadow-sm",
+        )}
+      >
+        <div className="h-24 flex border-b border-gray-200 items-center py-3 px-6 ">
+          {collapsed ? (
+            <div className="flex items-center justify-center">
+              <Image
+                src="/logo-icon.png"
+                alt="Mullai Logo"
+                width={40}
+                height={40}
+                className="object-contain"
+                priority
+              />
+            </div>
+          ) : (
+            <Image
+              src="/logo-mullai.png"
+              alt="Mullai Full Logo"
+              width={170}
+              height={40}
+              className="object-contain"
+              priority
+            />
+          )}
+        </div>
+
+        <nav className="flex-1 px-4 py-4 space-y-3 text-sm text-gray-600">
+          {!collapsed && (
+            <p className="hidden lg:block uppercase text-xs font-medium text-gray-400 px-1">
+              Menus
+            </p>
+          )}
+
+          {collapsed ? (
+            <div className="flex flex-col gap-1">
+              {filteredNavigation.map((item) => (
+                <SidebarItem
+                  key={`${item.name}-collapsed`}
+                  label={item.name}
+                  href={item.href}
+                  icon={item.icon}
+                  collapsed
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col gap-1">
+              {filteredNavigation.map((item) => (
+                <SidebarItem
+                  key={item.name}
+                  label={item.name}
+                  href={item.href}
+                  icon={item.icon}
+                  collapsed={false}
+                />
+              ))}
+            </div>
+          )}
+        </nav>
+      </aside>
+    </TooltipProvider>
+  );
+}
+
+// <div className="flex flex-col">
+//   <SidebarItem label="Dashboard" href="" icon={LayoutDashboard} />
+
+//   {/*{isMainAdmin && (
+//   <SidebarItem label="Campuses" href="" icon={School} />
+// )}
+// {isMainAdmin && (
+//   <SidebarItem label="Admin Management" href="" icon={ShieldUser} />
+// )}*/}
+
+//   <SidebarItem label="Teachers" href="" icon={SquareUser} />
+//   <SidebarItem label="Staffs" href="" icon={Users} />
+//   <SidebarItem label="Students" href="" icon={UserRoundPen} />
+//   <SidebarItem label="Timetables" href="" icon={CalendarDays} />
+//   <SidebarItem label="Exams" href="" icon={NotebookPen} />
+//   <SidebarItem label="Admissions" href="" icon={BookUser} />
+//   <SidebarItem label="Fees" href="" icon={ReceiptIndianRupee} />
+//   <SidebarItem label="Settings" href="" icon={Settings} />
+// </div>
