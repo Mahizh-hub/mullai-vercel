@@ -64,8 +64,8 @@ export default function Topbar({
       <div
         className={cn(
           "h-18 bg-white flex items-center justify-between",
-          variant === "contained" && "mx-6 rounded-b-lg px-6",
-          variant === "full" && "w-full px-6",
+          variant === "contained" && "mx-6 rounded-b-lg px-4",
+          variant === "full" && "w-full px-4",
         )}
       >
         <Button variant="ghost" size="icon-lg" onClick={toggle}>
