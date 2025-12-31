@@ -5,7 +5,6 @@ import { useMemo, useState } from "react";
 import PageHeader from "../PageHeader";
 import { campusColumns } from "./campus-columns";
 import { DataTable } from "../DataTable";
-import TablePagination from "../TablePagination";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
 
 export type Campus = {
@@ -45,12 +44,9 @@ const sampleCampus: Campus[] = [
   },
 ];
 
-const ITEMS_PER_PAGE = 10;
-
 export default function AllCampus() {
   const [data, setData] = useState<Campus[]>(sampleCampus);
   const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
 
   const [deleteTarget, setDeleteTarget] = useState<Campus | null>(null);
 
@@ -58,14 +54,6 @@ export default function AllCampus() {
     () =>
       data.filter((c) => c.name.toLowerCase().includes(search.toLowerCase())),
     [data, search],
-  );
-
-  const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
-
-  const paginatedData = useMemo(
-    () =>
-      filteredData.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE),
-    [filteredData, page],
   );
 
   return (
@@ -83,23 +71,14 @@ export default function AllCampus() {
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
-            setPage(1);
           }}
           className="max-w-70"
         />
         <DataTable
-          data={paginatedData}
+          data={filteredData}
           columns={campusColumns((campus) => setDeleteTarget(campus))}
           rowKeyAction={(row) => row.id}
         />
-
-        <div className="flex w-full mt-4 items-end">
-          <TablePagination
-            page={page}
-            totalPages={totalPages}
-            onChange={setPage}
-          />
-        </div>
       </div>
 
       <ConfirmDeleteDialog

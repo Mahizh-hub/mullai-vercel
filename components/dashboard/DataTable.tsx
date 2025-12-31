@@ -18,6 +18,7 @@ export type DataTableColumn<T> = {
   header: string;
   cell?: (row: T) => ReactNode;
   align?: "left" | "right" | "center";
+  width?: string;
 };
 
 type Props<T extends Record<string, CellValue>> = {
@@ -34,59 +35,62 @@ export function DataTable<T extends Record<string, CellValue>>({
   className,
 }: Props<T>) {
   return (
-    <div className={cn("rounded-md mt-4", className)}>
-      <Table>
+    <div className={cn("rounded-md border border-gray-100", className)}>
+      {/* Header table */}
+      <Table className="table-fixed">
         <TableHeader className="bg-gray-100">
           <TableRow>
             {columns.map((col) => (
               <TableHead
                 key={String(col.key)}
-                className={
-                  col.align === "right"
-                    ? "text-right text-gray-600"
-                    : col.align === "center"
-                      ? "text-center text-gray-600"
-                      : " text-gray-600"
-                }
+                style={col.width ? { width: col.width } : undefined}
+                className={cn(
+                  "text-gray-600",
+                  col.align === "right" && "text-right",
+                  col.align === "center" && "text-center",
+                )}
               >
                 {col.header}
               </TableHead>
             ))}
           </TableRow>
         </TableHeader>
-
-        <TableBody>
-          {data.length === 0 ? (
-            <TableRow>
-              <TableCell
-                colSpan={columns.length}
-                className="h-24 text-center text-muted-foreground"
-              >
-                No results found
-              </TableCell>
-            </TableRow>
-          ) : (
-            data.map((row) => (
-              <TableRow key={rowKeyAction(row)}>
-                {columns.map((col) => (
-                  <TableCell
-                    key={String(col.key)}
-                    className={
-                      col.align === "right"
-                        ? "text-right"
-                        : col.align === "center"
-                          ? "text-center"
-                          : ""
-                    }
-                  >
-                    {col.cell ? col.cell(row) : row[col.key]}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
-          )}
-        </TableBody>
       </Table>
+
+      {/* Scrollable body */}
+      <div className="max-h-[calc(100vh-260px)] overflow-y-auto">
+        <Table className="table-fixed">
+          <TableBody>
+            {data.length === 0 ? (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center text-muted-foreground"
+                >
+                  No results found
+                </TableCell>
+              </TableRow>
+            ) : (
+              data.map((row) => (
+                <TableRow key={rowKeyAction(row)}>
+                  {columns.map((col) => (
+                    <TableCell
+                      key={String(col.key)}
+                      style={col.width ? { width: col.width } : undefined}
+                      className={cn(
+                        col.align === "right" && "text-right",
+                        col.align === "center" && "text-center",
+                      )}
+                    >
+                      {col.cell ? col.cell(row) : row[col.key]}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 }

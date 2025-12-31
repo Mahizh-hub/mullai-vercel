@@ -15,6 +15,7 @@ export const campusColumns = (
   {
     key: "code",
     header: "S.No",
+    width: "80px",
     cell: (row) => (
       <span className="text-sm text-muted-foreground">{row.code}</span>
     ),
@@ -22,6 +23,7 @@ export const campusColumns = (
   {
     key: "name",
     header: "Campus Name",
+    width: "30%",
     cell: (row) => (
       <div className="flex items-center gap-3">
         {row.avatar && (

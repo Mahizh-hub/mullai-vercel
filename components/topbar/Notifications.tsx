@@ -10,6 +10,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { NotificationIcon } from "../Icons";
 
 type Notification = {
   id: string;
@@ -91,7 +92,7 @@ export default function Notifications() {
         onClick={() => setOpen((prev) => !prev)}
         className="relative text-gray-600 hover:text-gray-800 transition"
       >
-        <Bell className="size-5" />
+        <NotificationIcon />
         {notifications.some((n) => n.isNew) && (
           <span className="absolute top-0.75 right-1.5 size-1.5 bg-pink-600 rounded-full" />
         )}

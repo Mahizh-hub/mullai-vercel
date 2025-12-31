@@ -175,12 +175,7 @@ export default function CampusForm() {
         <Button type="button" variant="ghost">
           Cancel
         </Button>
-        <Button
-          type="submit"
-          className="text-pink-600 transition-colors border bg-white hover:bg-pink-600 hover:text-white border-pink-600"
-        >
-          Create Campus
-        </Button>
+        <Button type="submit">Create Campus</Button>
       </div>
     </form>
   );

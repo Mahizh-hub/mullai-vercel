@@ -8,6 +8,7 @@ import { useSidebar } from "./SidebarContext";
 import Notifications from "../topbar/Notifications";
 import Profile from "../topbar/Profile";
 import Fullscreen from "../topbar/Fullscreen";
+import { MenuIcon } from "../Icons";
 
 export default function Topbar({
   variant = "contained",
@@ -69,18 +70,11 @@ export default function Topbar({
         )}
       >
         <Button variant="ghost" size="icon-lg" onClick={toggle}>
-          <svg
-            height="40px"
-            viewBox="0 -960 960 960"
-            width="40px"
-            className="size-6 fill-gray-500"
-          >
-            <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
-          </svg>
+          <MenuIcon className="size-6 fill-gray-600" />
         </Button>
 
-        <div className="flex items-center gap-3">
-          <div className="hidden md:flex text-pink-600 border border-pink-200 bg-pink-50 text-sm rounded-md py-1 px-3 items-center gap-2.5">
+        <div className="flex items-center gap-4">
+          <div className="hidden lg:flex text-wrap text-pink-600 border border-pink-200 bg-pink-50 text-sm rounded-md py-1 px-3 items-center gap-2.5">
             <Calendar className="size-4" />
             {todayLabel}
           </div>

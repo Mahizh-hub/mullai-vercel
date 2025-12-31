@@ -1,18 +1,5 @@
 "use client";
 
-import {
-  BookUser,
-  CalendarDays,
-  LayoutDashboard,
-  NotebookPen,
-  ReceiptIndianRupee,
-  School,
-  Settings,
-  ShieldUser,
-  SquareUser,
-  UserRoundPen,
-  Users,
-} from "lucide-react";
 import Image from "next/image";
 import SidebarItem from "./SidebarItem";
 import { useAppStore } from "@/lib/store";
@@ -20,64 +7,75 @@ import { TooltipProvider } from "../ui/tooltip";
 import { useSidebar } from "./SidebarContext";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import {
+  AdminManagementIcon,
+  AdmissionsIcon,
+  CampusIcon,
+  DashboardIcon,
+  ExamsIcon,
+  FeesIcon,
+  SettingsIcon,
+  TeachersIcon,
+  TimetablesIcon,
+} from "../Icons";
 
 const navigation = [
   {
     name: "Dashboard",
     href: "/dashboard/",
-    icon: LayoutDashboard,
+    icon: DashboardIcon,
   },
   {
     name: "Campuses",
     href: "/dashboard/campuses",
-    icon: School,
+    icon: CampusIcon,
     adminOnly: true,
   },
   {
-    name: "Admin Management",
-    href: "/dashboard/admin-management",
-    icon: ShieldUser,
+    name: "Employee Management",
+    href: "/dashboard/employee-management",
+    icon: AdminManagementIcon,
     adminOnly: true,
   },
   {
     name: "Teachers",
     href: "/dashboard/teachers",
-    icon: SquareUser,
+    icon: TeachersIcon,
   },
   {
     name: "Staffs",
     href: "/dashboard/staffs",
-    icon: Users,
+    icon: TeachersIcon, // reuse or create StaffIcon later
   },
   {
     name: "Students",
     href: "/dashboard/students",
-    icon: UserRoundPen,
+    icon: TeachersIcon, // reuse or add StudentsIcon
   },
   {
     name: "Timetables",
     href: "/dashboard/timetables",
-    icon: CalendarDays,
+    icon: TimetablesIcon,
   },
   {
     name: "Exams",
     href: "/dashboard/exams",
-    icon: NotebookPen,
+    icon: ExamsIcon,
   },
   {
     name: "Admissions",
     href: "/dashboard/admissions",
-    icon: BookUser,
+    icon: AdmissionsIcon,
   },
   {
     name: "Fees",
     href: "/dashboard/fees",
-    icon: ReceiptIndianRupee,
+    icon: FeesIcon,
   },
   {
     name: "Settings",
     href: "/dashboard/settings",
-    icon: Settings,
+    icon: SettingsIcon,
   },
 ];
 
@@ -163,23 +161,3 @@ export default function Sidebar() {
     </TooltipProvider>
   );
 }
-
-// <div className="flex flex-col">
-//   <SidebarItem label="Dashboard" href="" icon={LayoutDashboard} />
-
-//   {/*{isMainAdmin && (
-//   <SidebarItem label="Campuses" href="" icon={School} />
-// )}
-// {isMainAdmin && (
-//   <SidebarItem label="Admin Management" href="" icon={ShieldUser} />
-// )}*/}
-
-//   <SidebarItem label="Teachers" href="" icon={SquareUser} />
-//   <SidebarItem label="Staffs" href="" icon={Users} />
-//   <SidebarItem label="Students" href="" icon={UserRoundPen} />
-//   <SidebarItem label="Timetables" href="" icon={CalendarDays} />
-//   <SidebarItem label="Exams" href="" icon={NotebookPen} />
-//   <SidebarItem label="Admissions" href="" icon={BookUser} />
-//   <SidebarItem label="Fees" href="" icon={ReceiptIndianRupee} />
-//   <SidebarItem label="Settings" href="" icon={Settings} />
-// </div>

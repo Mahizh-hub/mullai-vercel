@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { Maximize, Minimize } from "lucide-react";
+import { MaximizeIcon, MinimizeIcon } from "../Icons";
 
 export default function Fullscreen() {
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -36,11 +36,7 @@ export default function Fullscreen() {
           variant="ghost"
           onClick={handleToggle}
         >
-          {isFullscreen ? (
-            <Minimize className="size-5" />
-          ) : (
-            <Maximize className="size-5" />
-          )}
+          {isFullscreen ? <MinimizeIcon /> : <MaximizeIcon />}
         </Button>
       </div>
     </>
