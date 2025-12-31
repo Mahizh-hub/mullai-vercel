@@ -65,21 +65,20 @@ export default function AllCampus() {
         actionLabel="Create Campus"
       />
 
-      <div>
-        <Input
-          placeholder="Search campus..."
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-          className="max-w-70"
-        />
-        <DataTable
-          data={filteredData}
-          columns={campusColumns((campus) => setDeleteTarget(campus))}
-          rowKeyAction={(row) => row.id}
-        />
-      </div>
+      <Input
+        placeholder="Search campus..."
+        value={search}
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
+        className="max-w-70"
+      />
+
+      <DataTable
+        data={filteredData}
+        columns={campusColumns((campus) => setDeleteTarget(campus))}
+        rowKeyAction={(row) => row.id}
+      />
 
       <ConfirmDeleteDialog
         open={!!deleteTarget}
