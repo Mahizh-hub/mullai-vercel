@@ -38,16 +38,6 @@ const navigation = [
     adminOnly: true,
   },
   {
-    name: "Teachers",
-    href: "/dashboard/teachers",
-    icon: TeachersIcon,
-  },
-  {
-    name: "Staffs",
-    href: "/dashboard/staffs",
-    icon: TeachersIcon, // reuse or create StaffIcon later
-  },
-  {
     name: "Students",
     href: "/dashboard/students",
     icon: TeachersIcon, // reuse or add StudentsIcon
