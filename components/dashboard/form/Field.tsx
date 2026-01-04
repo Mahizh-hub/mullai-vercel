@@ -1,24 +1,45 @@
+"use client";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+
+type SelectOption = {
+  label: string;
+  value: string;
+};
 
 type FieldProps = {
   label: string;
   placeholder?: string;
   required?: boolean;
   as?: "input" | "select";
-  children?: ReactNode;
-} & React.InputHTMLAttributes<HTMLInputElement> &
-  React.SelectHTMLAttributes<HTMLSelectElement>;
+  className?: string;
+
+  /* Select-only props */
+  options?: SelectOption[];
+  value?: string;
+  onValueChange?: (value: string) => void;
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 export function Field({
   label,
   required,
   placeholder,
   as = "input",
-  children,
   className,
+
+  options = [],
+  value,
+  onValueChange,
+
   ...props
 }: FieldProps) {
   return (
@@ -28,21 +49,26 @@ export function Field({
       </Label>
 
       {as === "select" ? (
-        <select
-          className={cn(
-            "w-full rounded-md h-10 border px-3 py-2 text-sm",
-            className,
-          )}
-          {...props}
-        >
-          {children}
-        </select>
+        <Select value={value} onValueChange={onValueChange}>
+          <SelectTrigger
+            className={cn(
+              "w-full h-10 rounded-md border px-3 text-sm",
+              className,
+            )}
+          >
+            <SelectValue placeholder={placeholder ?? "Select"} />
+          </SelectTrigger>
+
+          <SelectContent>
+            {options.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       ) : (
-        <Input
-          placeholder={placeholder}
-          {...props}
-          className={cn("h-10", className)}
-        />
+        <Input placeholder={placeholder} {...props} className={cn(className)} />
       )}
     </div>
   );

@@ -20,7 +20,17 @@ export default function SidebarItem({
   collapsed = false,
 }: Props) {
   const pathname = usePathname();
-  const isActive = pathname === href || pathname.startsWith(`${href}/`);
+
+  const normalize = (path: string) => path.replace(/\/$/, "");
+
+  const current = normalize(pathname);
+  const target = normalize(href);
+
+  const isDashboard = target === "/dashboard";
+
+  const isActive = isDashboard
+    ? current === target
+    : current === target || current.startsWith(`${target}/`);
 
   const content = (
     <Link

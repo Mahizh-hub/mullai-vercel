@@ -16,7 +16,7 @@ export default function PageHeader({
   actionLabel,
 }: Props) {
   return (
-    <div className="flex items-center mb-8 justify-between">
+    <div className="flex flex-col md:flex-row gap-6 text-center md:text-start items-center mb-8 justify-between">
       <div>
         <h2 className="font-semibold">{title}</h2>
         <p className="text-sm mt-1 text-gray-500">{subtitle}</p>

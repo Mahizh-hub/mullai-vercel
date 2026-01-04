@@ -2,11 +2,11 @@ import { Field } from "@/components/dashboard/form/Field";
 import { FileUploadField } from "@/components/dashboard/form/FileUploadField";
 import { Button } from "@/components/ui/button";
 import { EmployeeFormValues } from "@/lib/validations/employee.schema";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 export default function PersonalStep({ onNext }: { onNext: () => void }) {
-  const { register } = useFormContext();
-  const { watch, setValue } = useFormContext<EmployeeFormValues>();
+  const { register, control, watch, setValue } =
+    useFormContext<EmployeeFormValues>();
 
   const photo = watch("photo");
 
@@ -20,12 +20,14 @@ export default function PersonalStep({ onNext }: { onNext: () => void }) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* INPUTS – unchanged */}
         <Field
           label="First Name"
           placeholder="Enter first name"
           required
           {...register("firstName")}
         />
+
         <Field
           label="Last Name"
           placeholder="Enter last name"
@@ -40,35 +42,67 @@ export default function PersonalStep({ onNext }: { onNext: () => void }) {
           {...register("dob")}
         />
 
-        <Field label="Gender" as="select" required {...register("gender")}>
-          <option value="">Select</option>
-          <option>Male</option>
-          <option>Female</option>
-        </Field>
+        {/* SELECTS – fixed with Controller */}
 
-        <Field
-          label="Blood Group"
-          as="select"
-          required
-          {...register("bloodGroup")}
-        >
-          <option value="">Select</option>
-          <option>A+</option>
-          <option>B+</option>
-          <option>O+</option>
-        </Field>
+        <Controller
+          name="gender"
+          control={control}
+          render={({ field }) => (
+            <Field
+              label="Gender"
+              as="select"
+              required
+              placeholder="Select"
+              value={field.value}
+              onValueChange={field.onChange}
+              options={[
+                { label: "Male", value: "Male" },
+                { label: "Female", value: "Female" },
+              ]}
+            />
+          )}
+        />
 
-        <Field
-          label="Identification Proof"
-          as="select"
-          required
-          {...register("idProof")}
-        >
-          <option value="">Select</option>
-          <option>Aadhaar</option>
-          <option>PAN</option>
-        </Field>
+        <Controller
+          name="bloodGroup"
+          control={control}
+          render={({ field }) => (
+            <Field
+              label="Blood Group"
+              as="select"
+              required
+              placeholder="Select"
+              value={field.value}
+              onValueChange={field.onChange}
+              options={[
+                { label: "A+", value: "A+" },
+                { label: "B+", value: "B+" },
+                { label: "O+", value: "O+" },
+              ]}
+            />
+          )}
+        />
 
+        <Controller
+          name="idProof"
+          control={control}
+          render={({ field }) => (
+            <Field
+              label="Identification Proof"
+              as="select"
+              required
+              placeholder="Select"
+              value={field.value}
+              onValueChange={field.onChange}
+              options={[
+                { label: "Aadhaar", value: "Aadhaar" },
+                { label: "PAN", value: "PAN" },
+              ]}
+            />
+          )}
+        />
+
+        {/* INPUT – unchanged */}
         <Field
           label="Identification Reference Number"
           placeholder="Enter reference number"

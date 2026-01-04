@@ -58,13 +58,16 @@ export default function CreateEmployeeForm() {
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="px-6 pb-6 space-y-8"
+      >
         {/*Step Tabs*/}
         <div className="grid grid-cols-3 rounded-md overflow-hidden">
           {steps.map((label, i) => (
             <div
               key={label}
-              className={`text-center py-3 text-sm font-semibold ${i === step ? "bg-pink-500 text-white" : "bg-pink-200 text-white"}`}
+              className={`text-center py-3 flex items-center justify-center text-sm font-semibold ${i === step ? "bg-pink-500 text-white" : "bg-pink-200 text-white"}`}
             >
               {label}
             </div>

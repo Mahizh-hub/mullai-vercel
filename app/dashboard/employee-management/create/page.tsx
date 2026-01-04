@@ -3,14 +3,14 @@ import CreateEmployeeForm from "@/components/dashboard/employee/createEmployee/C
 
 export default function CreateEmployeePage() {
   return (
-    <div className="space-y-6 p-5 md:p-6">
+    <div className="space-y-6 p-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className="text-xl font-semibold">Employee Management</h3>
         <DynamicBreadcrumb />
       </div>
 
       <div className="rounded-lg bg-white">
-        <div className="border-b border-gray-50 p-6">
+        <div className="border-b text-center md:text-start border-gray-50 p-6">
           <h3 className="text-lg font-semibold">Create a new Employee</h3>
           <p className="text-sm text-muted-foreground">
             Enter the employee’s personal details to get started. You can add

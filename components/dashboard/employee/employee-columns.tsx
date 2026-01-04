@@ -19,6 +19,14 @@ export const employeeColumns = (
   onRequestDelete: (user: Employee) => void,
 ): DataTableColumn<Employee>[] => [
   {
+    key: "code",
+    header: "S.No",
+    width: "80px",
+    cell: (row) => (
+      <span className="text-sm text-muted-foreground">{row.code}</span>
+    ),
+  },
+  {
     key: "name",
     header: "Name",
     cell: (row) => (

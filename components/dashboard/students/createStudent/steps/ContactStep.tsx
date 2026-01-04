@@ -14,7 +14,12 @@ export default function ContactStep({
 
   return (
     <section className="space-y-6">
-      <h4 className="font-semibold">Contact Information</h4>
+      <div>
+        <h4 className="font-semibold">Contact Information</h4>
+        <p className="text-sm text-muted-foreground">
+          Enter student contact details
+        </p>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Field label="Door Number" required {...register("address.door")} />
@@ -38,7 +43,12 @@ export default function ContactStep({
       </div>
 
       <div className="flex justify-end gap-3">
-        <Button type="button" variant="ghost" onClick={onBack}>
+        <Button
+          type="button"
+          variant="outline"
+          className="border-red-600 text-red-600 hover:text-red-700"
+          onClick={onBack}
+        >
           Back
         </Button>
         <Button

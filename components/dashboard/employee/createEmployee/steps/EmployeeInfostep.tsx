@@ -16,7 +16,12 @@ export default function EmployeeInfoStep({ onBack }: { onBack: () => void }) {
 
   return (
     <section className="space-y-6">
-      <h4 className="font-semibold">Employee Information</h4>
+      <div>
+        <h4 className="font-semibold">Employee Information</h4>
+        <p className="text-sm text-muted-foreground">
+          Enter the employee&apos;s professional details
+        </p>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Field
@@ -118,7 +123,12 @@ export default function EmployeeInfoStep({ onBack }: { onBack: () => void }) {
       </div>
 
       <div className="flex justify-end gap-3">
-        <Button type="button" variant="ghost" onClick={onBack}>
+        <Button
+          type="button"
+          variant="outline"
+          className="border-red-600 text-red-600 hover:text-red-700"
+          onClick={onBack}
+        >
           Back
         </Button>
         <Button type="submit" className="bg-pink-500 text-white">

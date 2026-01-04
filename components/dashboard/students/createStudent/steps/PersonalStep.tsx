@@ -1,11 +1,12 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, Controller } from "react-hook-form";
 import { StudentFormValues } from "../CreateStudentForm";
 import { Field } from "@/components/dashboard/form/Field";
 import { FileUploadField } from "@/components/dashboard/form/FileUploadField";
 import { Button } from "@/components/ui/button";
 
 export default function PersonalStep({ onNext }: { onNext: () => void }) {
-  const { register, watch, setValue } = useFormContext<StudentFormValues>();
+  const { register, watch, setValue, control } =
+    useFormContext<StudentFormValues>();
 
   const photo = watch("photo");
 
@@ -19,13 +20,29 @@ export default function PersonalStep({ onNext }: { onNext: () => void }) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Field label="Branch" required as="select" {...register("branch")}>
-          <option>Branch 1</option>
-          <option>Branch 2</option>
-          <option>Branch 3</option>
-        </Field>
-        <Field label="Roll Number" required {...register("rollNumber")} />
+        {/* Branch – SELECT */}
+        <Controller
+          name="branch"
+          control={control}
+          render={({ field }) => (
+            <Field
+              label="Branch"
+              as="select"
+              required
+              placeholder="Select"
+              value={field.value}
+              onValueChange={field.onChange}
+              options={[
+                { label: "Branch 1", value: "Branch 1" },
+                { label: "Branch 2", value: "Branch 2" },
+                { label: "Branch 3", value: "Branch 3" },
+              ]}
+            />
+          )}
+        />
 
+        {/* INPUTS – unchanged */}
+        <Field label="Roll Number" required {...register("rollNumber")} />
         <Field label="First Name" required {...register("firstName")} />
         <Field label="Last Name" required {...register("lastName")} />
 
@@ -35,12 +52,12 @@ export default function PersonalStep({ onNext }: { onNext: () => void }) {
           required
           {...register("joinDate")}
         />
-        <Field label="Class" required {...register("class")} />
 
+        <Field label="Class" required {...register("class")} />
         <Field label="Section" required {...register("section")} />
         <Field label="Group" {...register("group")} />
-
         <Field label="Language Group" {...register("languageGroup")} />
+
         <Field
           label="Date of Birth"
           type="date"
@@ -48,35 +65,68 @@ export default function PersonalStep({ onNext }: { onNext: () => void }) {
           {...register("dob")}
         />
 
-        <Field label="Gender" as="select" required {...register("gender")}>
-          <option value="">Select</option>
-          <option>Male</option>
-          <option>Female</option>
-        </Field>
+        {/* Gender – SELECT */}
+        <Controller
+          name="gender"
+          control={control}
+          render={({ field }) => (
+            <Field
+              label="Gender"
+              as="select"
+              required
+              placeholder="Select"
+              value={field.value}
+              onValueChange={field.onChange}
+              options={[
+                { label: "Male", value: "Male" },
+                { label: "Female", value: "Female" },
+              ]}
+            />
+          )}
+        />
 
-        <Field
-          label="Blood Group"
-          as="select"
-          required
-          {...register("bloodGroup")}
-        >
-          <option value="">Select</option>
-          <option>A+</option>
-          <option>B+</option>
-          <option>O+</option>
-        </Field>
+        {/* Blood Group – SELECT */}
+        <Controller
+          name="bloodGroup"
+          control={control}
+          render={({ field }) => (
+            <Field
+              label="Blood Group"
+              as="select"
+              required
+              placeholder="Select"
+              value={field.value}
+              onValueChange={field.onChange}
+              options={[
+                { label: "A+", value: "A+" },
+                { label: "B+", value: "B+" },
+                { label: "O+", value: "O+" },
+              ]}
+            />
+          )}
+        />
 
-        <Field
-          label="Identification Proof"
-          as="select"
-          required
-          {...register("idProof")}
-        >
-          <option value="">Select</option>
-          <option>Aadhaar</option>
-          <option>PAN</option>
-        </Field>
+        {/* ID Proof – SELECT */}
+        <Controller
+          name="idProof"
+          control={control}
+          render={({ field }) => (
+            <Field
+              label="Identification Proof"
+              as="select"
+              required
+              placeholder="Select"
+              value={field.value}
+              onValueChange={field.onChange}
+              options={[
+                { label: "Aadhaar", value: "Aadhaar" },
+                { label: "PAN", value: "PAN" },
+              ]}
+            />
+          )}
+        />
 
+        {/* INPUT – unchanged */}
         <Field
           label="ID Reference Number"
           required

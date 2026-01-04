@@ -99,7 +99,15 @@ export default function Notifications() {
       </Button>
 
       {open && (
-        <div className="absolute z-10 right-0 mt-6 w-96 rounded-xl bg-white shadow-sm">
+        <div
+          className="fixed sm:absolute z-50
+              inset-x-0 top-20 sm:top-auto
+              sm:right-0 right-0 sm:left-auto sm:inset-x-auto
+              mt-0 border sm:mt-6
+              w-full sm:w-96
+              rounded-2xl sm:rounded-xl
+              bg-white shadow-lg"
+        >
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-4 border-dashed border-b border-gray-200">
             <h4 className="font-semibold text-sm text-gray-600">

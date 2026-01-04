@@ -115,7 +115,7 @@ export default function Stats() {
                   <span className="block text-sm text-gray-600">
                     {item.label}
                   </span>
-                  <h5 className="mt-1 text-xl font-semibold text-gray-900">
+                  <h5 className="mt-1 text-xl font-semibold text-wrap text-gray-800">
                     {item.value}
                   </h5>
                 </div>

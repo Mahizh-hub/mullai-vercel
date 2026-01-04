@@ -27,30 +27,33 @@ export function PasswordField({
       <Label>
         {label} <span className="text-destructive">*</span>
       </Label>
+      <div className="flex flex-col gap-1">
+        <div className="relative">
+          <Input
+            type={visible ? "text" : "password"}
+            placeholder={placeholder}
+            className={cn("pr-10", error && "border-destructive")}
+            {...registration}
+          />
 
-      <div className="relative">
-        <Input
-          type={visible ? "text" : "password"}
-          placeholder={placeholder}
-          className={cn("pr-10", error && "border-destructive")}
-          {...registration}
-        />
+          <button
+            type="button"
+            aria-label={visible ? "Hide password" : "Show password"}
+            onClick={() => setVisible((v) => !v)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+          >
+            {visible ? (
+              <EyeOff className="h-4 w-4" />
+            ) : (
+              <Eye className="h-4 w-4" />
+            )}
+          </button>
+        </div>
 
-        <button
-          type="button"
-          aria-label={visible ? "Hide password" : "Show password"}
-          onClick={() => setVisible((v) => !v)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-        >
-          {visible ? (
-            <EyeOff className="h-4 w-4" />
-          ) : (
-            <Eye className="h-4 w-4" />
-          )}
-        </button>
+        {error && (
+          <p className="text-xs ml-1 text-destructive">{error.message}</p>
+        )}
       </div>
-
-      {error && <p className="text-xs text-destructive">{error.message}</p>}
     </div>
   );
 }

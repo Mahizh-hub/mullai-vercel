@@ -37,7 +37,7 @@ export function DataTable<T extends Record<string, CellValue>>({
   return (
     <div className={cn("rounded-md border border-gray-100", className)}>
       {/* Header table */}
-      <Table className="table-fixed">
+      <Table>
         <TableHeader className="bg-gray-100">
           <TableRow>
             {columns.map((col) => (
@@ -55,42 +55,38 @@ export function DataTable<T extends Record<string, CellValue>>({
             ))}
           </TableRow>
         </TableHeader>
-      </Table>
 
-      {/* Scrollable body */}
-      <div className="max-h-[calc(100vh-260px)] overflow-y-auto">
-        <Table className="table-fixed">
-          <TableBody>
-            {data.length === 0 ? (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center text-muted-foreground"
-                >
-                  No results found
-                </TableCell>
+        {/* Scrollable body */}
+        <TableBody className="max-h-[calc(100vh-260px)] overflow-y-auto">
+          {data.length === 0 ? (
+            <TableRow>
+              <TableCell
+                colSpan={columns.length}
+                className="h-24 text-center text-muted-foreground"
+              >
+                No results found
+              </TableCell>
+            </TableRow>
+          ) : (
+            data.map((row) => (
+              <TableRow key={rowKeyAction(row)}>
+                {columns.map((col) => (
+                  <TableCell
+                    key={String(col.key)}
+                    style={col.width ? { width: col.width } : undefined}
+                    className={cn(
+                      col.align === "right" && "text-right",
+                      col.align === "center" && "text-center",
+                    )}
+                  >
+                    {col.cell ? col.cell(row) : row[col.key]}
+                  </TableCell>
+                ))}
               </TableRow>
-            ) : (
-              data.map((row) => (
-                <TableRow key={rowKeyAction(row)}>
-                  {columns.map((col) => (
-                    <TableCell
-                      key={String(col.key)}
-                      style={col.width ? { width: col.width } : undefined}
-                      className={cn(
-                        col.align === "right" && "text-right",
-                        col.align === "center" && "text-center",
-                      )}
-                    >
-                      {col.cell ? col.cell(row) : row[col.key]}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
-      </div>
+            ))
+          )}
+        </TableBody>
+      </Table>
     </div>
   );
 }

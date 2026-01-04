@@ -27,7 +27,7 @@ export default function CampusForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 px-6 py-1">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 px-6 py-1">
       {/* Basic Info */}
       <section className="grid grid-cols-1 gap-4">
         <Field
@@ -84,14 +84,16 @@ export default function CampusForm() {
       </section>
 
       {/* Auth */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <section className="grid grid-cols-1 mb-4 md:grid-cols-2 gap-4">
         <PasswordField
           label="Password"
+          placeholder="Enter password"
           registration={register("password")}
           error={errors.password}
         />
         <PasswordField
           label="Confirm Password"
+          placeholder="Confirm password"
           registration={register("confirmPassword")}
           error={errors.confirmPassword}
         />
@@ -172,7 +174,7 @@ export default function CampusForm() {
 
       {/* Actions */}
       <div className="flex justify-end gap-3 py-4">
-        <Button type="button" variant="ghost">
+        <Button type="button" className="bg-red-600 text-white" variant="ghost">
           Cancel
         </Button>
         <Button type="submit">Create Campus</Button>
@@ -199,8 +201,12 @@ function Field({
         {label}
         {required && <span className="text-destructive">*</span>}
       </Label>
-      <Input {...props} className="py-6" />
-      {error && <p className="text-xs text-destructive">{error.message}</p>}
+      <div className="flex flex-col gap-1">
+        <Input {...props} className="py-6" />
+        {error && (
+          <p className="text-xs ml-1 text-destructive">{error.message}</p>
+        )}
+      </div>
     </div>
   );
 }

@@ -9,6 +9,7 @@ import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
 
 export type Employee = {
   id: number;
+  code: number;
   name: string;
   status: "active" | "inactive";
   phone: string;
@@ -19,6 +20,7 @@ export type Employee = {
 const sampleUsers: Employee[] = [
   {
     id: 1,
+    code: 101,
     name: "Vijay John",
     status: "active",
     phone: "9734567890",
@@ -27,6 +29,7 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 2,
+    code: 102,
     name: "Michael Bay",
     status: "inactive",
     phone: "9734567891",
@@ -35,6 +38,7 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 3,
+    code: 103,
     name: "Arun Kumar",
     status: "active",
     phone: "9734567892",
@@ -43,6 +47,7 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 4,
+    code: 104,
     name: "Suresh Patel",
     status: "inactive",
     phone: "9734567893",
@@ -51,14 +56,16 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 5,
+    code: 105,
     name: "Karthik Raja",
     status: "active",
     phone: "9734567894",
-    roles: ["Campus Admin"],
+    roles: ["Branch Admin"],
     avatar: "/users/user57.jpg",
   },
   {
     id: 6,
+    code: 106,
     name: "Rahul Verma",
     status: "inactive",
     phone: "9734567895",
@@ -67,6 +74,7 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 7,
+    code: 107,
     name: "Manoj Singh",
     status: "active",
     phone: "9734567896",
@@ -75,6 +83,7 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 8,
+    code: 108,
     name: "Deepak Sharma",
     status: "inactive",
     phone: "9734567897",
@@ -83,6 +92,7 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 9,
+    code: 109,
     name: "Praveen Nair",
     status: "active",
     phone: "9734567898",
@@ -91,6 +101,7 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 10,
+    code: 110,
     name: "Ajith Menon",
     status: "inactive",
     phone: "9734567899",
@@ -99,6 +110,7 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 11,
+    code: 111,
     name: "Sanjay Gupta",
     status: "active",
     phone: "9734567800",
@@ -107,6 +119,7 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 12,
+    code: 112,
     name: "Naveen Prasad",
     status: "inactive",
     phone: "9734567801",
@@ -115,6 +128,7 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 13,
+    code: 113,
     name: "Rohit Malhotra",
     status: "active",
     phone: "9734567802",
@@ -123,14 +137,16 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 14,
+    code: 114,
     name: "Balaji Iyer",
     status: "inactive",
     phone: "9734567803",
-    roles: ["Campus Admin"],
+    roles: ["Branch Admin"],
     avatar: "/users/user56.jpg",
   },
   {
     id: 15,
+    code: 115,
     name: "Vinoth Kumar",
     status: "active",
     phone: "9734567804",
@@ -139,6 +155,7 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 16,
+    code: 116,
     name: "Ashwin Rao",
     status: "inactive",
     phone: "9734567805",
@@ -147,6 +164,7 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 17,
+    code: 117,
     name: "Harish Patel",
     status: "active",
     phone: "9734567806",
@@ -155,6 +173,7 @@ const sampleUsers: Employee[] = [
   },
   {
     id: 18,
+    code: 118,
     name: "Lokesh Anand",
     status: "inactive",
     phone: "9734567807",
