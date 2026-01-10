@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 
 const inter = Inter({
   subsets: ["latin"],
+  style: ["italic", "normal"],
 });
 
 export const metadata: Metadata = {
