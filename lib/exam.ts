@@ -7,6 +7,6 @@ export type ExamRow = {
   session: "Morning" | "Afternoon";
   subject: string;
   markingType: "Marks" | "Grade";
-  total: number | "";
-  passPercentage: number | "";
+  total: string;
+  passPercentage: string;
 };
