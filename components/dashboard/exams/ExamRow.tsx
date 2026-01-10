@@ -39,7 +39,7 @@ export default function ExamRowItem({
           type="date"
           value={row.date}
           onChange={(e) => handleDateChange(e.target.value)}
-          className="h-9 text-xs"
+          className="h-8 text-xs"
         />
       </td>
 
@@ -52,7 +52,7 @@ export default function ExamRowItem({
           onChange={(e) =>
             onChangeAction(row.id, { startTime: e.target.value })
           }
-          className="h-9 text-xs"
+          className="h-8 text-xs"
         />
       </td>
 
@@ -61,7 +61,7 @@ export default function ExamRowItem({
           type="time"
           value={row.endTime}
           onChange={(e) => onChangeAction(row.id, { endTime: e.target.value })}
-          className="h-9 text-xs"
+          className="h-8 text-xs"
         />
       </td>
 
@@ -72,7 +72,7 @@ export default function ExamRowItem({
             onChangeAction(row.id, { session: v as ExamRow["session"] })
           }
         >
-          <SelectTrigger size="sm" className="h-9 text-xs">
+          <SelectTrigger size="sm" className="h-8 text-xs">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -88,7 +88,7 @@ export default function ExamRowItem({
           value={row.subject}
           onValueChange={(v) => onChangeAction(row.id, { subject: v })}
         >
-          <SelectTrigger size="sm" className="h-9 text-xs">
+          <SelectTrigger size="sm" className="h-8 text-xs">
             <SelectValue placeholder="Subject" />
           </SelectTrigger>
           <SelectContent>
@@ -107,7 +107,7 @@ export default function ExamRowItem({
             onChangeAction(row.id, { markingType: v as ExamRow["markingType"] })
           }
         >
-          <SelectTrigger size="sm" className="h-9 text-xs">
+          <SelectTrigger size="sm" className="h-8 text-xs">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -123,7 +123,7 @@ export default function ExamRowItem({
           placeholder="100"
           value={row.total}
           onChange={(e) => onChangeAction(row.id, { total: e.target.value })}
-          className="h-9 text-xs"
+          className="h-8 text-xs"
         />
       </td>
 
@@ -135,7 +135,7 @@ export default function ExamRowItem({
           onChange={(e) =>
             onChangeAction(row.id, { passPercentage: e.target.value })
           }
-          className="h-9 text-xs"
+          className="h-8 text-xs"
         />
       </td>
 

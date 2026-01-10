@@ -71,7 +71,7 @@ export default function AllCampus() {
         onChange={(e) => {
           setSearch(e.target.value);
         }}
-        className="max-w-70"
+        className="max-w-70 h-8"
       />
 
       <DataTable

@@ -29,20 +29,24 @@ export type Fee = {
   dob?: string;
   address?: string;
 
-  history?: {
-    id: number;
-    exam: string;
-    date: string;
-    transactionId: string;
-    mode: string;
-    amount: number;
-    status: "Paid" | "Pending" | "Partial";
-  }[];
+  history?: FeeHistory[];
 };
 
+export type FeeHistory = {
+  id: number;
+  exam: string;
+  date: string;
+  transactionId: string;
+  mode: string;
+  amount: number;
+  status: "Paid" | "Pending" | "Partial";
+};
+
+export type FeeRow = Omit<Fee, "history">;
+
 export const feesColumns = (
-  onDelete: (row: Fee) => void,
-): DataTableColumn<Fee>[] => [
+  onDelete: (row: FeeRow) => void,
+): DataTableColumn<FeeRow>[] => [
   {
     key: "name",
     header: "Name",

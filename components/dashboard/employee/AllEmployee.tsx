@@ -208,7 +208,7 @@ export default function AllEmployee() {
         onChange={(e) => {
           setSearch(e.target.value);
         }}
-        className="max-w-xs"
+        className="max-w-xs h-8"
       />
 
       <DataTable

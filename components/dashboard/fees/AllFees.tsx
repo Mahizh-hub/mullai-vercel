@@ -5,11 +5,11 @@ import PageHeader from "../PageHeader";
 import { Input } from "@/components/ui/input";
 import { DataTable } from "../DataTable";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
-import { feesColumns, Fee } from "./fees-columns";
+import { feesColumns, Fee, FeeRow } from "./fees-columns";
 import { feesData } from "./fees.data";
 
 export default function AllFees() {
-  const [data, setData] = useState<Fee[]>(feesData);
+  const [data, setData] = useState<FeeRow[]>(feesData);
   const [search, setSearch] = useState("");
   const [deleteTarget, setDeleteTarget] = useState<Fee | null>(null);
 
@@ -34,7 +34,7 @@ export default function AllFees() {
         placeholder="Search student..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="max-w-xs"
+        className="max-w-xs h-8"
       />
 
       <DataTable

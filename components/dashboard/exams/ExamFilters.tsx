@@ -18,7 +18,7 @@ export default function ExamFilters({
     <div className="flex flex-wrap justify-between gap-3">
       <div className="flex gap-2">
         <Select>
-          <SelectTrigger className="w-44">
+          <SelectTrigger className="w-44" size="sm">
             <SelectValue placeholder="Select Class" />
           </SelectTrigger>
           <SelectContent>
@@ -28,7 +28,7 @@ export default function ExamFilters({
         </Select>
 
         <Select>
-          <SelectTrigger className="w-44">
+          <SelectTrigger className="w-44" size="sm">
             <SelectValue placeholder="Select Section" />
           </SelectTrigger>
           <SelectContent>
@@ -38,7 +38,7 @@ export default function ExamFilters({
         </Select>
 
         <Select>
-          <SelectTrigger className="w-52">
+          <SelectTrigger className="w-52" size="sm">
             <SelectValue placeholder="Select Exam Type" />
           </SelectTrigger>
           <SelectContent>
@@ -52,7 +52,7 @@ export default function ExamFilters({
         placeholder="Seach here"
         value={search}
         onChange={(e) => onSearchChange(e.target.value)}
-        className="max-w-xs"
+        className="max-w-xs h-8"
       />
     </div>
   );
