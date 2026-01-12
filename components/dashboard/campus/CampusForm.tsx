@@ -278,7 +278,7 @@ function SelectField({
       </Label>
       <div className="flex flex-col gap-1">
         <Select value={value} onValueChange={onValueChange}>
-          <SelectTrigger className="h-12">
+          <SelectTrigger className="w-full h-12">
             <SelectValue placeholder={placeholder} />
           </SelectTrigger>
           <SelectContent>
