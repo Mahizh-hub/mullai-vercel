@@ -28,7 +28,7 @@ export default function AllFees() {
     () =>
       data.filter((row) => {
         const matchesSearch = row.name.toLowerCase().includes(search.toLowerCase());
-        const matchesClass = !selectedClass || selectedClass === "all" || row.class === selectedClass;
+        const matchesClass = !selectedClass || selectedClass === "all" || row.className === selectedClass;
         const matchesSection = !selectedSection || selectedSection === "all" || row.section === selectedSection;
         
         return matchesSearch && matchesClass && matchesSection;
