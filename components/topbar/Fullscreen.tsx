@@ -29,7 +29,7 @@ export default function Fullscreen() {
 
   return (
     <>
-      <div className="relative">
+      <div className="relative hidden lg:flex">
         <Button
           size="icon"
           type="button"

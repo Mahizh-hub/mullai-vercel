@@ -32,7 +32,6 @@ export const studentColumns = (
     ),
   },
   { key: "phone", header: "Phone Number", width: "15%" },
-  { key: "rollNumber", header: "Roll Number", width: "12%" },
   { key: "class", header: "Class", width: "10%" },
   { key: "section", header: "Section", width: "10%" },
   {

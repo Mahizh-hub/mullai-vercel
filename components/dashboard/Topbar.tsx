@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Calendar } from "lucide-react";
+import { Calendar, ChevronDown, School } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { useSidebar } from "./SidebarContext";
@@ -9,6 +9,7 @@ import Notifications from "../topbar/Notifications";
 import Profile from "../topbar/Profile";
 import Fullscreen from "../topbar/Fullscreen";
 import { MenuIcon } from "../Icons";
+import { CampusSelect } from "./main/CampusSelect";
 
 export default function Topbar({
   variant = "contained",
@@ -69,9 +70,13 @@ export default function Topbar({
           variant === "full" && "w-full px-4",
         )}
       >
-        <Button variant="ghost" size="icon-lg" onClick={toggle}>
-          <MenuIcon className="size-6 fill-gray-600" />
-        </Button>
+        <div className="flex items-center gap-4">
+          <Button variant="ghost" size="icon-lg" onClick={toggle}>
+            <MenuIcon className="size-6 fill-gray-600" />
+          </Button>
+
+          <CampusSelect />
+        </div>
 
         <div className="flex items-center gap-4">
           <div className="hidden lg:flex text-wrap text-pink-600 border border-pink-200 bg-pink-50 text-sm rounded-md py-1 px-3 items-center gap-2.5">
