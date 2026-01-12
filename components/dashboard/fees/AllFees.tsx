@@ -48,7 +48,7 @@ export default function AllFees() {
 
       {/* Filters */}
       <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-4">
-        <div className="grid grid-cols-1md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Select value={academicYear} onValueChange={setAcademicYear}>
           <SelectTrigger size="sm" className="w-[200px] bg-gray-50">
             <SelectValue placeholder="Select Academic year" />
