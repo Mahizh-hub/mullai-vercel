@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import PageHeader from "../PageHeader";
 import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
 import { DataTable } from "../DataTable";
 import { studentColumns } from "./student-columns";
@@ -89,26 +90,30 @@ export default function AllStudents() {
   const filtered = useMemo(
     () =>
       data.filter((s) => s.name.toLowerCase().includes(search.toLowerCase())),
-    [data, search],
+    [data, search]
   );
 
   return (
-    <div className="rounded-lg bg-white p-6 space-y-4 border border-gray-50">
+    <div className="card-base">
       <PageHeader
         title="Students List"
         subtitle="View and manage student profiles, academic details, staff, and parent information."
         actionHref="/dashboard/students/create"
         actionLabel="Create Student"
+        subtitleExtra="Use filters and search to quickly find students across different classes and sections"
       />
 
-      <Input
-        placeholder="Search student..."
-        value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
-        className="max-w-70 h-8"
-      />
+      <div className="relative max-w-sm">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <Input
+          placeholder="Search student..."
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+          className="pl-9 h-10"
+        />
+      </div>
 
       <DataTable
         data={filtered}

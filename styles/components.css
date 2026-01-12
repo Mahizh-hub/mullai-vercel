@@ -1,0 +1,127 @@
+@layer layout {
+  /* ========================================
+     LAYOUT UTILITIES
+     ======================================== */
+
+  .flex-center {
+    @apply flex items-center;
+  }
+
+  .flex-center-between {
+    @apply flex items-center justify-between;
+  }
+
+  .flex-center-gap-2 {
+    @apply flex items-center gap-2;
+  }
+
+  .flex-center-gap-3 {
+    @apply flex items-center gap-3;
+  }
+
+  .flex-center-gap-4 {
+    @apply flex items-center gap-4;
+  }
+
+  .flex-responsive {
+    @apply flex flex-col gap-3 text-center
+           md:flex-row md:items-center md:justify-between md:text-left;
+  }
+}
+
+@layer components {
+  /* ========================================
+     CARD PATTERNS
+     ======================================== */
+
+  .card-base {
+    @apply rounded-lg bg-white p-6 border
+           border-[oklch(0.97_0.01_106.42)] space-y-4;
+  }
+
+  .card-widget {
+    @apply rounded-md bg-white border
+           border-gray-200
+           p-5 md:p-6;
+  }
+
+  .card-nested {
+    @apply rounded-lg border
+           border-[oklch(0.89_0.01_106.42)]
+           p-4 space-y-4;
+  }
+
+  /* ========================================
+     FORM PATTERNS
+     ======================================== */
+
+  .form-section {
+    @apply grid grid-cols-1 gap-4;
+  }
+
+  .form-grid {
+    @apply grid grid-cols-1 gap-4 md:grid-cols-2;
+  }
+
+  .field-container {
+    @apply flex flex-col gap-3;
+  }
+
+  .field-label {
+    @apply flex items-center gap-1
+           text-[oklch(0.45_0.01_106.42)];
+  }
+
+  .field-error {
+    @apply ml-1 text-xs leading-4 text-destructive;
+  }
+}
+
+@layer utilities {
+  /* ========================================
+     BUTTON PATTERNS
+     ======================================== */
+
+  .btn-pink-outline {
+    @apply border
+           text-[oklch(0.61_0.25_353.85)]
+           border-[oklch(0.61_0.25_353.85)]
+           hover:text-[oklch(0.54_0.25_353.85)];
+  }
+
+  /* ========================================
+     TEXT PATTERNS
+     ======================================== */
+
+  .text-muted-sm {
+    @apply text-sm leading-5
+           text-[oklch(0.55_0.01_106.42)];
+  }
+
+  .text-muted-xs {
+    @apply text-xs leading-4
+           text-[oklch(0.55_0.01_106.42)];
+  }
+
+  /* ========================================
+     AVATAR + NAME PATTERN
+     ======================================== */
+
+  .avatar-display {
+    @apply flex items-center gap-3;
+  }
+
+  .avatar-img {
+    @apply w-10 h-10 rounded-full;
+  }
+
+  .avatar-name {
+    @apply font-medium
+           text-[oklch(0.15_0.01_106.42)];
+  }
+
+  .avatar-meta {
+    @apply text-sm leading-5
+           text-[oklch(0.55_0.01_106.42)];
+  }
+}

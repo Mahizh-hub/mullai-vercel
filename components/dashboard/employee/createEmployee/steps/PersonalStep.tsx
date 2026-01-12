@@ -3,6 +3,7 @@ import { FileUploadField } from "@/components/dashboard/form/FileUploadField";
 import { Button } from "@/components/ui/button";
 import { EmployeeFormValues } from "@/lib/validations/employee.schema";
 import { Controller, useFormContext } from "react-hook-form";
+import { BLOOD_GROUPS, ID_PROOF_TYPES } from "@/lib/constants/locations";
 
 export default function PersonalStep({ onNext }: { onNext: () => void }) {
   const { register, control, watch, setValue } =
@@ -19,7 +20,7 @@ export default function PersonalStep({ onNext }: { onNext: () => void }) {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* INPUTS – unchanged */}
         <Field
           label="First Name"
@@ -74,11 +75,7 @@ export default function PersonalStep({ onNext }: { onNext: () => void }) {
               placeholder="Select"
               value={field.value}
               onValueChange={field.onChange}
-              options={[
-                { label: "A+", value: "A+" },
-                { label: "B+", value: "B+" },
-                { label: "O+", value: "O+" },
-              ]}
+              options={BLOOD_GROUPS}
             />
           )}
         />
@@ -94,10 +91,7 @@ export default function PersonalStep({ onNext }: { onNext: () => void }) {
               placeholder="Select"
               value={field.value}
               onValueChange={field.onChange}
-              options={[
-                { label: "Aadhaar", value: "Aadhaar" },
-                { label: "PAN", value: "PAN" },
-              ]}
+              options={ID_PROOF_TYPES}
             />
           )}
         />

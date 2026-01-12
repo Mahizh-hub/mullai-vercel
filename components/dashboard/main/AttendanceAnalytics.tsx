@@ -109,9 +109,9 @@ export default function AttendanceAnalytics() {
 
   /* ---------------- UI ---------------- */
   return (
-    <div className="rounded-md bg-white border border-gray-200 p-5 md:p-6">
+    <div className="card-widget">
       {/* Header */}
-      <div className="mb-5 flex items-center justify-between">
+      <div className="mb-5 flex-center-between">
         <h5 className="font-semibold text-lg">Attendance Analytics</h5>
 
         <DropdownMenu>
@@ -119,7 +119,7 @@ export default function AttendanceAnalytics() {
             <Button
               variant="outline"
               size="sm"
-              className="flex text-sm items-center gap-2"
+              className="flex-center text-sm gap-2"
             >
               {selectedOption}
               <ChevronDown className="h-4 w-4" />

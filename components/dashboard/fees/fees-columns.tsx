@@ -50,9 +50,9 @@ export const feesColumns = (
   {
     key: "name",
     header: "Name",
-    width: "25%",
+    width: "30%",
     cell: (row) => (
-      <div className="flex items-center gap-3">
+      <div className="flex-center-gap-3">
         {row.avatar && (
           <Image
             src={row.avatar}
@@ -66,7 +66,6 @@ export const feesColumns = (
       </div>
     ),
   },
-  { key: "phone", header: "Phone No" },
   { key: "rollNo", header: "Roll No" },
   {
     key: "status",

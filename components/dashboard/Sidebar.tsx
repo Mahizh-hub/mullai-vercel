@@ -82,17 +82,19 @@ export default function Sidebar() {
 
   return (
     <TooltipProvider delayDuration={0}>
-      <aside
+    <aside
         className={cn(
           "fixed lg:static inset-y-0 left-0 z-50",
           "bg-white flex flex-col border-r border-gray-100",
           "transition-all duration-300 ease-in-out",
+          "will-change-[width,transform]",
           "h-full",
           collapsed ? "lg:w-20.5 w-0 overflow-hidden" : "lg:w-66 w-66",
           collapsed ? "max-lg:-translate-x-full" : "max-lg:translate-x-0",
           !collapsed && "max-lg:shadow-xl",
           isHome ? "" : "drop-shadow-sm",
         )}
+        style={{ transform: 'translateZ(0)' }}
       >
         <div className="h-24 flex border-b border-gray-200 items-center py-3 px-6 ">
           {collapsed ? (

@@ -44,9 +44,9 @@ const events: Event[] = [
 
 export default function UpcomingEvents() {
   return (
-    <div className="mb-6 rounded-md bg-white border border-gray-200 p-5 md:p-6">
+    <div className="card-widget">
       {/* Header */}
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-4 flex-center-between">
         <h5 className="font-semibold text-lg">Upcoming Events</h5>
         <div>
           <div className="swiper-pagination-upcoming-events swiper-pagination-clickable" />
@@ -66,7 +66,7 @@ export default function UpcomingEvents() {
         {events.map((event, index) => (
           <SwiperSlide key={index}>
             <div className="rounded-md bg-gray-50 p-3">
-              <div className="flex items-center justify-between">
+              <div className="flex-center-between">
                 <span className="font-medium">{event.title}</span>
                 <span className="text-sm text-gray-500">{event.date}</span>
               </div>

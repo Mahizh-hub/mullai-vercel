@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import PageHeader from "../PageHeader";
 import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 import { DataTable } from "../DataTable";
 import { employeeColumns } from "./employee-columns";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
@@ -194,22 +195,26 @@ export default function AllEmployee() {
   );
 
   return (
-    <div className="rounded-lg bg-white p-6 space-y-4">
+    <div className="card-base">
       <PageHeader
         title="Employee List"
         subtitle="Manage employee records, update details, and track roles and assignments."
         actionLabel="Create Employee"
         actionHref="/dashboard/employee-management/create"
+        subtitleExtra="Assign roles and permissions to control access across different modules"
       />
 
-      <Input
-        placeholder="Search employee..."
-        value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
-        className="max-w-xs h-8"
-      />
+      <div className="relative max-w-sm">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <Input
+          placeholder="Search employee..."
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+          className="pl-9 h-10"
+        />
+      </div>
 
       <DataTable
         data={filtered}

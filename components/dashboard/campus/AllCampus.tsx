@@ -1,6 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import PageHeader from "../PageHeader";
 import { campusColumns } from "./campus-columns";
@@ -57,22 +58,26 @@ export default function AllCampus() {
   );
 
   return (
-    <div className="rounded-lg bg-white p-6 space-y-4 border border-gray-50">
+    <div className="card-base">
       <PageHeader
         title="Campuses List"
         subtitle="View and manage all registered campuses, including their classes, staff, and student details."
         actionHref="/dashboard/campuses/create"
         actionLabel="Create Campus"
+        subtitleExtra="Each campus can have its own admin, classes, and sections configuration"
       />
 
-      <Input
-        placeholder="Search campus..."
-        value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
-        className="max-w-70 h-8"
-      />
+      <div className="relative max-w-sm">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <Input
+          placeholder="Search campus..."
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+          className="pl-9 h-10"
+        />
+      </div>
 
       <DataTable
         data={filteredData}

@@ -32,7 +32,8 @@ function DashboardLayoutInner({
 
       <div
         id="dashboard-scroll"
-        className="flex-1 flex flex-col overflow-y-auto relative z-10"
+        className="flex-1 flex flex-col overflow-y-auto relative z-10 will-change-transform"
+        style={{ transform: 'translateZ(0)' }}
       >
         <Topbar variant="contained" />
         <main className="flex-1 py-1 px-2">{children}</main>

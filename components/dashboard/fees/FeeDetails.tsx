@@ -17,7 +17,7 @@ export default function FeeDetails({ feeId }: Props) {
   /* ---------- Not found guard ---------- */
   if (!fee) {
     return (
-      <div className="rounded-lg bg-white p-6 border border-gray-100">
+      <div className="card-base">
         <PageHeader
           title="Student Fees Details"
           subtitle="The requested fee record could not be found."
@@ -30,7 +30,7 @@ export default function FeeDetails({ feeId }: Props) {
   }
 
   return (
-    <div className="rounded-lg bg-white p-6 space-y-6 border border-gray-50">
+    <div className="card-base space-y-6">
       <PageHeader
         title="Student Fees Details"
         subtitle="View the student’s fee summary, pending balance, and complete payment history."
@@ -50,9 +50,9 @@ export default function FeeDetails({ feeId }: Props) {
 
         {/* ---------------- Right : Student Summary ---------------- */}
         <div className="lg:col-span-4">
-          <div className="rounded-lg border p-4 space-y-4">
+          <div className="card-nested">
             {/* Student header */}
-            <div className="flex items-center gap-3">
+            <div className="flex-center-gap-3">
               <Image
                 src={fee.avatar ?? "/users/user-placeholder.jpg"}
                 alt={fee.name}

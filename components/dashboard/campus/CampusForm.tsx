@@ -1,6 +1,6 @@
 "use client";
 
-import { FieldError, useForm } from "react-hook-form";
+import { FieldError, useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   campusSchema,
@@ -12,11 +12,20 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Camera } from "lucide-react";
 import { PasswordField } from "../form/PasswordField";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { INDIAN_CITIES, INDIAN_STATES, COUNTRIES } from "@/lib/constants/locations";
 
 export default function CampusForm() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<CampusFormValues>({
     resolver: zodResolver(campusSchema),
@@ -29,7 +38,7 @@ export default function CampusForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 px-6 py-1">
       {/* Basic Info */}
-      <section className="grid grid-cols-1 gap-4">
+      <section className="form-section">
         <Field
           label="Campus Name"
           required
@@ -54,7 +63,7 @@ export default function CampusForm() {
       </section>
 
       {/* Contact */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <section className="form-grid">
         <Field
           label="Phone Number"
           required
@@ -84,7 +93,7 @@ export default function CampusForm() {
       </section>
 
       {/* Auth */}
-      <section className="grid grid-cols-1 mb-4 md:grid-cols-2 gap-4">
+      <section className="form-grid mb-4">
         <PasswordField
           label="Password"
           placeholder="Enter password"
@@ -100,10 +109,10 @@ export default function CampusForm() {
       </section>
 
       {/* Address */}
-      <section className="space-y-4">
+      <section className="form-section">
         <h5 className="font-semibold">Address</h5>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="form-grid">
           <Field
             label="Door Number"
             required
@@ -128,17 +137,39 @@ export default function CampusForm() {
             placeholder="Nearby landmark (optional)"
             {...register("landmark")}
           />
-          <Field
-            label="City"
-            required
-            placeholder="Select"
-            error={errors.city}
-            {...register("city")}
+          <Controller
+            name="city"
+            control={control}
+            render={({ field }) => (
+              <SelectField
+                label="City"
+                required
+                placeholder="Select"
+                error={errors.city}
+                value={field.value}
+                onValueChange={field.onChange}
+                options={INDIAN_CITIES.map((city) => ({
+                  label: city,
+                  value: city,
+                }))}
+              />
+            )}
           />
-          <Field
-            label="State / Province"
-            placeholder="Select"
-            {...register("state")}
+          <Controller
+            name="state"
+            control={control}
+            render={({ field }) => (
+              <SelectField
+                label="State / Province"
+                placeholder="Select"
+                value={field.value}
+                onValueChange={field.onChange}
+                options={INDIAN_STATES.map((state) => ({
+                  label: state,
+                  value: state,
+                }))}
+              />
+            )}
           />
           <Field
             label="PIN Code"
@@ -147,10 +178,21 @@ export default function CampusForm() {
             error={errors.pinCode}
             {...register("pinCode")}
           />
-          <Field
-            label="Country"
-            placeholder="Select"
-            {...register("country")}
+          <Controller
+            name="country"
+            control={control}
+            render={({ field }) => (
+              <SelectField
+                label="Country"
+                placeholder="Select"
+                value={field.value}
+                onValueChange={field.onChange}
+                options={COUNTRIES.map((country) => ({
+                  label: country,
+                  value: country,
+                }))}
+              />
+            )}
           />
         </div>
       </section>
@@ -203,6 +245,50 @@ function Field({
       </Label>
       <div className="flex flex-col gap-1">
         <Input {...props} className="py-6" />
+        {error && (
+          <p className="text-xs ml-1 text-destructive">{error.message}</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function SelectField({
+  label,
+  required,
+  error,
+  value,
+  onValueChange,
+  placeholder,
+  options,
+}: {
+  label: string;
+  required?: boolean;
+  error?: FieldError;
+  value?: string;
+  onValueChange?: (value: string) => void;
+  placeholder?: string;
+  options: { label: string; value: string }[];
+}) {
+  return (
+    <div className="space-y-3">
+      <Label className="flex items-center gap-1 text-gray-700">
+        {label}
+        {required && <span className="text-destructive">*</span>}
+      </Label>
+      <div className="flex flex-col gap-1">
+        <Select value={value} onValueChange={onValueChange}>
+          <SelectTrigger className="h-12">
+            <SelectValue placeholder={placeholder} />
+          </SelectTrigger>
+          <SelectContent>
+            {options.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         {error && (
           <p className="text-xs ml-1 text-destructive">{error.message}</p>
         )}

@@ -10,6 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { Calendar } from "lucide-react";
 
 type SelectOption = {
   label: string;
@@ -35,6 +36,7 @@ export function Field({
   placeholder,
   as = "input",
   className,
+  type,
 
   options = [],
   value,
@@ -42,6 +44,8 @@ export function Field({
 
   ...props
 }: FieldProps) {
+  const isDateInput = type === "date";
+
   return (
     <div className="space-y-3">
       <Label className="text-gray-700">
@@ -52,7 +56,7 @@ export function Field({
         <Select value={value} onValueChange={onValueChange}>
           <SelectTrigger
             className={cn(
-              "w-full h-10 rounded-md border px-3 text-sm",
+              "w-full h-12 rounded-md border px-3 text-sm",
               className,
             )}
           >
@@ -67,8 +71,18 @@ export function Field({
             ))}
           </SelectContent>
         </Select>
+      ) : isDateInput ? (
+        <div className="relative">
+          <Input
+            type="date"
+            placeholder={placeholder || "dd/mm/yyyy"}
+            className={cn("pr-10", className)}
+            {...props}
+          />
+          <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
+        </div>
       ) : (
-        <Input placeholder={placeholder} {...props} className={cn(className)} />
+        <Input placeholder={placeholder} type={type} {...props} className={cn(className)} />
       )}
     </div>
   );

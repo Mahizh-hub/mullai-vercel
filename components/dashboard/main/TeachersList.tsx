@@ -44,13 +44,13 @@ const teachers: Teacher[] = [
 
 export default function TeachersList() {
   return (
-    <div className="rounded-md bg-white border border-gray-200">
+    <div className="card-widget p-0">
       {/*Header*/}
-      <div className="flex items-center p-6 justify-between">
+      <div className="flex-center-between p-6">
         <h5 className="font-semibold text-lg">Teachers</h5>
         <Link
           href="/"
-          className="flex items-center text-sm text-gray-500 hover:text-gray-600"
+          className="flex-center text-sm text-gray-500 hover:text-gray-600"
         >
           View All <ChevronRight />
         </Link>
@@ -70,7 +70,7 @@ export default function TeachersList() {
             {teachers.slice(0, 5).map((teacher) => (
               <tr key={teacher.email} className="border-b last:border-none">
                 <td className="px-8 py-3">
-                  <div className="flex items-center gap-3">
+                  <div className="flex-center-gap-3">
                     <Image
                       src={teacher.image}
                       alt={teacher.name}

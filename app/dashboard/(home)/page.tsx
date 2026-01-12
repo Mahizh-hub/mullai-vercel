@@ -18,7 +18,7 @@ export default function DashboardPage() {
           <div className="lg:col-span-2">
             <AttendanceAnalytics />
           </div>
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 flex flex-col gap-4">
             <UpcomingEvents />
             <RecentActivity />
           </div>

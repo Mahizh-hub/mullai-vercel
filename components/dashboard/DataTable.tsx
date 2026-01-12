@@ -36,8 +36,7 @@ export function DataTable<T extends Record<string, CellValue>>({
 }: Props<T>) {
   return (
     <div className={cn("rounded-md border border-gray-100", className)}>
-      {/* Header table */}
-      <Table>
+      <Table className="md:min-w-full min-w-[800px]">
         <TableHeader className="bg-gray-100">
           <TableRow>
             {columns.map((col) => (

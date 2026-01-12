@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ExamRow } from "@/lib/exam";
-import { Trash2 } from "lucide-react";
+import { Trash2, Calendar } from "lucide-react";
 
 export default function ExamRowItem({
   row,
@@ -35,12 +35,15 @@ export default function ExamRowItem({
   return (
     <tr className="border-b text-xs">
       <td className="px-3 py-2">
-        <Input
-          type="date"
-          value={row.date}
-          onChange={(e) => handleDateChange(e.target.value)}
-          className="h-8 text-xs"
-        />
+        <div className="relative">
+          <Input
+            type="date"
+            placeholder="Select date"
+            value={row.date}
+            onChange={(e) => handleDateChange(e.target.value)}
+            className="h-8 text-sm"
+          />
+        </div>
       </td>
 
       <td className="px-3 py-2 font-semibold">{row.day}</td>
@@ -48,20 +51,22 @@ export default function ExamRowItem({
       <td className="px-3 py-2">
         <Input
           type="time"
+          placeholder="Start time"
           value={row.startTime}
           onChange={(e) =>
             onChangeAction(row.id, { startTime: e.target.value })
           }
-          className="h-8 text-xs"
+          className="h-8 text-sm"
         />
       </td>
 
       <td className="px-3 py-2">
         <Input
           type="time"
+          placeholder="End time"
           value={row.endTime}
           onChange={(e) => onChangeAction(row.id, { endTime: e.target.value })}
-          className="h-8 text-xs"
+          className="h-8 text-sm"
         />
       </td>
 
@@ -72,7 +77,7 @@ export default function ExamRowItem({
             onChangeAction(row.id, { session: v as ExamRow["session"] })
           }
         >
-          <SelectTrigger size="sm" className="h-8 text-xs">
+          <SelectTrigger size="sm" className="h-8 text-sm">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -88,7 +93,7 @@ export default function ExamRowItem({
           value={row.subject}
           onValueChange={(v) => onChangeAction(row.id, { subject: v })}
         >
-          <SelectTrigger size="sm" className="h-8 text-xs">
+          <SelectTrigger size="sm" className="h-8 text-sm">
             <SelectValue placeholder="Subject" />
           </SelectTrigger>
           <SelectContent>
@@ -107,7 +112,7 @@ export default function ExamRowItem({
             onChangeAction(row.id, { markingType: v as ExamRow["markingType"] })
           }
         >
-          <SelectTrigger size="sm" className="h-8 text-xs">
+          <SelectTrigger size="sm" className="h-8 text-sm">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -123,7 +128,7 @@ export default function ExamRowItem({
           placeholder="100"
           value={row.total}
           onChange={(e) => onChangeAction(row.id, { total: e.target.value })}
-          className="h-8 text-xs"
+          className="h-8 text-sm"
         />
       </td>
 
@@ -135,7 +140,7 @@ export default function ExamRowItem({
           onChange={(e) =>
             onChangeAction(row.id, { passPercentage: e.target.value })
           }
-          className="h-8 text-xs"
+          className="h-8 text-sm"
         />
       </td>
 
@@ -152,7 +157,7 @@ export default function ExamRowItem({
           )}
           <Button
             size="sm"
-            className="bg-pink-500 text-white text-xs"
+            className="bg-pink-500 text-white text-sm"
             onClick={onAddAction}
           >
             + Add

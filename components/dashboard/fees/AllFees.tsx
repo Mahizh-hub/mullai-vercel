@@ -7,35 +7,102 @@ import { DataTable } from "../DataTable";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
 import { feesColumns, Fee, FeeRow } from "./fees-columns";
 import { feesData } from "./fees.data";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Search } from "lucide-react";
 
 export default function AllFees() {
   const [data, setData] = useState<FeeRow[]>(feesData);
   const [search, setSearch] = useState("");
   const [deleteTarget, setDeleteTarget] = useState<Fee | null>(null);
+  const [academicYear, setAcademicYear] = useState("");
+  const [selectedClass, setSelectedClass] = useState("");
+  const [selectedSection, setSelectedSection] = useState("");
 
   const filteredData = useMemo(
     () =>
-      data.filter((row) =>
-        row.name.toLowerCase().includes(search.toLowerCase()),
-      ),
-    [data, search],
+      data.filter((row) => {
+        const matchesSearch = row.name.toLowerCase().includes(search.toLowerCase());
+        const matchesClass = !selectedClass || selectedClass === "all" || row.class === selectedClass;
+        const matchesSection = !selectedSection || selectedSection === "all" || row.section === selectedSection;
+        
+        return matchesSearch && matchesClass && matchesSection;
+      }),
+    [data, search, selectedClass, selectedSection],
   );
 
   return (
-    <div className="rounded-lg bg-white p-6 space-y-4 border border-gray-50">
+    <div className="card-base">
       <PageHeader
         title="Fees List"
-        subtitle="Track student fee details, monitor payments, and manage pending dues."
+        subtitle="Track student fee details, monitor payments, and manage pending dues for the selected academic year."
         actionHref="/dashboard/fees/create"
         actionLabel="Add Fees Entry"
+        subtitleExtra="Manage fees types and amounts in the fees settings"
       />
 
-      <Input
-        placeholder="Search student..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="max-w-xs h-8"
-      />
+      {/* Filters */}
+      <div className="flex items-center gap-4 mb-4">
+        <Select value={academicYear} onValueChange={setAcademicYear}>
+          <SelectTrigger size="sm" className="w-[200px] bg-gray-50">
+            <SelectValue placeholder="Select Academic year" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="2023-24">2023-24</SelectItem>
+            <SelectItem value="2024-25">2024-25</SelectItem>
+            <SelectItem value="2025-26">2025-26</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Select value={selectedClass} onValueChange={setSelectedClass}>
+          <SelectTrigger size="sm" className="w-[200px] bg-gray-50">
+            <SelectValue placeholder="Select Class" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Classes</SelectItem>
+            <SelectItem value="1">Class 1</SelectItem>
+            <SelectItem value="2">Class 2</SelectItem>
+            <SelectItem value="3">Class 3</SelectItem>
+            <SelectItem value="4">Class 4</SelectItem>
+            <SelectItem value="5">Class 5</SelectItem>
+            <SelectItem value="6">Class 6</SelectItem>
+            <SelectItem value="7">Class 7</SelectItem>
+            <SelectItem value="8">Class 8</SelectItem>
+            <SelectItem value="9">Class 9</SelectItem>
+            <SelectItem value="10">Class 10</SelectItem>
+            <SelectItem value="11">Class 11</SelectItem>
+            <SelectItem value="12">Class 12</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Select value={selectedSection} onValueChange={setSelectedSection}>
+          <SelectTrigger size="sm" className="w-[200px] bg-gray-50">
+            <SelectValue placeholder="Select Section" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Sections</SelectItem>
+            <SelectItem value="A">Section A</SelectItem>
+            <SelectItem value="B">Section B</SelectItem>
+            <SelectItem value="C">Section C</SelectItem>
+            <SelectItem value="D">Section D</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <div className="relative flex-1 max-w-sm ml-auto">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="Search here"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-9 h-10"
+          />
+        </div>
+      </div>
 
       <DataTable
         data={filteredData}

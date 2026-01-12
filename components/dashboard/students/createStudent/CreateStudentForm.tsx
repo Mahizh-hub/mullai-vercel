@@ -125,12 +125,12 @@ export default function CreateStudentForm() {
         className="px-6 pb-6 space-y-8"
       >
         {/*Step Tabs*/}
-        <div className="grid grid-cols-3 rounded-md overflow-hidden">
+        <div className="grid grid-cols-3 overflow-hidden rounded-t-md">
           {steps.map((label, i) => (
             <div
               key={label}
               className={`text-center py-3 flex items-center justify-center text-sm font-semibold ${
-                i === step ? "bg-pink-500 text-white" : "bg-pink-200 text-white"
+                i === step ? "bg-pink-500 text-white" : "bg-pink-200/50 text-gray-400"
               }`}
             >
               {label}

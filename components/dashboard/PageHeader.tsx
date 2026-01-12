@@ -9,6 +9,7 @@ type Props = {
   actionLabel?: string;
   actionHref?: string;
   className?: string;
+  subtitleExtra?: React.ReactNode;
 };
 
 export default function PageHeader({
@@ -17,23 +18,25 @@ export default function PageHeader({
   className,
   actionHref,
   actionLabel,
+  subtitleExtra,
 }: Props) {
   return (
     <div
       className={cn(
-        "flex flex-col md:flex-row gap-6 text-center md:text-start items-center mb-8 justify-between",
+        "flex-responsive",
         className,
       )}
     >
       <div>
         <h2 className="font-semibold">{title}</h2>
-        <p className="text-sm mt-1 text-gray-500">{subtitle}</p>
+        <p className="text-sm text-gray-500">{subtitle}</p>
+        <p className="text-xs italic text-pink-500">{subtitleExtra}</p>
       </div>
       {actionHref && actionLabel && (
         <Link href={actionHref}>
           <Button
             variant="outline"
-            className="text-pink-600 border-pink-600 hover:text-pink-700"
+            className="btn-pink-outline"
           >
             <Plus />
             {actionLabel}

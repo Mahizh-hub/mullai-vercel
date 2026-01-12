@@ -3,6 +3,7 @@ import { StudentFormValues } from "../CreateStudentForm";
 import { Field } from "@/components/dashboard/form/Field";
 import { FileUploadField } from "@/components/dashboard/form/FileUploadField";
 import { Button } from "@/components/ui/button";
+import { BLOOD_GROUPS, ID_PROOF_TYPES } from "@/lib/constants/locations";
 
 export default function PersonalStep({ onNext }: { onNext: () => void }) {
   const { register, watch, setValue, control } =
@@ -15,18 +16,18 @@ export default function PersonalStep({ onNext }: { onNext: () => void }) {
       <div>
         <h4 className="font-semibold">Personal Information</h4>
         <p className="text-sm text-muted-foreground">
-          Enter student academic and personal details
+          Enter student's basic personal details for identification and records.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Branch – SELECT */}
+      <div className="space-y-4">
+        {/* Campus - Full Width */}
         <Controller
           name="branch"
           control={control}
           render={({ field }) => (
             <Field
-              label="Branch"
+              label="Campus"
               as="select"
               required
               placeholder="Select"
@@ -41,97 +42,185 @@ export default function PersonalStep({ onNext }: { onNext: () => void }) {
           )}
         />
 
-        {/* INPUTS – unchanged */}
-        <Field label="Roll Number" required {...register("rollNumber")} />
-        <Field label="First Name" required {...register("firstName")} />
-        <Field label="Last Name" required {...register("lastName")} />
+        {/* First Name, Last Name - 2 Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Field label="First Name" placeholder="Enter first name" required {...register("firstName")} />
+          <Field label="Last Name" placeholder="Enter last name" required {...register("lastName")} />
+        </div>
 
-        <Field
-          label="Join Date"
-          type="date"
-          required
-          {...register("joinDate")}
-        />
+        {/* Roll Number, Join Date - 2 Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Field label="Roll Number" placeholder="Enter roll number" required {...register("rollNumber")} />
+          <Field
+            label="Join Date"
+            type="date"
+            required
+            {...register("joinDate")}
+          />
+        </div>
 
-        <Field label="Class" required {...register("class")} />
-        <Field label="Section" required {...register("section")} />
-        <Field label="Group" {...register("group")} />
-        <Field label="Language Group" {...register("languageGroup")} />
+        {/* Class, Section, Group, Language Group - 4 Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <Controller
+            name="class"
+            control={control}
+            render={({ field }) => (
+              <Field
+                label="Class"
+                as="select"
+                required
+                placeholder="Select class"
+                value={field.value}
+                onValueChange={field.onChange}
+                options={[
+                  { label: "1", value: "1" },
+                  { label: "2", value: "2" },
+                  { label: "3", value: "3" },
+                  { label: "4", value: "4" },
+                  { label: "5", value: "5" },
+                  { label: "6", value: "6" },
+                  { label: "7", value: "7" },
+                  { label: "8", value: "8" },
+                  { label: "9", value: "9" },
+                  { label: "10", value: "10" },
+                  { label: "11", value: "11" },
+                  { label: "12", value: "12" },
+                ]}
+              />
+            )}
+          />
 
-        <Field
-          label="Date of Birth"
-          type="date"
-          required
-          {...register("dob")}
-        />
+          <Controller
+            name="section"
+            control={control}
+            render={({ field }) => (
+              <Field
+                label="Section"
+                as="select"
+                required
+                placeholder="Select section"
+                value={field.value}
+                onValueChange={field.onChange}
+                options={[
+                  { label: "A", value: "A" },
+                  { label: "B", value: "B" },
+                  { label: "C", value: "C" },
+                  { label: "D", value: "D" },
+                ]}
+              />
+            )}
+          />
 
-        {/* Gender – SELECT */}
-        <Controller
-          name="gender"
-          control={control}
-          render={({ field }) => (
-            <Field
-              label="Gender"
-              as="select"
-              required
-              placeholder="Select"
-              value={field.value}
-              onValueChange={field.onChange}
-              options={[
-                { label: "Male", value: "Male" },
-                { label: "Female", value: "Female" },
-              ]}
-            />
-          )}
-        />
+          <Controller
+            name="group"
+            control={control}
+            render={({ field }) => (
+              <Field
+                label="Group"
+                as="select"
+                placeholder="Select group"
+                value={field.value}
+                onValueChange={field.onChange}
+                options={[
+                  { label: "Science", value: "Science" },
+                  { label: "Commerce", value: "Commerce" },
+                  { label: "Arts", value: "Arts" },
+                ]}
+              />
+            )}
+          />
 
-        {/* Blood Group – SELECT */}
-        <Controller
-          name="bloodGroup"
-          control={control}
-          render={({ field }) => (
-            <Field
-              label="Blood Group"
-              as="select"
-              required
-              placeholder="Select"
-              value={field.value}
-              onValueChange={field.onChange}
-              options={[
-                { label: "A+", value: "A+" },
-                { label: "B+", value: "B+" },
-                { label: "O+", value: "O+" },
-              ]}
-            />
-          )}
-        />
+          <Controller
+            name="languageGroup"
+            control={control}
+            render={({ field }) => (
+              <Field
+                label="Language Group"
+                as="select"
+                placeholder="Select language"
+                value={field.value}
+                onValueChange={field.onChange}
+                options={[
+                  { label: "Tamil", value: "Tamil" },
+                  { label: "Hindi", value: "Hindi" },
+                  { label: "Sanskrit", value: "Sanskrit" },
+                  { label: "French", value: "French" },
+                ]}
+              />
+            )}
+          />
+        </div>
 
-        {/* ID Proof – SELECT */}
-        <Controller
-          name="idProof"
-          control={control}
-          render={({ field }) => (
-            <Field
-              label="Identification Proof"
-              as="select"
-              required
-              placeholder="Select"
-              value={field.value}
-              onValueChange={field.onChange}
-              options={[
-                { label: "Aadhaar", value: "Aadhaar" },
-                { label: "PAN", value: "PAN" },
-              ]}
-            />
-          )}
-        />
+        {/* Date of Birth, Gender, Blood Group - 3 Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Field
+            label="Date of Birth"
+            type="date"
+            required
+            {...register("dob")}
+          />
 
-        {/* INPUT – unchanged */}
-        <Field
-          label="ID Reference Number"
-          required
-          {...register("tdRefNumber")}
-        />
+          <Controller
+            name="gender"
+            control={control}
+            render={({ field }) => (
+              <Field
+                label="Gender"
+                as="select"
+                required
+                placeholder="Select"
+                value={field.value}
+                onValueChange={field.onChange}
+                options={[
+                  { label: "Male", value: "Male" },
+                  { label: "Female", value: "Female" },
+                ]}
+              />
+            )}
+          />
+
+          <Controller
+            name="bloodGroup"
+            control={control}
+            render={({ field }) => (
+              <Field
+                label="Blood Group"
+                as="select"
+                required
+                placeholder="Select"
+                value={field.value}
+                onValueChange={field.onChange}
+                options={BLOOD_GROUPS}
+              />
+            )}
+          />
+        </div>
+
+        {/* ID Proof, ID Reference Number - 2 Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Controller
+            name="idProof"
+            control={control}
+            render={({ field }) => (
+              <Field
+                label="Identification Proof"
+                as="select"
+                required
+                placeholder="Select"
+                value={field.value}
+                onValueChange={field.onChange}
+                options={ID_PROOF_TYPES}
+              />
+            )}
+          />
+
+          <Field
+            label="Identification Reference Number"
+            placeholder="Enter reference number"
+            required
+            {...register("tdRefNumber")}
+          />
+        </div>
       </div>
 
       <FileUploadField

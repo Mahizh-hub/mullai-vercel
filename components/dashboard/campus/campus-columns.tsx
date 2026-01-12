@@ -23,9 +23,9 @@ export const campusColumns = (
   {
     key: "name",
     header: "Campus Name",
-    width: "30%",
+    width: "35%",
     cell: (row) => (
-      <div className="flex items-center gap-3">
+      <div className="flex-center-gap-3">
         {row.avatar && (
           <Image
             src={row.avatar}

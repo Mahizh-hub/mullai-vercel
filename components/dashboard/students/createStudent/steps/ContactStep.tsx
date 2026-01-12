@@ -1,7 +1,8 @@
 import { Field } from "@/components/dashboard/form/Field";
 import { Button } from "@/components/ui/button";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, Controller } from "react-hook-form";
 import { StudentFormValues } from "../CreateStudentForm";
+import { INDIAN_CITIES, INDIAN_STATES, COUNTRIES } from "@/lib/constants/locations";
 
 export default function ContactStep({
   onNext,
@@ -10,36 +11,105 @@ export default function ContactStep({
   onNext: () => void;
   onBack: () => void;
 }) {
-  const { register } = useFormContext<StudentFormValues>();
+  const { register, control } = useFormContext<StudentFormValues>();
 
   return (
     <section className="space-y-6">
       <div>
         <h4 className="font-semibold">Contact Information</h4>
         <p className="text-sm text-muted-foreground">
-          Enter student contact details
+          Provide contact details to enable communication with the student and guardians.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Field label="Door Number" required {...register("address.door")} />
-        <Field label="Address Line 1" {...register("address.line1")} />
+      <div>
+        <h5 className="font-semibold mb-4">Address</h5>
+        <div className="space-y-4">
+          {/* Door Number, Address Line 1 - 2 Columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Field label="Door Number" placeholder="e.g., No. 12/38" required {...register("address.door")} />
+            <Field label="Address Line 1" placeholder="Street name" {...register("address.line1")} />
+          </div>
 
-        <Field label="Address Line 2" required {...register("address.line2")} />
-        <Field label="Landmark" {...register("address.landmark")} />
+          {/* Address Line 2, Landmark - 2 Columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Field label="Address Line 2" placeholder="Area / Locality" required {...register("address.line2")} />
+            <Field label="Landmark" placeholder="Nearby landmark (optional)" {...register("address.landmark")} />
+          </div>
 
-        <Field label="City" required {...register("address.city")} />
-        <Field label="State" {...register("address.state")} />
+          {/* City, State, PIN Code - 3 Columns */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Controller
+              name="address.city"
+              control={control}
+              render={({ field }) => (
+                <Field
+                  label="City"
+                  as="select"
+                  required
+                  placeholder="Select"
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  options={INDIAN_CITIES.map((city) => ({
+                    label: city,
+                    value: city,
+                  }))}
+                />
+              )}
+            />
 
-        <Field label="PIN Code" required {...register("address.pin")} />
-        <Field label="Country" {...register("address.country")} />
+            <Controller
+              name="address.state"
+              control={control}
+              render={({ field }) => (
+                <Field
+                  label="State / Province / Region"
+                  as="select"
+                  required
+                  placeholder="Select"
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  options={INDIAN_STATES.map((state) => ({
+                    label: state,
+                    value: state,
+                  }))}
+                />
+              )}
+            />
 
-        <Field
-          label="Email"
-          type="email"
-          required
-          {...register("address.email")}
-        />
+            <Field label="ZIP / Postal / PIN Code" placeholder="Enter PIN code" required {...register("address.pin")} />
+          </div>
+
+          {/* Country, Email - 2 Columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Controller
+              name="address.country"
+              control={control}
+              render={({ field }) => (
+                <Field
+                  label="Country"
+                  as="select"
+                  required
+                  placeholder="Select"
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  options={COUNTRIES.map((country) => ({
+                    label: country,
+                    value: country,
+                  }))}
+                />
+              )}
+            />
+
+            <Field
+              label="Mail ID"
+              type="email"
+              placeholder="example@email.com"
+              required
+              {...register("address.email")}
+            />
+          </div>
+        </div>
       </div>
 
       <div className="flex justify-end gap-3">

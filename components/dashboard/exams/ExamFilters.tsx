@@ -6,6 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Search } from "lucide-react";
 
 export default function ExamFilters({
   search,
@@ -15,10 +16,10 @@ export default function ExamFilters({
   onSearchChange: (v: string) => void;
 }) {
   return (
-    <div className="flex flex-wrap justify-between gap-3">
-      <div className="flex gap-2">
+    <div className="flex flex-col md:flex-row justify-between gap-3">
+      <div className="flex flex-col md:flex-row flex-wrap gap-2">
         <Select>
-          <SelectTrigger className="w-44" size="sm">
+          <SelectTrigger size="sm" className="w-44 bg-gray-100">
             <SelectValue placeholder="Select Class" />
           </SelectTrigger>
           <SelectContent>
@@ -28,7 +29,7 @@ export default function ExamFilters({
         </Select>
 
         <Select>
-          <SelectTrigger className="w-44" size="sm">
+          <SelectTrigger size="sm" className="w-44 h-10 bg-gray-100">
             <SelectValue placeholder="Select Section" />
           </SelectTrigger>
           <SelectContent>
@@ -38,7 +39,7 @@ export default function ExamFilters({
         </Select>
 
         <Select>
-          <SelectTrigger className="w-52" size="sm">
+          <SelectTrigger size="sm" className="w-52 h-10 bg-gray-100">
             <SelectValue placeholder="Select Exam Type" />
           </SelectTrigger>
           <SelectContent>
@@ -48,12 +49,15 @@ export default function ExamFilters({
         </Select>
       </div>
 
-      <Input
-        placeholder="Seach here"
-        value={search}
-        onChange={(e) => onSearchChange(e.target.value)}
-        className="max-w-xs h-8"
-      />
+      <div className="relative max-w-sm">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <Input
+          placeholder="Search here"
+          value={search}
+          onChange={(e) => onSearchChange(e.target.value)}
+          className="pl-9 h-10"
+        />
+      </div>
     </div>
   );
 }
