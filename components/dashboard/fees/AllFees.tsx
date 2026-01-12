@@ -47,7 +47,8 @@ export default function AllFees() {
       />
 
       {/* Filters */}
-      <div className="flex items-center gap-4 mb-4">
+      <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-4">
+        <div className="grid grid-cols-1md:grid-cols-3 gap-4">
         <Select value={academicYear} onValueChange={setAcademicYear}>
           <SelectTrigger size="sm" className="w-[200px] bg-gray-50">
             <SelectValue placeholder="Select Academic year" />
@@ -92,8 +93,9 @@ export default function AllFees() {
             <SelectItem value="D">Section D</SelectItem>
           </SelectContent>
         </Select>
+        </div>
 
-        <div className="relative flex-1 max-w-sm ml-auto">
+        <div className="relative flex-1 max-w-sm md:ml-auto">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Search here"
