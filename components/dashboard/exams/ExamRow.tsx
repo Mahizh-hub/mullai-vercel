@@ -33,7 +33,7 @@ export default function ExamRowItem({
   };
 
   return (
-    <tr className="border-b text-xs">
+    <tr className="border-b last:border-b-0 text-xs">
       <td className="px-3 py-2">
         <div className="relative">
           <Input
