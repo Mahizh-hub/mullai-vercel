@@ -17,9 +17,9 @@ export default function ExamFilters({
 }) {
   return (
     <div className="flex flex-col md:flex-row justify-between gap-3">
-      <div className="flex flex-col md:flex-row flex-wrap gap-2">
+      <div className="flex flex-col md:flex-row gap-2">
         <Select>
-          <SelectTrigger size="sm" className="w-44 bg-gray-100">
+          <SelectTrigger size="sm" className="w-full sm:w-44 bg-gray-100">
             <SelectValue placeholder="Select Class" />
           </SelectTrigger>
           <SelectContent>
@@ -29,7 +29,7 @@ export default function ExamFilters({
         </Select>
 
         <Select>
-          <SelectTrigger size="sm" className="w-44 h-10 bg-gray-100">
+          <SelectTrigger size="sm" className="w-full sm:w-44 h-10 bg-gray-100">
             <SelectValue placeholder="Select Section" />
           </SelectTrigger>
           <SelectContent>
@@ -39,7 +39,7 @@ export default function ExamFilters({
         </Select>
 
         <Select>
-          <SelectTrigger size="sm" className="w-52 h-10 bg-gray-100">
+          <SelectTrigger size="sm" className="w-full sm:w-52 h-10 bg-gray-100">
             <SelectValue placeholder="Select Exam Type" />
           </SelectTrigger>
           <SelectContent>
@@ -49,7 +49,7 @@ export default function ExamFilters({
         </Select>
       </div>
 
-      <div className="relative max-w-sm">
+      <div className="relative w-full md:w-auto md:max-w-sm">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input
           placeholder="Search here"

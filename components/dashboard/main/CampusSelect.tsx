@@ -12,7 +12,7 @@ export function CampusSelect() {
     <Select>
       <SelectTrigger
         size="sm"
-        className="w-60 bg-gray-100 border border-gray-300 ring-0 focus:ring-0 focus-visible:ring-0"
+        className="w-auto lg:w-50 bg-gray-100 border border-gray-300 ring-0 focus:ring-0 focus-visible:ring-0"
       >
         <SelectValue placeholder="Select campus" />
       </SelectTrigger>

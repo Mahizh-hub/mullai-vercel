@@ -47,10 +47,10 @@ export default function AllFees() {
       />
 
       {/* Filters */}
-      <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
+        <div className="flex flex-col md:flex-row flex-wrap gap-2">
         <Select value={academicYear} onValueChange={setAcademicYear}>
-          <SelectTrigger size="sm" className="w-[200px] bg-gray-50">
+          <SelectTrigger size="sm" className="w-full sm:w-[200px] bg-gray-50">
             <SelectValue placeholder="Select Academic year" />
           </SelectTrigger>
           <SelectContent>
@@ -61,7 +61,7 @@ export default function AllFees() {
         </Select>
 
         <Select value={selectedClass} onValueChange={setSelectedClass}>
-          <SelectTrigger size="sm" className="w-[200px] bg-gray-50">
+          <SelectTrigger size="sm" className="w-full sm:w-[200px] bg-gray-50">
             <SelectValue placeholder="Select Class" />
           </SelectTrigger>
           <SelectContent>
@@ -82,7 +82,7 @@ export default function AllFees() {
         </Select>
 
         <Select value={selectedSection} onValueChange={setSelectedSection}>
-          <SelectTrigger size="sm" className="w-[200px] bg-gray-50">
+          <SelectTrigger size="sm" className="w-full sm:w-[200px] bg-gray-50">
             <SelectValue placeholder="Select Section" />
           </SelectTrigger>
           <SelectContent>
@@ -95,7 +95,7 @@ export default function AllFees() {
         </Select>
         </div>
 
-        <div className="relative flex-1 max-w-sm md:ml-auto">
+        <div className="relative w-full md:w-auto md:max-w-sm md:ml-auto md:self-start">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Search here"

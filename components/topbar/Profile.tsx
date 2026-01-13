@@ -28,10 +28,12 @@ export default function Profile() {
               {currentUserRole === "admin" ? "A" : "C"}
             </AvatarFallback>
           </Avatar>
-          <span className="text-[14px] font-medium inline-flex items-center gap-1">
-            {currentUserRole === "admin" ? "Admin" : "Campus Admin"}
+          <p className="text-[14px] font-medium inline-flex items-center gap-1">
+            <span className="hidden md:inline-flex">
+              {currentUserRole === "admin" ? "Admin" : "Campus Admin"}
+            </span>
             <ChevronDown className="size-3 mt-1 text-muted-foreground" />
-          </span>
+          </p>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56 mt-5">
