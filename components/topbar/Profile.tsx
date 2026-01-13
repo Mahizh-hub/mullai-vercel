@@ -21,7 +21,7 @@ export default function Profile() {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="flex items-center gap-2 h-9 px-2 hover:bg-accent"
+          className="flex items-center gap-2 h-9 px-2"
         >
           <Avatar className="size-8">
             <AvatarFallback className="bg-primary/10 text-primary text-sm font-medium">

@@ -35,7 +35,7 @@ export function DataTable<T extends Record<string, CellValue>>({
   className,
 }: Props<T>) {
   return (
-    <div className={cn("rounded-md border border-gray-100", className)}>
+    <div className={cn("rounded-md", className)}>
       <Table className="md:min-w-full min-w-[800px]">
         <TableHeader className="bg-gray-100">
           <TableRow>

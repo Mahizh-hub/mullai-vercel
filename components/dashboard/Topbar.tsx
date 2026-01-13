@@ -6,10 +6,12 @@ import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { useSidebar } from "./SidebarContext";
 import Notifications from "../topbar/Notifications";
-import Profile from "../topbar/Profile";
 import Fullscreen from "../topbar/Fullscreen";
 import { MenuIcon } from "../Icons";
-import { CampusSelect } from "./main/CampusSelect";
+import dynamic from "next/dynamic";
+
+const Profile = dynamic(() => import('../topbar/Profile'), { ssr: false });
+const CampusSelect = dynamic(() => import('./main/CampusSelect'), { ssr: false });
 
 export default function Topbar({
   variant = "contained",

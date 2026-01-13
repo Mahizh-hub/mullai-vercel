@@ -1,9 +1,13 @@
-import AttendanceAnalytics from "@/components/dashboard/main/AttendanceAnalytics";
+"use client"
+
 import Header from "@/components/dashboard/main/Header";
 import RecentActivity from "@/components/dashboard/main/RecentActivity";
 import Stats from "@/components/dashboard/main/Stats";
 import TeachersList from "@/components/dashboard/main/TeachersList";
 import UpcomingEvents from "@/components/dashboard/main/UpcomingEvents";
+import dynamic from "next/dynamic";
+
+const AttendanceAnalytics = dynamic(() => import("@/components/dashboard/main/AttendanceAnalytics"), { ssr: false });
 
 export default function DashboardPage() {
   return (
