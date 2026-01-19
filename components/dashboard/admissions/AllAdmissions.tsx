@@ -44,8 +44,8 @@ export const admissionsData: AdmissionRow[] = [
 export default function AllAdmissions() {
   const [data, setData] = useState<AdmissionRow[]>(admissionsData);
   const [search, setSearch] = useState("");
-  const [academicYear, setAcademicYear] = useState("all");
-  const [classFilter, setClassFilter] = useState("all");
+  const [academicYear, setAcademicYear] = useState<string | undefined>(undefined);
+  const [classFilter, setClassFilter] = useState<string | undefined>(undefined);
   const [deleteTarget, setDeleteTarget] = useState<AdmissionRow | null>(null);
 
   const filtered = useMemo(() => {
@@ -57,11 +57,11 @@ export default function AllAdmissions() {
 
       // Academic year filter
       const matchesAcademicYear =
-        academicYear === "all" || admission.academicYear === academicYear;
+        !academicYear || academicYear === "all" || admission.academicYear === academicYear;
 
       // Class filter
       const matchesClass =
-        classFilter === "all" || admission.class === classFilter;
+        !classFilter || classFilter === "all" || admission.class === classFilter;
 
       return matchesSearch && matchesAcademicYear && matchesClass;
     });

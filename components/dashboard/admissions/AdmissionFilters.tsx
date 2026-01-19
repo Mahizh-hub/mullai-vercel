@@ -18,16 +18,16 @@ export default function AdmissionFilters({
 }: {
   search: string;
   onSearchChange: (v: string) => void;
-  academicYear: string;
+  academicYear: string | undefined;
   onAcademicYearChange: (v: string) => void;
-  classFilter: string;
+  classFilter: string | undefined;
   onClassFilterChange: (v: string) => void;
 }) {
   return (
     <div className="flex flex-col md:flex-row justify-between gap-3">
       <div className="flex flex-col md:flex-row gap-2">
-        <Select value={academicYear} onValueChange={onAcademicYearChange}>
-          <SelectTrigger size="sm" className="w-full sm:w-44 bg-gray-100">
+        <Select onValueChange={onAcademicYearChange}>
+          <SelectTrigger size="sm" className="w-full sm:w-44 h-10 bg-gray-100">
             <SelectValue placeholder="Academic Year" />
           </SelectTrigger>
           <SelectContent>
@@ -39,7 +39,7 @@ export default function AdmissionFilters({
           </SelectContent>
         </Select>
 
-        <Select value={classFilter} onValueChange={onClassFilterChange}>
+        <Select onValueChange={onClassFilterChange}>
           <SelectTrigger size="sm" className="w-full sm:w-44 h-10 bg-gray-100">
             <SelectValue placeholder="Show All" />
           </SelectTrigger>
