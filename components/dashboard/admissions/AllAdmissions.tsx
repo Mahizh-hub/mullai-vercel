@@ -2,11 +2,10 @@
 
 import { useMemo, useState } from "react";
 import PageHeader from "../PageHeader";
-import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { DataTable } from "../DataTable";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
 import { admissionsColumns } from "./admission-columns";
+import AdmissionFilters from "./AdmissionFilters";
 
 export type AdmissionRow = {
   id: number;
@@ -14,6 +13,7 @@ export type AdmissionRow = {
   phone: string;
   admissionType: "Enrollment" | "Enquiry";
   class: string;
+  academicYear: string;
   status: "active" | "inactive";
   avatar?: string;
 };
@@ -25,6 +25,7 @@ export const admissionsData: AdmissionRow[] = [
     phone: "9734567890",
     admissionType: "Enrollment",
     class: "10",
+    academicYear: "2025-2026",
     status: "active",
     avatar: "/users/user53.jpg",
   },
@@ -34,6 +35,7 @@ export const admissionsData: AdmissionRow[] = [
     phone: "9876543211",
     admissionType: "Enquiry",
     class: "9",
+    academicYear: "2024-2025",
     status: "inactive",
     avatar: "/users/user54.jpg",
   },
@@ -42,13 +44,28 @@ export const admissionsData: AdmissionRow[] = [
 export default function AllAdmissions() {
   const [data, setData] = useState<AdmissionRow[]>(admissionsData);
   const [search, setSearch] = useState("");
+  const [academicYear, setAcademicYear] = useState("all");
+  const [classFilter, setClassFilter] = useState("all");
   const [deleteTarget, setDeleteTarget] = useState<AdmissionRow | null>(null);
 
-  const filtered = useMemo(
-    () =>
-      data.filter((s) => s.name.toLowerCase().includes(search.toLowerCase())),
-    [data, search]
-  );
+  const filtered = useMemo(() => {
+    return data.filter((admission) => {
+      // Search filter
+      const matchesSearch = admission.name
+        .toLowerCase()
+        .includes(search.toLowerCase());
+
+      // Academic year filter
+      const matchesAcademicYear =
+        academicYear === "all" || admission.academicYear === academicYear;
+
+      // Class filter
+      const matchesClass =
+        classFilter === "all" || admission.class === classFilter;
+
+      return matchesSearch && matchesAcademicYear && matchesClass;
+    });
+  }, [data, search, academicYear, classFilter]);
 
   return (
     <div className="card-base">
@@ -60,17 +77,14 @@ export default function AllAdmissions() {
         subtitleExtra="Use filters and search to quickly find students across different classes and sections"
       />
 
-      <div className="relative w-full sm:max-w-sm">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input
-          placeholder="Search here..."
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-          className="pl-9 h-10"
-        />
-      </div>
+      <AdmissionFilters
+        search={search}
+        onSearchChange={setSearch}
+        academicYear={academicYear}
+        onAcademicYearChange={setAcademicYear}
+        classFilter={classFilter}
+        onClassFilterChange={setClassFilter}
+      />
 
       <DataTable
         data={filtered}
