@@ -1,4 +1,4 @@
-import { Plus } from "lucide-react";
+import { ArrowLeft, Plus } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,7 @@ type Props = {
   actionHref?: string;
   className?: string;
   subtitleExtra?: React.ReactNode;
+  icon?: "default" | "back";
 };
 
 export default function PageHeader({
@@ -19,6 +20,7 @@ export default function PageHeader({
   actionHref,
   actionLabel,
   subtitleExtra,
+  icon = "default"
 }: Props) {
   return (
     <div
@@ -38,7 +40,8 @@ export default function PageHeader({
             variant="outline"
             className="btn-pink-outline"
           >
-            <Plus />
+            {icon === "default" && <Plus />}
+            {icon === "back" && <ArrowLeft />}
             {actionLabel}
           </Button>
         </Link>
