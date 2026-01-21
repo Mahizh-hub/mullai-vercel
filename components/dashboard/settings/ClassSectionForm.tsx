@@ -132,13 +132,7 @@ export default function ClassSectionForm({ teachers }: Props) {
         {/* Tab 2: Assign Teacher */}
         {activeTab === 1 && (
           <div className="space-y-6">
-            <div>
-              <h4 className="font-semibold">Assign Teacher</h4>
-              <p className="text-sm text-muted-foreground">
-                Assign teachers to classes and sections.
-              </p>
-            </div>
-
+            <PageHeader title="Assign Teacher" subtitle="Assign teachers to classes and sections." />
             <div className="form-section"
 >
               <div className="space-y-3">
@@ -146,7 +140,7 @@ export default function ClassSectionForm({ teachers }: Props) {
                   Class/Grade <span className="text-destructive">*</span>
                 </Label>
                 <Select value={selectedClass} onValueChange={setSelectedClass}>
-                  <SelectTrigger>
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select class" />
                   </SelectTrigger>
                   <SelectContent>
@@ -306,8 +300,8 @@ function TeacherAssignmentRow({
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
-      <div className="md:col-span-3">
+    <div className="grid grid-cols-1 md:grid-cols-10 gap-3 items-center">
+      <div className="md:col-span-2">
         <Input
           value={section.name}
           disabled
@@ -315,9 +309,9 @@ function TeacherAssignmentRow({
         />
       </div>
 
-      <div className="md:col-span-3">
+      <div className="md:col-span-4">
         <Select value={selectedTeacher} onValueChange={setSelectedTeacher} disabled={isAssigned}>
-          <SelectTrigger>
+          <SelectTrigger className="w-full">
             <SelectValue placeholder="Assign Teacher" />
           </SelectTrigger>
           <SelectContent>
@@ -330,7 +324,7 @@ function TeacherAssignmentRow({
         </Select>
       </div>
 
-      <div className="md:col-span-3">
+      <div className="md:col-span-1">
         <Button
           type="button"
           size="xl"
