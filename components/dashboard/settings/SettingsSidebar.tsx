@@ -5,27 +5,29 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { SettingsMenuItem } from "./types";
 import {
-  BookOpen,
-  GraduationCap,
-  UserCog,
-  DollarSign,
-  Calendar,
-  ClipboardCheck,
-  LucideIcon,
-} from "lucide-react";
+  ClassSectionIcon,
+  SubjectsSetupIcon,
+  TeacherMapIcon,
+  FeesIcon,
+  CalenderIcon,
+  ExamSetupIcon,
+  IconProps,
+} from "@/components/Icons";
 
 type Props = {
   menuItems: SettingsMenuItem[];
 };
 
+type IconComponent = React.ComponentType<IconProps>;
+
 // Icon mapping
-const iconMap: Record<string, LucideIcon> = {
-  "graduation-cap": GraduationCap,
-  "book-open": BookOpen,
-  "user-cog": UserCog,
-  "dollar-sign": DollarSign,
-  "calendar": Calendar,
-  "clipboard-check": ClipboardCheck,
+const iconMap: Record<string, IconComponent> = {
+  "ClassSectionIcon": ClassSectionIcon,
+  "SubjectsSetupIcon": SubjectsSetupIcon,
+  "TeacherMapIcon": TeacherMapIcon,
+  "FeesIcon": FeesIcon,
+  "CalenderIcon": CalenderIcon,
+  "ExamSetupIcon": ExamSetupIcon,
 };
 
 export default function SettingsSidebar({ menuItems }: Props) {
@@ -33,10 +35,10 @@ export default function SettingsSidebar({ menuItems }: Props) {
 
   return (
     <div className="rounded-lg bg-white border border-gray-100">
-      <div className="p-4">
+      <div className="px-4 py-5">
         <ul className="space-y-2">
           {menuItems.map((item) => {
-            const Icon = iconMap[item.icon] || GraduationCap;
+            const Icon = iconMap[item.icon] || ClassSectionIcon;
             
             // Find the most specific matching menu item
             // Check exact match first, then check if pathname starts with this href
@@ -60,7 +62,7 @@ export default function SettingsSidebar({ menuItems }: Props) {
                 <Link
                   href={item.href}
                   className={cn(
-                    "flex items-center text-sm font-medium gap-2 px-3 py-2 rounded-md transition-all",
+                    "flex items-center text-sm font-medium gap-2 p-3.5 rounded-md transition-all",
                     isActive
                       ? "bg-pink-500 text-white"
                       : "text-gray-600 hover:bg-gray-50 hover:text-pink-500"

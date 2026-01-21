@@ -5,37 +5,37 @@ export const settingsMenuItems: SettingsMenuItem[] = [
     id: "class-section",
     label: "Class & Section setup",
     href: "/dashboard/settings",
-    icon: "graduation-cap",
+    icon: "ClassSectionIcon",
   },
   {
     id: "subjects",
     label: "Subjects Setup",
     href: "/dashboard/settings/subjects",
-    icon: "book-open",
+    icon: "SubjectsSetupIcon",
   },
   {
     id: "teacher-mapping",
     label: "Teacher Mapping",
     href: "/dashboard/settings/teacher-mapping",
-    icon: "user-cog",
+    icon: "TeacherMapIcon",
   },
   {
     id: "fees",
     label: "Fees Setup",
     href: "/dashboard/settings/fees",
-    icon: "dollar-sign",
+    icon: "FeesIcon",
   },
   {
     id: "calendar",
     label: "Calendar",
     href: "/dashboard/settings/calendar",
-    icon: "calendar",
+    icon: "CalenderIcon",
   },
   {
     id: "exam",
     label: "Exam Setup",
     href: "/dashboard/settings/exam",
-    icon: "clipboard-check",
+    icon: "ExamSetupIcon",
   },
 ];
 

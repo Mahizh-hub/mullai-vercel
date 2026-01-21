@@ -58,6 +58,7 @@ export default function AllClassSections() {
         subtitle="View and manage all classes and their sections for the academic year."
         actionHref="/dashboard/settings/class-section/create"
         actionLabel="Create"
+        className="mb-6"
       />
 
       <DataTable

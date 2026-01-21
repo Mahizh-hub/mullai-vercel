@@ -13,7 +13,7 @@ export default function Settings() {
         <DynamicBreadcrumb />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
         {/* Sidebar */}
         <div className="md:col-span-3">
           <SettingsSidebar menuItems={settingsMenuItems} />
