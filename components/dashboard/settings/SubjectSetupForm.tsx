@@ -368,24 +368,24 @@ export default function SubjectSetupForm() {
                       </div>
 
                       <div className="overflow-x-auto">
-                        <table className="w-full text-sm rounded-md overflow-hidden">
+                        <table className="min-w-[500px] w-full text-sm rounded-md overflow-hidden table-fixed">
                           <thead className="bg-gray-100">
                             <tr>
-                              <th className="text-left p-2">Group Name</th>
+                              <th className="text-left p-2 w-[150px]">Group Name</th>
                               <th className="text-left p-2">Subjects</th>
-                              <th className="text-right p-2">Action</th>
+                              <th className="text-right p-2 w-[100px]">Action</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
-                              <td className="p-2">
+                              <td className="p-2 align-top w-[150px]">
                                 <Input
                                   value={group.name}
                                   onChange={(e) => handleGroupNameChange(group.id, e.target.value)}
                                   placeholder="Group name"
                                 />
                               </td>
-                              <td className="p-2">
+                              <td className="p-2 align-top">
                                 <div className="space-y-2">
                                   {group.subjects.map((subject, subIndex) => (
                                     <Input
@@ -397,8 +397,8 @@ export default function SubjectSetupForm() {
                                   ))}
                                 </div>
                               </td>
-                              <td className="p-2 align-top">
-                                <div className="flex justify-end gap-1">
+                              <td className="p-2 w-[100px]">
+                                <div className="flex items-center justify-end gap-1">
                                   <Button
                                     type="button"
                                     variant="outline"
