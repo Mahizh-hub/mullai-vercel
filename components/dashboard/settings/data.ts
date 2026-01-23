@@ -1,4 +1,4 @@
-import { ClassSection, Teacher, SettingsMenuItem } from "./types";
+import { ClassSection, Teacher, SettingsMenuItem, SubjectListItem } from "./types";
 
 export const settingsMenuItems: SettingsMenuItem[] = [
   {
@@ -123,4 +123,104 @@ export const mockTeachers: Teacher[] = [
   { id: "6", name: "Deepa Krishnan" },
   { id: "7", name: "Venkat Raman" },
   { id: "8", name: "Anitha Murugan" },
+];
+
+// Subject Setup Mock Data
+export const mockSubjectsList: SubjectListItem[] = [
+  {
+    id: "1",
+    class: "1",
+    sections: "A, B, C, D",
+    group: "-",
+    commonSubjects: 5,
+    electiveSubjects: 0,
+    languageChoices: 2,
+  },
+  {
+    id: "2",
+    class: "10",
+    sections: "A, B, C, D, E",
+    group: "-",
+    commonSubjects: 6,
+    electiveSubjects: 0,
+    languageChoices: 2,
+  },
+  {
+    id: "3",
+    class: "11",
+    sections: "A, B, C, D, E",
+    group: "Computer Science",
+    commonSubjects: 5,
+    electiveSubjects: 6,
+    languageChoices: 2,
+  },
+  {
+    id: "4",
+    class: "11",
+    sections: "F, G",
+    group: "Commerce",
+    commonSubjects: 5,
+    electiveSubjects: 4,
+    languageChoices: 2,
+  },
+  {
+    id: "5",
+    class: "11",
+    sections: "H, I",
+    group: "Bio Maths",
+    commonSubjects: 5,
+    electiveSubjects: 4,
+    languageChoices: 2,
+  },
+  {
+    id: "6",
+    class: "12",
+    sections: "A, B, C",
+    group: "Computer Science",
+    commonSubjects: 5,
+    electiveSubjects: 6,
+    languageChoices: 2,
+  },
+];
+
+export const mockClasses = [
+  { id: "1", name: "Class 1", sections: ["A", "B", "C", "D"] },
+  { id: "10", name: "Class 10", sections: ["A", "B", "C", "D", "E"] },
+  { id: "11", name: "Class 11", sections: ["A", "B", "C", "D", "E", "F", "G", "H", "I"] },
+  { id: "12", name: "Class 12", sections: ["A", "B", "C"] },
+];
+
+export const mockCommonSubjects = [
+  { id: "1", name: "Maths", color: "blue" as const },
+  { id: "2", name: "Science", color: "purple" as const },
+  { id: "3", name: "English", color: "pink" as const },
+];
+
+// Grouped subjects (displayed together in a container)
+export const mockGroupedSubjects = [
+  {
+    id: "1",
+    subjects: [
+      { label: "Computer Science", color: "green" as const },
+      { label: "CS Lab", color: "green-light" as const },
+    ],
+  },
+];
+
+export const mockElectiveGroups = [
+  {
+    id: "1",
+    name: "Computer Science",
+    subjects: ["Physics", "Chemistry", "Computer Science", "Maths"],
+  },
+  {
+    id: "2",
+    name: "Commerce",
+    subjects: ["Accountancy", "Business Studies", "Economics", "Commerce"],
+  },
+  {
+    id: "3",
+    name: "Bio Maths",
+    subjects: ["Physics", "Chemistry", "Biology", "Maths"],
+  },
 ];

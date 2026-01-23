@@ -40,3 +40,39 @@ export type TeacherAssignment = {
   sectionId: string;
   teacherId: string;
 };
+
+// Subject Setup Types
+export type SubjectListItem = {
+  id: string;
+  class: string;
+  sections: string;
+  group: string;
+  commonSubjects: number;
+  electiveSubjects: number;
+  languageChoices: number;
+};
+
+export type Subject = {
+  id: string;
+  name: string;
+  type: "common" | "elective";
+  subdivisions?: Subject[];
+};
+
+export type ElectiveGroup = {
+  id: string;
+  name: string;
+  subjects: string[];
+};
+
+export type SectionAssignment = {
+  groupId: string;
+  sectionIds: string[];
+};
+
+export type SubjectFormData = {
+  classId: string;
+  subjects: Subject[];
+  electiveGroups: ElectiveGroup[];
+  sectionAssignments: SectionAssignment[];
+};

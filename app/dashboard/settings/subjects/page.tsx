@@ -2,7 +2,7 @@
 
 import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
 import SettingsSidebar from "@/components/dashboard/settings/SettingsSidebar";
-import PageHeader from "@/components/dashboard/PageHeader";
+import AllSubjects from "@/components/dashboard/settings/AllSubjects";
 import { settingsMenuItems } from "@/components/dashboard/settings/data";
 
 export default function SubjectsSetup() {
@@ -21,12 +21,7 @@ export default function SubjectsSetup() {
 
         {/* Main Content */}
         <div className="md:col-span-9">
-          <div className="card-base">
-            <PageHeader
-              title="Subjects Setup"
-              subtitle="Configure and manage subjects for all classes"
-            />
-          </div>
+          <AllSubjects />
         </div>
       </div>
     </div>
