@@ -14,7 +14,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Plus, Trash2 } from "lucide-react";
-import { mockClasses, mockCommonSubjects, mockGroupedSubjects, mockElectiveGroups } from "./data";
+import {
+  mockClasses,
+  mockCommonSubjects,
+  mockGroupedSubjects,
+  mockElectiveGroups,
+} from "./data";
 import SubjectPill, { GroupedSubjects } from "./SubjectPill";
 import GroupCard from "./GroupCard";
 
@@ -24,11 +29,22 @@ const tabs = [
   { id: "assign-sections", label: "Assign to Sections" },
 ];
 
+type SubdivisionL2 = {
+  id: string;
+  name: string;
+};
+
+type SubdivisionL1 = {
+  id: string;
+  name: string;
+  subdivisions: SubdivisionL2[];
+};
+
 type SubjectEntry = {
   id: string;
   name: string;
   type: "common" | "elective";
-  subdivisions: { id: string; name: string }[];
+  subdivisions: SubdivisionL1[];
 };
 
 type ElectiveGroupEntry = {
@@ -40,17 +56,19 @@ type ElectiveGroupEntry = {
 export default function SubjectSetupForm() {
   const [activeTab, setActiveTab] = useState(0);
   const [selectedClass, setSelectedClass] = useState("");
-  
+
   // Tab 1 state: Create Class Subjects
   const [subjects, setSubjects] = useState<SubjectEntry[]>([]);
-  
+
   // Tab 2 state: Configure Electives
   const [electiveGroups, setElectiveGroups] = useState<ElectiveGroupEntry[]>([
-    { id: "1", name: "", subjects: [""] }
+    { id: "1", name: "", subjects: [""] },
   ]);
-  
+
   // Tab 3 state: Section Assignments
-  const [sectionAssignments, setSectionAssignments] = useState<Record<string, string>>({});
+  const [sectionAssignments, setSectionAssignments] = useState<
+    Record<string, string>
+  >({});
 
   const selectedClassData = mockClasses.find((c) => c.id === selectedClass);
 
@@ -71,32 +89,111 @@ export default function SubjectSetupForm() {
     setSubjects(subjects.filter((s) => s.id !== id));
   };
 
-  const handleSubjectChange = (id: string, field: keyof SubjectEntry, value: string | { id: string; name: string }[]) => {
-    setSubjects(subjects.map((s) => 
-      s.id === id ? { ...s, [field]: value } : s
-    ));
+  const handleSubjectChange = (
+    id: string,
+    field: keyof SubjectEntry,
+    value: string | SubdivisionL1[],
+  ) => {
+    setSubjects(
+      subjects.map((s) => (s.id === id ? { ...s, [field]: value } : s)),
+    );
   };
 
   const handleAddSubdivision = (subjectId: string) => {
-    setSubjects(subjects.map((s) =>
-      s.id === subjectId
-        ? {
-            ...s,
-            subdivisions: [
-              ...s.subdivisions,
-              { id: Date.now().toString(), name: "" },
-            ],
-          }
-        : s
-    ));
+    setSubjects(
+      subjects.map((s) =>
+        s.id === subjectId
+          ? {
+              ...s,
+              subdivisions: [
+                ...s.subdivisions,
+                { id: Date.now().toString(), name: "", subdivisions: [] },
+              ],
+            }
+          : s,
+      ),
+    );
   };
 
   const handleRemoveSubdivision = (subjectId: string, subId: string) => {
-    setSubjects(subjects.map((s) =>
-      s.id === subjectId
-        ? { ...s, subdivisions: s.subdivisions.filter((sub) => sub.id !== subId) }
-        : s
-    ));
+    setSubjects(
+      subjects.map((s) =>
+        s.id === subjectId
+          ? {
+              ...s,
+              subdivisions: s.subdivisions.filter((sub) => sub.id !== subId),
+            }
+          : s,
+      ),
+    );
+  };
+
+  const handleAddL2Subdivision = (subjectId: string, l1Id: string) => {
+    setSubjects(
+      subjects.map((s) => {
+        if (s.id !== subjectId) return s;
+        return {
+          ...s,
+          subdivisions: s.subdivisions.map((l1) => {
+            if (l1.id !== l1Id) return l1;
+            return {
+              ...l1,
+              subdivisions: [
+                ...l1.subdivisions,
+                { id: Date.now().toString(), name: "" },
+              ],
+            };
+          }),
+        };
+      }),
+    );
+  };
+
+  const handleRemoveL2Subdivision = (
+    subjectId: string,
+    l1Id: string,
+    l2Id: string,
+  ) => {
+    setSubjects(
+      subjects.map((s) => {
+        if (s.id !== subjectId) return s;
+        return {
+          ...s,
+          subdivisions: s.subdivisions.map((l1) => {
+            if (l1.id !== l1Id) return l1;
+            return {
+              ...l1,
+              subdivisions: l1.subdivisions.filter((l2) => l2.id !== l2Id),
+            };
+          }),
+        };
+      }),
+    );
+  };
+
+  const handleL2SubdivisionChange = (
+    subjectId: string,
+    l1Id: string,
+    l2Id: string,
+    value: string,
+  ) => {
+    setSubjects(
+      subjects.map((s) => {
+        if (s.id !== subjectId) return s;
+        return {
+          ...s,
+          subdivisions: s.subdivisions.map((l1) => {
+            if (l1.id !== l1Id) return l1;
+            return {
+              ...l1,
+              subdivisions: l1.subdivisions.map((l2) =>
+                l2.id === l2Id ? { ...l2, name: value } : l2,
+              ),
+            };
+          }),
+        };
+      }),
+    );
   };
 
   // Tab 2: Elective Groups
@@ -112,31 +209,44 @@ export default function SubjectSetupForm() {
   };
 
   const handleGroupNameChange = (id: string, name: string) => {
-    setElectiveGroups(electiveGroups.map((g) =>
-      g.id === id ? { ...g, name } : g
-    ));
+    setElectiveGroups(
+      electiveGroups.map((g) => (g.id === id ? { ...g, name } : g)),
+    );
   };
 
   const handleAddSubjectToGroup = (groupId: string) => {
-    setElectiveGroups(electiveGroups.map((g) =>
-      g.id === groupId ? { ...g, subjects: [...g.subjects, ""] } : g
-    ));
+    setElectiveGroups(
+      electiveGroups.map((g) =>
+        g.id === groupId ? { ...g, subjects: [...g.subjects, ""] } : g,
+      ),
+    );
   };
 
   const handleRemoveSubjectFromGroup = (groupId: string) => {
-    setElectiveGroups(electiveGroups.map((g) =>
-      g.id === groupId && g.subjects.length > 1
-        ? { ...g, subjects: g.subjects.slice(0, -1) }
-        : g
-    ));
+    setElectiveGroups(
+      electiveGroups.map((g) =>
+        g.id === groupId && g.subjects.length > 1
+          ? { ...g, subjects: g.subjects.slice(0, -1) }
+          : g,
+      ),
+    );
   };
 
-  const handleGroupSubjectChange = (groupId: string, index: number, value: string) => {
-    setElectiveGroups(electiveGroups.map((g) =>
-      g.id === groupId
-        ? { ...g, subjects: g.subjects.map((s, i) => (i === index ? value : s)) }
-        : g
-    ));
+  const handleGroupSubjectChange = (
+    groupId: string,
+    index: number,
+    value: string,
+  ) => {
+    setElectiveGroups(
+      electiveGroups.map((g) =>
+        g.id === groupId
+          ? {
+              ...g,
+              subjects: g.subjects.map((s, i) => (i === index ? value : s)),
+            }
+          : g,
+      ),
+    );
   };
 
   // Tab 3: Section Assignment
@@ -162,8 +272,18 @@ export default function SubjectSetupForm() {
   };
 
   return (
-    <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-      <WizardTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+    <form
+      className="space-y-6"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+    >
+      <WizardTabs
+        tabs={tabs}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      />
 
       <div className="px-3 pb-3">
         {/* Tab 1: Create Class Subjects */}
@@ -196,11 +316,20 @@ export default function SubjectSetupForm() {
               {/* Subject List */}
               <div className="space-y-4">
                 {subjects.map((subject) => (
-                  <div key={subject.id} className="border rounded-lg p-4 space-y-3">
+                  <div
+                    key={subject.id}
+                    className="border rounded-lg p-4 space-y-3"
+                  >
                     <div className="flex items-center gap-2">
                       <Input
                         value={subject.name}
-                        onChange={(e) => handleSubjectChange(subject.id, "name", e.target.value)}
+                        onChange={(e) =>
+                          handleSubjectChange(
+                            subject.id,
+                            "name",
+                            e.target.value,
+                          )
+                        }
                         placeholder="Ex. Science"
                         className="flex-1"
                       />
@@ -222,7 +351,9 @@ export default function SubjectSetupForm() {
                           name={`type-${subject.id}`}
                           value="common"
                           checked={subject.type === "common"}
-                          onChange={() => handleSubjectChange(subject.id, "type", "common")}
+                          onChange={() =>
+                            handleSubjectChange(subject.id, "type", "common")
+                          }
                           className="accent-pink-500"
                         />
                         <span className="text-sm">Common</span>
@@ -233,7 +364,9 @@ export default function SubjectSetupForm() {
                           name={`type-${subject.id}`}
                           value="elective"
                           checked={subject.type === "elective"}
-                          onChange={() => handleSubjectChange(subject.id, "type", "elective")}
+                          onChange={() =>
+                            handleSubjectChange(subject.id, "type", "elective")
+                          }
                           className="accent-pink-500"
                         />
                         <span className="text-sm">Elective</span>
@@ -244,32 +377,100 @@ export default function SubjectSetupForm() {
                     {subject.subdivisions.length > 0 && (
                       <div className="ml-6 space-y-2 border-l-2 border-gray-200 pl-4">
                         {subject.subdivisions.map((sub) => (
-                          <div key={sub.id} className="flex items-center gap-2">
-                            <Input
-                              value={sub.name}
-                              onChange={(e) => {
-                                setSubjects(subjects.map((s) =>
-                                  s.id === subject.id
-                                    ? {
-                                        ...s,
-                                        subdivisions: s.subdivisions.map((sd) =>
-                                          sd.id === sub.id ? { ...sd, name: e.target.value } : sd
-                                        ),
+                          <div key={sub.id} className="space-y-2">
+                            {/* L1 Input */}
+                            <div className="flex items-center gap-2">
+                              <Input
+                                value={sub.name}
+                                onChange={(e) => {
+                                  setSubjects(
+                                    subjects.map((s) =>
+                                      s.id === subject.id
+                                        ? {
+                                            ...s,
+                                            subdivisions: s.subdivisions.map(
+                                              (sd) =>
+                                                sd.id === sub.id
+                                                  ? {
+                                                      ...sd,
+                                                      name: e.target.value,
+                                                    }
+                                                  : sd,
+                                            ),
+                                          }
+                                        : s,
+                                    ),
+                                  );
+                                }}
+                                placeholder="Subdivision L1"
+                                className="flex-1"
+                              />
+                              
+                              {/* Add L2 Button (Only for Elective) */}
+                              {subject.type === "elective" && (
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() =>
+                                    handleAddL2Subdivision(subject.id, sub.id)
+                                  }
+                                >
+                                  <Plus className="size-4" />
+                                </Button>
+                              )}
+
+                              <Button
+                                type="button"
+                                variant="destructive"
+                                size="sm"
+                                onClick={() =>
+                                  handleRemoveSubdivision(subject.id, sub.id)
+                                }
+                              >
+                                <Trash2 className="size-4" />
+                              </Button>
+                            </div>
+
+                            {/* L2 Subdivisions List */}
+                            {sub.subdivisions.length > 0 && (
+                              <div className="ml-8 space-y-2 border-l-2 border-gray-200 pl-4">
+                                {sub.subdivisions.map((l2) => (
+                                  <div
+                                    key={l2.id}
+                                    className="flex items-center gap-2"
+                                  >
+                                    <Input
+                                      value={l2.name}
+                                      onChange={(e) =>
+                                        handleL2SubdivisionChange(
+                                          subject.id,
+                                          sub.id,
+                                          l2.id,
+                                          e.target.value,
+                                        )
                                       }
-                                    : s
-                                ));
-                              }}
-                              placeholder="Division name"
-                              className="flex-1"
-                            />
-                            <Button
-                              type="button"
-                              variant="destructive"
-                              size="sm"
-                              onClick={() => handleRemoveSubdivision(subject.id, sub.id)}
-                            >
-                              <Trash2 className="size-4" />
-                            </Button>
+                                      placeholder="Subdivision L2"
+                                      className="flex-1"
+                                    />
+                                    <Button
+                                      type="button"
+                                      variant="destructive"
+                                      size="sm"
+                                      onClick={() =>
+                                        handleRemoveL2Subdivision(
+                                          subject.id,
+                                          sub.id,
+                                          l2.id,
+                                        )
+                                      }
+                                    >
+                                      <Trash2 className="size-4" />
+                                    </Button>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
                           </div>
                         ))}
                       </div>
@@ -336,10 +537,16 @@ export default function SubjectSetupForm() {
 
               {/* Common Subjects Pills */}
               <div>
-                <h4 className="text-base font-semibold mb-2">Common Subjects</h4>
+                <h4 className="text-base font-semibold mb-2">
+                  Common Subjects
+                </h4>
                 <div className="flex flex-wrap items-center gap-3">
                   {mockCommonSubjects.map((subject) => (
-                    <SubjectPill key={subject.id} label={subject.name} color={subject.color} />
+                    <SubjectPill
+                      key={subject.id}
+                      label={subject.name}
+                      color={subject.color}
+                    />
                   ))}
                   {mockGroupedSubjects.map((group) => (
                     <GroupedSubjects key={group.id} subjects={group.subjects} />
@@ -349,7 +556,9 @@ export default function SubjectSetupForm() {
 
               {/* Elective Groups */}
               <div>
-                <h4 className="text-base font-semibold mb-2">Elective Subjects</h4>
+                <h4 className="text-base font-semibold mb-2">
+                  Elective Subjects
+                </h4>
                 <div className="space-y-4">
                   {electiveGroups.map((group, groupIndex) => (
                     <div key={group.id} className="card-nested">
@@ -371,9 +580,13 @@ export default function SubjectSetupForm() {
                         <table className="min-w-[500px] w-full text-sm rounded-md overflow-hidden table-fixed">
                           <thead className="bg-gray-100">
                             <tr>
-                              <th className="text-left p-2 w-[150px]">Group Name</th>
+                              <th className="text-left p-2 w-[150px]">
+                                Group Name
+                              </th>
                               <th className="text-left p-2">Subjects</th>
-                              <th className="text-right p-2 w-[100px]">Action</th>
+                              <th className="text-right p-2 w-[100px]">
+                                Action
+                              </th>
                             </tr>
                           </thead>
                           <tbody>
@@ -381,7 +594,12 @@ export default function SubjectSetupForm() {
                               <td className="p-2 align-top w-[150px]">
                                 <Input
                                   value={group.name}
-                                  onChange={(e) => handleGroupNameChange(group.id, e.target.value)}
+                                  onChange={(e) =>
+                                    handleGroupNameChange(
+                                      group.id,
+                                      e.target.value,
+                                    )
+                                  }
                                   placeholder="Group name"
                                 />
                               </td>
@@ -391,7 +609,13 @@ export default function SubjectSetupForm() {
                                     <Input
                                       key={subIndex}
                                       value={subject}
-                                      onChange={(e) => handleGroupSubjectChange(group.id, subIndex, e.target.value)}
+                                      onChange={(e) =>
+                                        handleGroupSubjectChange(
+                                          group.id,
+                                          subIndex,
+                                          e.target.value,
+                                        )
+                                      }
                                       placeholder="Select subject"
                                     />
                                   ))}
@@ -403,7 +627,9 @@ export default function SubjectSetupForm() {
                                     type="button"
                                     variant="outline"
                                     size="icon"
-                                    onClick={() => handleAddSubjectToGroup(group.id)}
+                                    onClick={() =>
+                                      handleAddSubjectToGroup(group.id)
+                                    }
                                     title="Add Subject"
                                   >
                                     <Plus className="size-4" />
@@ -412,7 +638,9 @@ export default function SubjectSetupForm() {
                                     type="button"
                                     variant="destructive"
                                     size="icon"
-                                    onClick={() => handleRemoveSubjectFromGroup(group.id)}
+                                    onClick={() =>
+                                      handleRemoveSubjectFromGroup(group.id)
+                                    }
                                     title="Delete Subject"
                                   >
                                     <Trash2 className="size-4" />
@@ -481,10 +709,16 @@ export default function SubjectSetupForm() {
 
               {/* Common Subjects Pills */}
               <div>
-                <h4 className="text-base font-semibold mb-2">Common Subjects</h4>
+                <h4 className="text-base font-semibold mb-2">
+                  Common Subjects
+                </h4>
                 <div className="flex flex-wrap items-center gap-3">
                   {mockCommonSubjects.map((subject) => (
-                    <SubjectPill key={subject.id} label={subject.name} color={subject.color} />
+                    <SubjectPill
+                      key={subject.id}
+                      label={subject.name}
+                      color={subject.color}
+                    />
                   ))}
                   {mockGroupedSubjects.map((group) => (
                     <GroupedSubjects key={group.id} subjects={group.subjects} />
@@ -519,9 +753,7 @@ export default function SubjectSetupForm() {
               >
                 Back
               </Button>
-              <Button type="submit">
-                Save & Continue
-              </Button>
+              <Button type="submit">Save & Continue</Button>
             </div>
           </div>
         )}
