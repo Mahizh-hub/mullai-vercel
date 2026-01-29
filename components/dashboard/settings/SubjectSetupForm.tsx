@@ -23,28 +23,85 @@ import {
 import SubjectPill, { GroupedSubjects } from "./SubjectPill";
 import GroupCard from "./GroupCard";
 
+const SubdivisionItem = ({
+  subdivision,
+  subjectId,
+  subjectType,
+  onAdd,
+  onRemove,
+  onChange,
+}: {
+  subdivision: Subdivision;
+  subjectId: string;
+  subjectType: "common" | "elective";
+  onAdd: (subjectId: string, parentId: string) => void;
+  onRemove: (subjectId: string, subId: string) => void;
+  onChange: (subjectId: string, subId: string, newName: string) => void;
+}) => {
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center gap-2">
+        <Input
+          value={subdivision.name}
+          onChange={(e) => onChange(subjectId, subdivision.id, e.target.value)}
+          placeholder="Subdivision"
+          className="flex-1"
+        />
+        {subjectType === "elective" && (
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => onAdd(subjectId, subdivision.id)}
+          >
+            <Plus className="size-4" />
+          </Button>
+        )}
+        <Button
+          type="button"
+          variant="destructive"
+          size="sm"
+          onClick={() => onRemove(subjectId, subdivision.id)}
+        >
+          <Trash2 className="size-4" />
+        </Button>
+      </div>
+      {subdivision.subdivisions.length > 0 && (
+        <div className="ml-8 space-y-2 border-l-2 border-gray-200 pl-4">
+          {subdivision.subdivisions.map((sub) => (
+            <SubdivisionItem
+              key={sub.id}
+              subdivision={sub}
+              subjectId={subjectId}
+              subjectType={subjectType}
+              onAdd={onAdd}
+              onRemove={onRemove}
+              onChange={onChange}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const tabs = [
   { id: "create-subjects", label: "Create Class Subjects" },
   { id: "configure-electives", label: "Configure Electives" },
   { id: "assign-sections", label: "Assign to Sections" },
 ];
 
-type SubdivisionL2 = {
+type Subdivision = {
   id: string;
   name: string;
-};
-
-type SubdivisionL1 = {
-  id: string;
-  name: string;
-  subdivisions: SubdivisionL2[];
+  subdivisions: Subdivision[];
 };
 
 type SubjectEntry = {
   id: string;
   name: string;
   type: "common" | "elective";
-  subdivisions: SubdivisionL1[];
+  subdivisions: Subdivision[];
 };
 
 type ElectiveGroupEntry = {
@@ -92,26 +149,90 @@ export default function SubjectSetupForm() {
   const handleSubjectChange = (
     id: string,
     field: keyof SubjectEntry,
-    value: string | SubdivisionL1[],
+    value: string | Subdivision[],
   ) => {
     setSubjects(
       subjects.map((s) => (s.id === id ? { ...s, [field]: value } : s)),
     );
   };
 
-  const handleAddSubdivision = (subjectId: string) => {
+  const addSubdivisionToTree = (
+    subdivisions: Subdivision[],
+    parentId: string,
+    newSub: Subdivision,
+  ): Subdivision[] => {
+    return subdivisions.map((sub) => {
+      if (sub.id === parentId) {
+        return { ...sub, subdivisions: [...sub.subdivisions, newSub] };
+      }
+      if (sub.subdivisions.length > 0) {
+        return {
+          ...sub,
+          subdivisions: addSubdivisionToTree(
+            sub.subdivisions,
+            parentId,
+            newSub,
+          ),
+        };
+      }
+      return sub;
+    });
+  };
+
+  const removeSubdivisionFromTree = (
+    subdivisions: Subdivision[],
+    targetId: string,
+  ): Subdivision[] => {
+    return subdivisions
+      .filter((sub) => sub.id !== targetId)
+      .map((sub) => ({
+        ...sub,
+        subdivisions: removeSubdivisionFromTree(sub.subdivisions, targetId),
+      }));
+  };
+
+  const updateSubdivisionNameRecursive = (
+    subdivisions: Subdivision[],
+    targetId: string,
+    newName: string,
+  ): Subdivision[] => {
+    return subdivisions.map((sub) => {
+      if (sub.id === targetId) return { ...sub, name: newName };
+      return {
+        ...sub,
+        subdivisions: updateSubdivisionNameRecursive(
+          sub.subdivisions,
+          targetId,
+          newName,
+        ),
+      };
+    });
+  };
+
+  const handleAddSubdivision = (subjectId: string, parentId?: string) => {
+    const newSub: Subdivision = {
+      id: Date.now().toString(),
+      name: "",
+      subdivisions: [],
+    };
+
     setSubjects(
-      subjects.map((s) =>
-        s.id === subjectId
-          ? {
-              ...s,
-              subdivisions: [
-                ...s.subdivisions,
-                { id: Date.now().toString(), name: "", subdivisions: [] },
-              ],
-            }
-          : s,
-      ),
+      subjects.map((s) => {
+        if (s.id !== subjectId) return s;
+        if (!parentId) {
+          // Add to root level
+          return { ...s, subdivisions: [...s.subdivisions, newSub] };
+        }
+        // Add to nested level
+        return {
+          ...s,
+          subdivisions: addSubdivisionToTree(
+            s.subdivisions,
+            parentId,
+            newSub,
+          ),
+        };
+      }),
     );
   };
 
@@ -121,78 +242,31 @@ export default function SubjectSetupForm() {
         s.id === subjectId
           ? {
               ...s,
-              subdivisions: s.subdivisions.filter((sub) => sub.id !== subId),
+              subdivisions: removeSubdivisionFromTree(s.subdivisions, subId),
             }
           : s,
       ),
     );
   };
 
-  const handleAddL2Subdivision = (subjectId: string, l1Id: string) => {
-    setSubjects(
-      subjects.map((s) => {
-        if (s.id !== subjectId) return s;
-        return {
-          ...s,
-          subdivisions: s.subdivisions.map((l1) => {
-            if (l1.id !== l1Id) return l1;
-            return {
-              ...l1,
-              subdivisions: [
-                ...l1.subdivisions,
-                { id: Date.now().toString(), name: "" },
-              ],
-            };
-          }),
-        };
-      }),
-    );
-  };
-
-  const handleRemoveL2Subdivision = (
+  const handleSubdivisionNameChange = (
     subjectId: string,
-    l1Id: string,
-    l2Id: string,
+    subId: string,
+    newName: string,
   ) => {
     setSubjects(
-      subjects.map((s) => {
-        if (s.id !== subjectId) return s;
-        return {
-          ...s,
-          subdivisions: s.subdivisions.map((l1) => {
-            if (l1.id !== l1Id) return l1;
-            return {
-              ...l1,
-              subdivisions: l1.subdivisions.filter((l2) => l2.id !== l2Id),
-            };
-          }),
-        };
-      }),
-    );
-  };
-
-  const handleL2SubdivisionChange = (
-    subjectId: string,
-    l1Id: string,
-    l2Id: string,
-    value: string,
-  ) => {
-    setSubjects(
-      subjects.map((s) => {
-        if (s.id !== subjectId) return s;
-        return {
-          ...s,
-          subdivisions: s.subdivisions.map((l1) => {
-            if (l1.id !== l1Id) return l1;
-            return {
-              ...l1,
-              subdivisions: l1.subdivisions.map((l2) =>
-                l2.id === l2Id ? { ...l2, name: value } : l2,
+      subjects.map((s) =>
+        s.id === subjectId
+          ? {
+              ...s,
+              subdivisions: updateSubdivisionNameRecursive(
+                s.subdivisions,
+                subId,
+                newName,
               ),
-            };
-          }),
-        };
-      }),
+            }
+          : s,
+      ),
     );
   };
 
@@ -373,105 +447,19 @@ export default function SubjectSetupForm() {
                       </label>
                     </div>
 
-                    {/* Subdivisions */}
+                    {/* Recursive Subdivisions */}
                     {subject.subdivisions.length > 0 && (
                       <div className="ml-6 space-y-2 border-l-2 border-gray-200 pl-4">
                         {subject.subdivisions.map((sub) => (
-                          <div key={sub.id} className="space-y-2">
-                            {/* L1 Input */}
-                            <div className="flex items-center gap-2">
-                              <Input
-                                value={sub.name}
-                                onChange={(e) => {
-                                  setSubjects(
-                                    subjects.map((s) =>
-                                      s.id === subject.id
-                                        ? {
-                                            ...s,
-                                            subdivisions: s.subdivisions.map(
-                                              (sd) =>
-                                                sd.id === sub.id
-                                                  ? {
-                                                      ...sd,
-                                                      name: e.target.value,
-                                                    }
-                                                  : sd,
-                                            ),
-                                          }
-                                        : s,
-                                    ),
-                                  );
-                                }}
-                                placeholder="Subdivision L1"
-                                className="flex-1"
-                              />
-                              
-                              {/* Add L2 Button (Only for Elective) */}
-                              {subject.type === "elective" && (
-                                <Button
-                                  type="button"
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() =>
-                                    handleAddL2Subdivision(subject.id, sub.id)
-                                  }
-                                >
-                                  <Plus className="size-4" />
-                                </Button>
-                              )}
-
-                              <Button
-                                type="button"
-                                variant="destructive"
-                                size="sm"
-                                onClick={() =>
-                                  handleRemoveSubdivision(subject.id, sub.id)
-                                }
-                              >
-                                <Trash2 className="size-4" />
-                              </Button>
-                            </div>
-
-                            {/* L2 Subdivisions List */}
-                            {sub.subdivisions.length > 0 && (
-                              <div className="ml-8 space-y-2 border-l-2 border-gray-200 pl-4">
-                                {sub.subdivisions.map((l2) => (
-                                  <div
-                                    key={l2.id}
-                                    className="flex items-center gap-2"
-                                  >
-                                    <Input
-                                      value={l2.name}
-                                      onChange={(e) =>
-                                        handleL2SubdivisionChange(
-                                          subject.id,
-                                          sub.id,
-                                          l2.id,
-                                          e.target.value,
-                                        )
-                                      }
-                                      placeholder="Subdivision L2"
-                                      className="flex-1"
-                                    />
-                                    <Button
-                                      type="button"
-                                      variant="destructive"
-                                      size="sm"
-                                      onClick={() =>
-                                        handleRemoveL2Subdivision(
-                                          subject.id,
-                                          sub.id,
-                                          l2.id,
-                                        )
-                                      }
-                                    >
-                                      <Trash2 className="size-4" />
-                                    </Button>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                          </div>
+                          <SubdivisionItem
+                            key={sub.id}
+                            subdivision={sub}
+                            subjectId={subject.id}
+                            subjectType={subject.type}
+                            onAdd={(sId, pId) => handleAddSubdivision(sId, pId)}
+                            onRemove={handleRemoveSubdivision}
+                            onChange={handleSubdivisionNameChange}
+                          />
                         ))}
                       </div>
                     )}
