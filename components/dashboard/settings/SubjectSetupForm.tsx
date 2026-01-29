@@ -27,6 +27,7 @@ const SubdivisionItem = ({
   subdivision,
   subjectId,
   subjectType,
+  level,
   onAdd,
   onRemove,
   onChange,
@@ -34,17 +35,19 @@ const SubdivisionItem = ({
   subdivision: Subdivision;
   subjectId: string;
   subjectType: "common" | "elective";
+  level?: number;
   onAdd: (subjectId: string, parentId: string) => void;
   onRemove: (subjectId: string, subId: string) => void;
   onChange: (subjectId: string, subId: string, newName: string) => void;
 }) => {
+  const currentLevel = level || 1;
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-2">
         <Input
           value={subdivision.name}
           onChange={(e) => onChange(subjectId, subdivision.id, e.target.value)}
-          placeholder="Subdivision"
+          placeholder={`Subdivision L${currentLevel}`}
           className="flex-1"
         />
         {subjectType === "elective" && (
@@ -74,6 +77,7 @@ const SubdivisionItem = ({
               subdivision={sub}
               subjectId={subjectId}
               subjectType={subjectType}
+              level={currentLevel + 1}
               onAdd={onAdd}
               onRemove={onRemove}
               onChange={onChange}
@@ -456,6 +460,7 @@ export default function SubjectSetupForm() {
                             subdivision={sub}
                             subjectId={subject.id}
                             subjectType={subject.type}
+                            level={1}
                             onAdd={(sId, pId) => handleAddSubdivision(sId, pId)}
                             onRemove={handleRemoveSubdivision}
                             onChange={handleSubdivisionNameChange}
@@ -471,7 +476,7 @@ export default function SubjectSetupForm() {
                       onClick={() => handleAddSubdivision(subject.id)}
                     >
                       <Plus className="size-4 mr-1" />
-                      Create a Subdivision
+                      Create a Subdivision (L1)
                     </Button>
                   </div>
                 ))}
