@@ -11,7 +11,7 @@ export type FeeHistory = {
 };
 
 export const feeHistoryColumns: DataTableColumn<FeeHistory>[] = [
-  { key: "exam", header: "Exam" },
+  { key: "exam",  header: "Exam" },
   { key: "date", header: "Date" },
   { key: "transactionId", header: "Transaction ID" },
   { key: "mode", header: "Payment Mode" },
@@ -23,6 +23,7 @@ export const feeHistoryColumns: DataTableColumn<FeeHistory>[] = [
   {
     key: "status",
     header: "Status",
+    align: "center",
     cell: (row) => (
       <span
         className={`rounded-md px-2 py-1 text-xs ${

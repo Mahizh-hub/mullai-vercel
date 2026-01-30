@@ -15,6 +15,7 @@ export const campusColumns = (
   {
     key: "code",
     header: "S.No",
+    align: "center",
     width: "80px",
     cell: (row) => (
       <span className="text-sm text-muted-foreground">{row.code}</span>
@@ -24,6 +25,7 @@ export const campusColumns = (
     key: "name",
     header: "Campus Name",
     width: "35%",
+    align: "left",
     cell: (row) => (
       <div className="flex-center-gap-3">
         {row.avatar && (
@@ -42,16 +44,18 @@ export const campusColumns = (
       </div>
     ),
   },
-  { key: "classes", header: "Classes" },
-  { key: "sections", header: "Sections" },
+  { key: "classes", align: "center", header: "Classes" },
+  { key: "sections", align: "center", header: "Sections" },
   {
     key: "admin",
     header: "Admin",
+    align: "center",
     cell: (row) => <span className="text-sm">{row.admin}</span>,
   },
   {
     key: "phone",
     header: "Phone Number",
+    align: "center",
     cell: (row) => (
       <span className="text-sm text-muted-foreground">{row.phone}</span>
     ),

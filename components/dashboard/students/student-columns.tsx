@@ -12,9 +12,11 @@ import { Button } from "@/components/ui/button";
 export const studentColumns = (
   onDelete: (student: Student) => void,
 ): DataTableColumn<Student>[] => [
+  { key: "admissionNo", header: "Admission No.", width: "15%" },
   {
     key: "name",
     header: "Name",
+    align: "left",
     width: "35%",
     cell: (row) => (
       <div className="flex-center-gap-3">
@@ -31,12 +33,13 @@ export const studentColumns = (
       </div>
     ),
   },
-  { key: "phone", header: "Phone Number", width: "15%" },
-  { key: "class", header: "Class", width: "10%" },
-  { key: "section", header: "Section", width: "10%" },
+  { key: "phone", align: "center", header: "Phone Number", width: "15%" },
+  { key: "class", align: "center", header: "Class", width: "10%" },
+  { key: "section", align: "center", header: "Section", width: "10%" },
   {
     key: "status",
     header: "Status",
+    align: "center",
     cell: (row) => (
       <span
         className={`px-2 py-1 text-xs rounded-md font-medium

@@ -17,6 +17,7 @@ export type Student = {
   section: string;
   status: "active" | "inactive";
   avatar?: string;
+  admissionNo?: string;
 };
 
 const sampleStudents: Student[] = [
@@ -29,6 +30,7 @@ const sampleStudents: Student[] = [
     section: "A",
     status: "active",
     avatar: "/users/user53.jpg",
+    admissionNo: "AD1001",
   },
   {
     id: 2,
@@ -39,6 +41,7 @@ const sampleStudents: Student[] = [
     section: "A",
     status: "active",
     avatar: "/users/user54.jpg",
+    admissionNo: "AD1002",
   },
   {
     id: 3,
@@ -49,6 +52,7 @@ const sampleStudents: Student[] = [
     section: "B",
     status: "inactive",
     avatar: "/users/user55.jpg",
+    admissionNo: "AD1003",
   },
   {
     id: 4,
@@ -59,6 +63,7 @@ const sampleStudents: Student[] = [
     section: "B",
     status: "active",
     avatar: "/users/user56.jpg",
+    admissionNo: "AD1004",
   },
   {
     id: 5,
@@ -69,6 +74,7 @@ const sampleStudents: Student[] = [
     section: "C",
     status: "inactive",
     avatar: "/users/user57.jpg",
+    admissionNo: "AD1005",
   },
   {
     id: 6,
@@ -79,6 +85,7 @@ const sampleStudents: Student[] = [
     section: "A",
     status: "active",
     avatar: "/users/user53.jpg",
+    admissionNo: "AD1006",
   },
 ];
 

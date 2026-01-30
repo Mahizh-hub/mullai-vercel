@@ -51,6 +51,7 @@ export const feesColumns = (
     key: "name",
     header: "Name",
     width: "30%",
+    align: "left",
     cell: (row) => (
       <div className="flex-center-gap-3">
         {row.avatar && (
@@ -66,25 +67,28 @@ export const feesColumns = (
       </div>
     ),
   },
-  { key: "rollNo", header: "Roll No" },
+  { key: "rollNo", align: "center", header: "Roll No" },
   {
     key: "status",
     header: "Status",
+    align: "center",
     cell: (row) => (
       <span className="rounded-md bg-pink-50 px-2 py-1 text-xs text-pink-600">
         {row.status}
       </span>
     ),
   },
-  { key: "className", header: "Class" },
-  { key: "section", header: "Section" },
+  { key: "className", align: "center", header: "Class" },
+  { key: "section", align: "center", header: "Section" },
   {
     key: "total",
+    align: "center",
     header: "Total",
     cell: (row) => `₹ ${row.total.toLocaleString()}`,
   },
   {
     key: "paid",
+    align: "center",
     header: "Paid",
     cell: (row) => (
       <span className="text-green-600">₹ {row.paid.toLocaleString()}</span>
@@ -92,6 +96,7 @@ export const feesColumns = (
   },
   {
     key: "due",
+    align: "center",
     header: "Due",
     cell: (row) => (
       <span className="text-red-600">₹ {row.due.toLocaleString()}</span>

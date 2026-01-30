@@ -21,6 +21,7 @@ export const employeeColumns = (
   {
     key: "code",
     header: "S.No",
+    align: "center",
     width: "80px",
     cell: (row) => (
       <span className="text-sm text-muted-foreground">{row.code}</span>
@@ -29,6 +30,7 @@ export const employeeColumns = (
   {
     key: "name",
     header: "Name",
+    align: "left",
     width: "200px",
     cell: (row) => (
       <div className="flex-center-gap-3">
@@ -48,6 +50,7 @@ export const employeeColumns = (
   {
     key: "status",
     header: "Status",
+    align: "center",
     cell: (row) => (
       <span
         className={`px-2 py-1 text-xs rounded-md font-medium
@@ -65,6 +68,7 @@ export const employeeColumns = (
   {
     key: "phone",
     header: "Phone Number",
+    align: "center",
     cell: (row) => (
       <span className="text-sm text-muted-foreground">{row.phone}</span>
     ),
@@ -72,6 +76,7 @@ export const employeeColumns = (
   {
     key: "roles",
     header: "Roles",
+    align: "left",
     cell: (row) => (
       <div className="flex flex-wrap gap-1">
         {row.roles.map((role) => (

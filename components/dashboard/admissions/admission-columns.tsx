@@ -15,6 +15,7 @@ export const admissionsColumns = (
   {
     key: "name",
     header: "Name",
+    align: "left",
     width: "35%",
     cell: (row) => (
       <div className="flex-center-gap-3">
@@ -35,6 +36,7 @@ export const admissionsColumns = (
   {
     key: "admissionType",
     header: "Admission Type",
+    align: "center",
     cell: (row) => (
       <span
         className={`px-2 py-1 text-xs rounded-md font-medium
@@ -49,10 +51,12 @@ export const admissionsColumns = (
       </span>
     ),
   },
-  { key: "class", header: "Class", width: "10%" },
+  { key: "createdDate", align: "center", header: "Created date", width: "15%" },
+  { key: "class", align: "center", header: "Class", width: "10%" },
   {
     key: "status",
     header: "Status",
+    align: "center",
     cell: (row) => (
       <span
         className={`px-2 py-1 text-xs rounded-md font-medium

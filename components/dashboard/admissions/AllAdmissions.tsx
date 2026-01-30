@@ -16,6 +16,7 @@ export type AdmissionRow = {
   academicYear: string;
   status: "active" | "inactive";
   avatar?: string;
+  createdDate?: string;
 };
 
 export const admissionsData: AdmissionRow[] = [
@@ -28,6 +29,7 @@ export const admissionsData: AdmissionRow[] = [
     academicYear: "2025-2026",
     status: "active",
     avatar: "/users/user53.jpg",
+    createdDate: "Jan 12, 2025",
   },
   {
     id: 2,
@@ -38,6 +40,7 @@ export const admissionsData: AdmissionRow[] = [
     academicYear: "2024-2025",
     status: "inactive",
     avatar: "/users/user54.jpg",
+    createdDate: "Dec 05, 2024",
   },
 ];
 
