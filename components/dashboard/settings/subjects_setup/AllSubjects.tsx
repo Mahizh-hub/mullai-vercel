@@ -1,33 +1,46 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import PageHeader from "../PageHeader";
-import { DataTable, DataTableColumn } from "../DataTable";
-import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
-import { ClassSection } from "./types";
-import { mockClassSections } from "./data";
+
 import { Eye, Pencil, Trash2 } from "lucide-react";
+import { SubjectListItem } from "../types";
+import { mockSubjectsList } from "../data";
+import { DataTable, DataTableColumn } from "../../DataTable";
+import PageHeader from "../../PageHeader";
+import ConfirmDeleteDialog from "../../ConfirmDeleteDialog";
 
-export default function AllClassSections() {
-  const [data, setData] = useState<ClassSection[]>(mockClassSections);
-  const [deleteTarget, setDeleteTarget] = useState<ClassSection | null>(null);
+export default function AllSubjects() {
+  const [data, setData] = useState<SubjectListItem[]>(mockSubjectsList);
+  const [deleteTarget, setDeleteTarget] = useState<SubjectListItem | null>(null);
 
-  const columns: DataTableColumn<ClassSection>[] = useMemo(
+  const columns: DataTableColumn<SubjectListItem>[] = useMemo(
     () => [
       {
         key: "class",
         header: "Class",
       },
       {
-        key: "total",
-        header: "Total",
-      },
-      {
         key: "sections",
         header: "Sections",
       },
       {
-        key: "actions" as keyof ClassSection,
+        key: "group",
+        header: "Group",
+      },
+      {
+        key: "commonSubjects",
+        header: "Common Subjects",
+      },
+      {
+        key: "electiveSubjects",
+        header: "Elective Subjects",
+      },
+      {
+        key: "languageChoices",
+        header: "Language Choices",
+      },
+      {
+        key: "actions" as keyof SubjectListItem,
         header: "Action",
         align: "right",
         cell: (row) => (
@@ -54,9 +67,9 @@ export default function AllClassSections() {
   return (
     <div className="card-base">
       <PageHeader
-        title="Class & Sections"
-        subtitle="View and manage all classes and their sections for the academic year."
-        actionHref="/dashboard/settings/class-section/create"
+        title="Subjects List"
+        subtitle="View and manage subjects for all classes and grades."
+        actionHref="/dashboard/settings/subjects/create"
         actionLabel="Create"
         className="mb-6"
       />
@@ -70,8 +83,8 @@ export default function AllClassSections() {
       <ConfirmDeleteDialog
         open={!!deleteTarget}
         onOpenChange={() => setDeleteTarget(null)}
-        title="Delete Class & Section"
-        description={`Are you sure you want to delete class "${deleteTarget?.class}"?`}
+        title="Delete Subject Configuration"
+        description={`Are you sure you want to delete the subject configuration for class "${deleteTarget?.class}"?`}
         onConfirm={() => {
           if (!deleteTarget) return;
           setData((prev) => prev.filter((c) => c.id !== deleteTarget.id));

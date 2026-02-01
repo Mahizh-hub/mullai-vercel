@@ -2,9 +2,10 @@
 
 import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
 import SettingsSidebar from "@/components/dashboard/settings/SettingsSidebar";
-import ClassSectionForm from "@/components/dashboard/settings/ClassSectionForm";
+
 import PageHeader from "@/components/dashboard/PageHeader";
 import { settingsMenuItems, mockTeachers } from "@/components/dashboard/settings/data";
+import ClassSectionForm from "@/components/dashboard/settings/class_sections_setup/ClassSectionForm";
 
 export default function CreateClassSection() {
   return (

@@ -2,7 +2,7 @@
 
 import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
 import SettingsSidebar from "@/components/dashboard/settings/SettingsSidebar";
-import SubjectSetupForm from "@/components/dashboard/settings/SubjectSetupForm";
+import SubjectSetupForm from "@/components/dashboard/settings/subjects_setup/SubjectSetupForm";
 import PageHeader from "@/components/dashboard/PageHeader";
 import { settingsMenuItems } from "@/components/dashboard/settings/data";
 

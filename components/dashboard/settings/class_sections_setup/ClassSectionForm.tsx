@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-import WizardTabs from "./WizardTabs";
-import { ClassSectionFormData, Teacher, TeacherAssignment } from "./types";
 import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,7 +13,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import PageHeader from "../PageHeader";
+import { ClassSectionFormData, Teacher, TeacherAssignment } from "../types";
+import WizardTabs from "../WizardTabs";
+import PageHeader from "../../PageHeader";
+
 
 type Props = {
   teachers: Teacher[];

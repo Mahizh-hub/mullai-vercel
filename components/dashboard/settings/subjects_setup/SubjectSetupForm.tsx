@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import WizardTabs from "./WizardTabs";
-import PageHeader from "../PageHeader";
+import WizardTabs from "../WizardTabs";
+import PageHeader from "../../PageHeader";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -19,9 +19,9 @@ import {
   mockCommonSubjects,
   mockGroupedSubjects,
   mockElectiveGroups,
-} from "./data";
+} from "../data";
 import SubjectPill, { GroupedSubjects } from "./SubjectPill";
-import GroupCard from "./GroupCard";
+import GroupCard from "../GroupCard";
 
 const SubdivisionItem = ({
   subdivision,

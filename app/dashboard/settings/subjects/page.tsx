@@ -2,8 +2,9 @@
 
 import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
 import SettingsSidebar from "@/components/dashboard/settings/SettingsSidebar";
-import AllSubjects from "@/components/dashboard/settings/AllSubjects";
 import { settingsMenuItems } from "@/components/dashboard/settings/data";
+import AllSubjects from "@/components/dashboard/settings/subjects_setup/AllSubjects";
+
 
 export default function SubjectsSetup() {
   return (

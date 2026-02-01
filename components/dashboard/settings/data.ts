@@ -224,3 +224,24 @@ export const mockElectiveGroups = [
     subjects: ["Physics", "Chemistry", "Biology", "Maths"],
   },
 ];
+
+export const mockTeacherMappings: import("./types").TeacherMappingItem[] = [
+  {
+    id: "1",
+    class: "10",
+    section: "A",
+    group: "Computer Science",
+    classTeacher: "Sumathi John",
+    totalSubjects: 8,
+    subjectTeachers: 8,
+  },
+  {
+    id: "2",
+    class: "10",
+    section: "D",
+    group: "Commerce",
+    classTeacher: "Sumathi John",
+    totalSubjects: 8,
+    subjectTeachers: 8,
+  },
+];

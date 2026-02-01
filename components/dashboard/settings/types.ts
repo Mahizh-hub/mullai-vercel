@@ -76,3 +76,24 @@ export type SubjectFormData = {
   electiveGroups: ElectiveGroup[];
   sectionAssignments: SectionAssignment[];
 };
+
+// Teacher Mapping Types
+export type TeacherMappingItem = {
+  id: string;
+  class: string;
+  section: string;
+  group: string;
+  classTeacher: string;
+  totalSubjects: number;
+  subjectTeachers: number;
+};
+
+export type TeacherMappingFormData = {
+  classId: string;
+  sectionId: string;
+  classTeacherId: string;
+  subjects: {
+    subjectId: string;
+    teacherId: string;
+  }[];
+};

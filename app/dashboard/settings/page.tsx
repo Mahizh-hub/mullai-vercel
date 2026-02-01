@@ -2,8 +2,8 @@
 
 import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
 import SettingsSidebar from "@/components/dashboard/settings/SettingsSidebar";
-import AllClassSections from "@/components/dashboard/settings/AllClassSections";
 import { settingsMenuItems } from "@/components/dashboard/settings/data";
+import AllClassSections from "@/components/dashboard/settings/class_sections_setup/AllClassSections";
 
 export default function Settings() {
   return (
