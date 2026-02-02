@@ -2,7 +2,6 @@
 
 import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
 import SettingsSidebar from "@/components/dashboard/settings/SettingsSidebar";
-import PageHeader from "@/components/dashboard/PageHeader";
 import { settingsMenuItems, mockTeacherMappings } from "@/components/dashboard/settings/data";
 import TeacherMappingList from "@/components/dashboard/settings/teacher-mapping/TeacherMappingList";
 
@@ -22,22 +21,7 @@ export default function TeacherMapping() {
 
         {/* Main Content */}
         <div className="md:col-span-9">
-          <div className="card-base">
-            <div className="flex items-center justify-between mb-6">
-               <PageHeader
-                title="Subject Teacher Mapping List"
-                subtitle="Manage teacher assignments for subjects"
-              />
-              <a
-                href="/dashboard/settings/teacher-mapping/create"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-primary text-primary hover:bg-primary/10 h-10 px-4 py-2"
-              >
-                Teacher Mapping
-              </a>
-            </div>
-
-            <TeacherMappingList mappings={mockTeacherMappings} />
-          </div>
+          <TeacherMappingList mappings={mockTeacherMappings} />
         </div>
       </div>
     </div>

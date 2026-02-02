@@ -83,10 +83,13 @@
      ======================================== */
 
   .btn-pink-outline {
-    @apply border
-           text-[oklch(0.61_0.25_353.85)]
-           border-[oklch(0.61_0.25_353.85)]
-           hover:text-[oklch(0.54_0.25_353.85)];
+    @apply border;
+    color: oklch(0.61 0.25 353.85) !important;
+    border-color: oklch(0.61 0.25 353.85) !important;
+  }
+
+  .btn-pink-outline:hover {
+    color: oklch(0.54 0.25 353.85) !important;
   }
 
   /* ========================================

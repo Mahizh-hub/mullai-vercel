@@ -23,18 +23,13 @@ export default function CreateTeacherMapping() {
         {/* Main Content */}
         <div className="md:col-span-9">
           <div className="card-base">
-            <div className="flex items-center justify-between mb-6">
                <PageHeader
                 title="Subject Teacher Mapping"
                 subtitle="Assign teachers to each subject for the selected class and section."
+                actionHref="/dashboard/settings/teacher-mapping"
+                actionLabel="List"
+                icon="back"
               />
-              <a
-                href="/dashboard/settings/teacher-mapping"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-primary text-primary hover:bg-primary/10 h-10 px-4 py-2"
-              >
-                List
-              </a>
-            </div>
 
             <TeacherMappingForm />
           </div>

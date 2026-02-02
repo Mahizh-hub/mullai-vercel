@@ -1,9 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Eye, Edit, Trash2 } from "lucide-react";
+import { Eye, Trash2, Pencil } from "lucide-react";
 import { TeacherMappingItem } from "../types";
 import { DataTable, DataTableColumn } from "../../DataTable";
+import PageHeader from "../../PageHeader";
 import { Button } from "@/components/ui/button";
 import TeacherMappingDetailsModal from "./TeacherMappingDetailsModal";
 
@@ -61,7 +62,7 @@ export default function TeacherMappingList({ mappings }: TeacherMappingListProps
               <Eye className="size-4 text-primary" />
             </Button>
             <Button variant="ghost" size="icon" className="p-1 hover:bg-gray-100 rounded h-auto w-auto">
-               <Edit className="size-4 text-gray-600" />
+               <Pencil className="size-4 text-gray-600" />
             </Button>
             <Button variant="ghost" size="icon" className="p-1 hover:bg-gray-100 rounded h-auto w-auto">
               <Trash2 className="size-4 text-destructive" />
@@ -74,7 +75,14 @@ export default function TeacherMappingList({ mappings }: TeacherMappingListProps
   );
 
   return (
-    <>
+    <div className="card-base">
+       <PageHeader
+        title="Subject Teacher Mapping List"
+        subtitle="Manage teacher assignments for subjects"
+        actionHref="/dashboard/settings/teacher-mapping/create"
+        actionLabel="Teacher Mapping"
+        className="mb-6"
+      />
       <DataTable
         data={mappings}
         columns={columns}
@@ -85,6 +93,6 @@ export default function TeacherMappingList({ mappings }: TeacherMappingListProps
         onClose={() => setIsModalOpen(false)}
         mapping={selectedMapping}
       />
-    </>
+    </div>
   );
 }

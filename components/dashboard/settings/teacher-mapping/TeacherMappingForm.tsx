@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -114,7 +115,7 @@ export default function TeacherMappingForm() {
 
           <div className="flex justify-end gap-3 mt-8">
             <Button variant="outline" className="px-8" asChild>
-                <a href="/dashboard/settings/teacher-mapping">Back</a>
+                <Link href="/dashboard/settings/teacher-mapping">Back</Link>
             </Button>
             <Button className="px-8">Save & Assign</Button>
           </div>
