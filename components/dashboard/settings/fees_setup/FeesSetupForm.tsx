@@ -40,7 +40,8 @@ export default function FeesSetupForm() {
   const [activeTab, setActiveTab] = useState(0);
   const [selectedClass, setSelectedClass] = useState<string>("");
   const [selectedSections, setSelectedSections] = useState<string[]>([]);
-  const [viewingPattern, setViewingPattern] = useState<FeePattern | null>(null);
+  // Use index to track viewing pattern ensures we get reactive updates from watch()
+  const [viewingPatternIndex, setViewingPatternIndex] = useState<number | null>(null);
 
   const { register, control, handleSubmit, watch, getValues, setValue } =
     useForm<FeePatternFormData>({
@@ -87,9 +88,23 @@ export default function FeesSetupForm() {
   };
 
   const handleViewList = (index: number) => {
-    const pattern = getValues(`patterns.${index}`);
-    setViewingPattern(pattern);
+    setViewingPatternIndex(index);
   };
+
+  // Handle deleting a component from the modal
+  const handleDeleteComponentFromPattern = (compIndex: number) => {
+    if (viewingPatternIndex === null) return;
+
+    // Get current components for this pattern
+    const currentComponents = getValues(`patterns.${viewingPatternIndex}.components`);
+    // Filter out the deleted component
+    const newComponents = currentComponents.filter((_, i) => i !== compIndex);
+    // Update the form value
+    setValue(`patterns.${viewingPatternIndex}.components`, newComponents);
+  };
+
+  // Derive the currently viewing pattern from watched state
+  const viewingPattern = viewingPatternIndex !== null ? watchPatterns[viewingPatternIndex] : null;
 
   // Mock data for sections
   const getSectionsForClass = (cls: string) => {
@@ -273,8 +288,9 @@ export default function FeesSetupForm() {
 
       <FeePatternListModal
         isOpen={!!viewingPattern}
-        onOpenChange={(open) => !open && setViewingPattern(null)}
+        onOpenChange={(open) => !open && setViewingPatternIndex(null)}
         pattern={viewingPattern}
+        onDeleteComponent={handleDeleteComponentFromPattern}
       />
     </>
   );

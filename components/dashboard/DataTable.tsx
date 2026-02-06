@@ -21,14 +21,14 @@ export type DataTableColumn<T> = {
   width?: string;
 };
 
-type Props<T extends Record<string, CellValue>> = {
+type Props<T> = {
   data: T[];
   columns: DataTableColumn<T>[];
   rowKeyAction: (row: T) => string | number;
   className?: string;
 };
 
-export function DataTable<T extends Record<string, CellValue>>({
+export function DataTable<T>({
   data,
   columns,
   rowKeyAction,
@@ -78,7 +78,7 @@ export function DataTable<T extends Record<string, CellValue>>({
                       col.align === "center" && "text-center",
                     )}
                   >
-                    {col.cell ? col.cell(row) : row[col.key]}
+                    {col.cell ? col.cell(row) : (row[col.key] as ReactNode)}
                   </TableCell>
                 ))}
               </TableRow>
