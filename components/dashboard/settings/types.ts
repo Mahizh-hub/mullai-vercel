@@ -97,3 +97,29 @@ export type TeacherMappingFormData = {
     teacherId: string;
   }[];
 };
+
+// Fees Setup Types
+export type FeeComponent = {
+  id: string;
+  name: string; // e.g., "Tuition - Term 1"
+  amount: number;
+};
+
+export type FeePattern = {
+  id: string;
+  name: string; // e.g., "Annual Fees"
+  components: FeeComponent[];
+};
+
+export type FeeStructure = {
+  id: string;
+  class: string;
+  section: string; // "A" or "A, B, C"
+  group: string; // "CS" or "-"
+  breakdown: FeeComponent[];
+  total: number;
+};
+
+export type FeePatternFormData = {
+  patterns: FeePattern[];
+};

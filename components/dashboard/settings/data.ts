@@ -245,3 +245,48 @@ export const mockTeacherMappings: import("./types").TeacherMappingItem[] = [
     subjectTeachers: 8,
   },
 ];
+
+export const mockFeesData: import("./types").FeeStructure[] = [
+  {
+    id: "1",
+    class: "11",
+    section: "A",
+    group: "CS",
+    breakdown: [
+      { id: "1", name: "Tuition – Term 1", amount: 18000 },
+      { id: "2", name: "Tuition – Term 2", amount: 18000 },
+      { id: "3", name: "Tuition – Term 3", amount: 18000 },
+      { id: "4", name: "Lab Fee", amount: 6000 },
+      { id: "5", name: "Transport", amount: 7000 },
+    ],
+    total: 92000,
+  },
+  {
+    id: "2",
+    class: "11",
+    section: "B",
+    group: "Biology",
+    breakdown: [
+      { id: "1", name: "Tuition – Term 1", amount: 17000 },
+      { id: "2", name: "Tuition – Term 2", amount: 17000 },
+      { id: "3", name: "Tuition – Term 3", amount: 17000 },
+      { id: "4", name: "Lab Fee – Physics", amount: 4000 },
+      { id: "5", name: "Lab Fee – Biology", amount: 4500 },
+      { id: "6", name: "Transport", amount: 6000 },
+    ],
+    total: 88500,
+  },
+  {
+    id: "3",
+    class: "10",
+    section: "A, B, C",
+    group: "-",
+    breakdown: [
+      { id: "1", name: "Tuition – Term 1", amount: 17000 },
+      { id: "2", name: "Tuition – Term 2", amount: 17000 },
+      { id: "3", name: "Tuition – Term 3", amount: 17000 },
+      { id: "4", name: "Transport", amount: 6000 },
+    ],
+    total: 78500,
+  },
+];

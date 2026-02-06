@@ -2,10 +2,10 @@
 
 import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
 import SettingsSidebar from "@/components/dashboard/settings/SettingsSidebar";
-import PageHeader from "@/components/dashboard/PageHeader";
 import { settingsMenuItems } from "@/components/dashboard/settings/data";
+import FeesSetupList from "@/components/dashboard/settings/fees_setup/FeesSetupList";
 
-export default function FeesSetup() {
+export default function FeesSetupPage() {
   return (
     <div className="space-y-4 p-4">
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
@@ -13,7 +13,7 @@ export default function FeesSetup() {
         <DynamicBreadcrumb />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
         {/* Sidebar */}
         <div className="md:col-span-3">
           <SettingsSidebar menuItems={settingsMenuItems} />
@@ -21,12 +21,7 @@ export default function FeesSetup() {
 
         {/* Main Content */}
         <div className="md:col-span-9">
-          <div className="card-base">
-            <PageHeader
-              title="Fees Setup"
-              subtitle="Configure fee structures and payment options"
-            />
-          </div>
+            <FeesSetupList />
         </div>
       </div>
     </div>
