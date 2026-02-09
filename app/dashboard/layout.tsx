@@ -45,6 +45,8 @@ function DashboardLayoutInner({
   );
 }
 
+import { CalendarProvider } from "@/components/dashboard/settings/calendar/CalendarContext";
+
 export default function DashboardLayout({
   children,
 }: {
@@ -55,7 +57,9 @@ export default function DashboardLayout({
 
   return (
     <SidebarProvider>
-      <DashboardLayoutInner isHome={isHome}>{children}</DashboardLayoutInner>
+      <CalendarProvider>
+        <DashboardLayoutInner isHome={isHome}>{children}</DashboardLayoutInner>
+      </CalendarProvider>
     </SidebarProvider>
   );
 }

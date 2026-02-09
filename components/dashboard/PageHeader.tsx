@@ -8,7 +8,8 @@ type Props = {
   subtitle: string;
   actionLabel?: string;
   actionHref?: string;
-  className?: string;
+  onActionClick?: () => void;
+  className?: string; // Wrapper class
   subtitleExtra?: React.ReactNode;
   icon?: "default" | "back";
 };
@@ -19,32 +20,33 @@ export default function PageHeader({
   className,
   actionHref,
   actionLabel,
+  onActionClick,
   subtitleExtra,
   icon = "default"
 }: Props) {
   return (
-    <div
-      className={cn(
-        "flex-responsive",
-        className,
-      )}
-    >
+    <div className={cn("flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6", className)}>
       <div>
-        <h2 className="font-semibold">{title}</h2>
-        <p className="text-sm text-gray-500">{subtitle}</p>
+        <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
+        <p className="text-muted-foreground">{subtitle}</p>
         <p className="text-xs italic text-pink-500">{subtitleExtra}</p>
       </div>
-      {actionHref && actionLabel && (
-        <Link href={actionHref}>
-          <Button
-            variant="outline"
-            className="btn-pink-outline"
-          >
-            {icon === "default" && <Plus />}
-            {icon === "back" && <ArrowLeft />}
-            {actionLabel}
+      {(actionLabel && (actionHref || onActionClick)) && (
+        onActionClick ? (
+          <Button onClick={onActionClick} className="bg-pink-500 hover:bg-pink-600 text-white">
+             {icon === "default" && <Plus className="mr-2 h-4 w-4" />}
+             {icon === "back" && <ArrowLeft className="mr-2 h-4 w-4" />}
+             {actionLabel}
           </Button>
-        </Link>
+        ) : (
+          <Link href={actionHref!}>
+            <Button>
+              {icon === "default" && <Plus className="mr-2 h-4 w-4" />}
+              {icon === "back" && <ArrowLeft className="mr-2 h-4 w-4" />}
+              {actionLabel}
+            </Button>
+          </Link>
+        )
       )}
     </div>
   );

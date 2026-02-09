@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FeePatternFormData, FeePattern } from "../types";
+import { FeePatternFormData } from "../types";
 import WizardTabs from "../WizardTabs";
 import PageHeader from "../../PageHeader";
 import FeePatternListModal from "./FeePatternListModal";
@@ -23,25 +23,14 @@ const tabs = [
   { id: "link-class", label: "Link Class/ Grade" },
 ];
 
-const FEE_TYPES = [
-  "Annual Fees",
-  "Admission",
-  "Tuition – Term 1",
-  "Tuition – Term 2",
-  "Tuition – Term 3",
-  "Transport",
-  "Books & Stationery",
-  "Lab Fee",
-  "Lab Fee - Physics",
-  "Lab Fee - Biology",
-];
-
 export default function FeesSetupForm() {
   const [activeTab, setActiveTab] = useState(0);
   const [selectedClass, setSelectedClass] = useState<string>("");
   const [selectedSections, setSelectedSections] = useState<string[]>([]);
-  // Use index to track viewing pattern ensures we get reactive updates from watch()
-  const [viewingPatternIndex, setViewingPatternIndex] = useState<number | null>(null);
+  
+  // State for dynamic fee types
+  const [availableFeeTypes, setAvailableFeeTypes] = useState<string[]>([]);
+  const [isViewListOpen, setIsViewListOpen] = useState(false);
 
   const { register, control, handleSubmit, watch, getValues, setValue } =
     useForm<FeePatternFormData>({
@@ -49,7 +38,7 @@ export default function FeesSetupForm() {
         patterns: [
           {
             id: Date.now().toString(),
-            name: "",
+            name: "Fee Structure", // Default name as we are moving away from multiple patterns
             components: [{ id: Date.now().toString(), name: "", amount: 0 }],
           },
         ],
@@ -58,8 +47,6 @@ export default function FeesSetupForm() {
 
   const {
     fields: patternFields,
-    append: appendPattern,
-    remove: removePattern,
   } = useFieldArray({
     control,
     name: "patterns",
@@ -87,24 +74,15 @@ export default function FeesSetupForm() {
     }
   };
 
-  const handleViewList = (index: number) => {
-    setViewingPatternIndex(index);
+  const handleAddFeeType = (newType: string) => {
+    if (newType && !availableFeeTypes.includes(newType)) {
+        setAvailableFeeTypes([...availableFeeTypes, newType]);
+    }
   };
 
-  // Handle deleting a component from the modal
-  const handleDeleteComponentFromPattern = (compIndex: number) => {
-    if (viewingPatternIndex === null) return;
-
-    // Get current components for this pattern
-    const currentComponents = getValues(`patterns.${viewingPatternIndex}.components`);
-    // Filter out the deleted component
-    const newComponents = currentComponents.filter((_, i) => i !== compIndex);
-    // Update the form value
-    setValue(`patterns.${viewingPatternIndex}.components`, newComponents);
+  const handleDeleteFeeType = (typeToDelete: string) => {
+    setAvailableFeeTypes(availableFeeTypes.filter(type => type !== typeToDelete));
   };
-
-  // Derive the currently viewing pattern from watched state
-  const viewingPattern = viewingPatternIndex !== null ? watchPatterns[viewingPatternIndex] : null;
 
   // Mock data for sections
   const getSectionsForClass = (cls: string) => {
@@ -135,38 +113,20 @@ export default function FeesSetupForm() {
                 subtitle="Create and manage fee components and term-wise amounts."
               />
 
-              {patternFields.map((patternField, patternIndex) => (
+              {/* We only render one pattern block now */}
+              {patternFields.length > 0 && (
                 <FeePatternBlock
-                  key={patternField.id}
-                  patternIndex={patternIndex}
+                  key={patternFields[0].id}
+                  patternIndex={0}
                   control={control}
                   register={register}
                   setValue={setValue}
                   watch={watch}
-                  onRemove={() => removePattern(patternIndex)}
-                  onViewList={() => handleViewList(patternIndex)}
-                  canRemove={patternFields.length > 1}
+                  activeFeeTypes={availableFeeTypes}
+                  onAddFeeType={handleAddFeeType}
+                  onViewList={() => setIsViewListOpen(true)}
                 />
-              ))}
-
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={() =>
-                  appendPattern({
-                    id: Date.now().toString(),
-                    name: "",
-                    components: [
-                      { id: Date.now().toString(), name: "", amount: 0 },
-                    ],
-                  })
-                }
-                className="w-full border-dashed py-5 text-primary border-primary/20 bg-primary/5 hover:bg-primary/10"
-              >
-                <Plus className="size-4 mr-2" />
-                Add Another Fee Pattern
-              </Button>
+              )}
 
               <div className="flex justify-end gap-3 pt-4">
                 <Button
@@ -202,7 +162,7 @@ export default function FeesSetupForm() {
                             <thead className="bg-gray-50 text-gray-700 uppercase text-xs">
                             <tr>
                                 {pattern.components.map((comp, cIdx) => (
-                                <th key={cIdx} className="px-4 py-2 whitespace-nowrap">
+                                <th key={cIdx} className="px-4 py-2 whitespace-nowrap border border-gray-100">
                                     {comp.name || "-"}
                                 </th>
                                 ))}
@@ -211,7 +171,7 @@ export default function FeesSetupForm() {
                             <tbody>
                             <tr className="border-t bg-white">
                                 {pattern.components.map((comp, cIdx) => (
-                                <td key={cIdx} className="px-4 py-2 font-medium">
+                                <td key={cIdx} className="px-4 py-2 font-medium border border-gray-100">
                                     {comp.amount || 0}
                                 </td>
                                 ))}
@@ -223,8 +183,8 @@ export default function FeesSetupForm() {
                 )})}
               </div>
 
-              <div className="form-section mt-6">
-                <div className="space-y-3 mb-6">
+              <div className="form-section mt-3">
+                <div className="space-y-3">
                   <Label>
                     Select Class <span className="text-destructive">*</span>
                   </Label>
@@ -255,10 +215,10 @@ export default function FeesSetupForm() {
                           key={section}
                           type="button"
                           onClick={() => toggleSection(section)}
-                          className={`px-6 py-2 rounded-full border transition-colors ${
+                          className={`px-4 text-sm py-1 rounded-full border transition-colors ${
                             selectedSections.includes(section)
-                              ? "bg-primary text-primary-foreground border-primary"
-                              : "bg-transparent text-primary border-primary hover:bg-primary/10"
+                              ? "bg-pink-600 text-primary-foreground border-pink-600"
+                              : "bg-transparent text-pink-600 border-pink-600 hover:bg-pink-600/10"
                           }`}
                         >
                           {section}
@@ -287,10 +247,10 @@ export default function FeesSetupForm() {
       </form>
 
       <FeePatternListModal
-        isOpen={!!viewingPattern}
-        onOpenChange={(open) => !open && setViewingPatternIndex(null)}
-        pattern={viewingPattern}
-        onDeleteComponent={handleDeleteComponentFromPattern}
+        isOpen={isViewListOpen}
+        onOpenChange={setIsViewListOpen}
+        feeTypes={availableFeeTypes}
+        onDelete={handleDeleteFeeType}
       />
     </>
   );
@@ -303,9 +263,9 @@ type FeePatternBlockProps = {
   register: any;
   setValue: any;
   watch: any;
-  onRemove: () => void;
+  activeFeeTypes: string[];
+  onAddFeeType: (type: string) => void;
   onViewList: () => void;
-  canRemove: boolean;
 };
 
 function FeePatternBlock({
@@ -314,10 +274,12 @@ function FeePatternBlock({
   register,
   setValue,
   watch,
-  onRemove,
+  activeFeeTypes,
+  onAddFeeType,
   onViewList,
-  canRemove,
 }: FeePatternBlockProps) {
+  const [newFeeTypeName, setNewFeeTypeName] = useState("");
+  
   const {
     fields: componentFields,
     append: appendComponent,
@@ -334,18 +296,38 @@ function FeePatternBlock({
     0
   );
 
+  const handleAddClick = () => {
+    if (newFeeTypeName.trim()) {
+        onAddFeeType(newFeeTypeName.trim());
+        setNewFeeTypeName(""); // Clear input
+    }
+  };
+
   return (
-    <div className="relative pb-2 border-b border-gray-200 last:border-0 mb-6">
+    <div className="relative pb-2 mb-6">
       <div className="mb-4">
         <Label className="block mb-2">
-            Fees Pattern Name <span className="text-destructive">*</span>
+            Fee Pattern Name <span className="text-destructive">*</span>
         </Label>
         <div className="flex gap-4 items-center">
-            <Input
-                {...register(`patterns.${patternIndex}.name`)}
-                placeholder="e.g. Annual Fees"
-                className="flex-1"
-            />
+            <div className="flex-1 flex gap-2 items-center">
+                <Input
+                    value={newFeeTypeName}
+                    onChange={(e) => setNewFeeTypeName(e.target.value)}
+                    placeholder="Enter new fee type name"
+                    className="flex-1"
+                />
+                 <Button
+                    type="button"
+                    variant="outline"
+                    size="icon"
+                    onClick={handleAddClick}
+                    disabled={!newFeeTypeName.trim()}
+                >
+                    <Plus className="size-4" />
+                </Button>
+            </div>
+           
             <div className="flex gap-2 shrink-0">
                 <Button
                 type="button"
@@ -356,16 +338,6 @@ function FeePatternBlock({
                 >
                 View List
                 </Button>
-                {canRemove && (
-                    <Button
-                    type="button"
-                    variant="destructive"
-                    size="icon"
-                    onClick={onRemove}
-                    >
-                    <Trash2 className="size-4" />
-                    </Button>
-                )}
             </div>
         </div>
       </div>
@@ -388,12 +360,13 @@ function FeePatternBlock({
                 onValueChange={(val) => 
                      setValue(`patterns.${patternIndex}.components.${compIndex}.name`, val)
                 }
+                disabled={activeFeeTypes.length === 0}
               >
                   <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select Fee Type" />
+                      <SelectValue placeholder={activeFeeTypes.length === 0 ? "Add fee type above first" : "Select Fee Type"} />
                   </SelectTrigger>
                   <SelectContent>
-                      {FEE_TYPES.map(type => (
+                      {activeFeeTypes.map(type => (
                           <SelectItem key={type} value={type}>{type}</SelectItem>
                       ))}
                   </SelectContent>
@@ -412,8 +385,7 @@ function FeePatternBlock({
               <Button
                 type="button"
                 variant="outline"
-                size="sm"
-                className="px-4" // Matches ClassSectionForm styling
+                size="icon"
                 onClick={() =>
                   appendComponent({
                     id: Date.now().toString(),
@@ -428,8 +400,7 @@ function FeePatternBlock({
                 <Button
                   type="button"
                   variant="destructive"
-                  size="sm"
-                  className="px-4" // Matches ClassSectionForm styling
+                  size="icon"
                   onClick={() => removeComponent(compIndex)}
                 >
                   <Trash2 className="size-4" />

@@ -44,7 +44,7 @@ export function DataTable<T>({
                 key={String(col.key)}
                 style={col.width ? { width: col.width } : undefined}
                 className={cn(
-                  "text-gray-600",
+                  "text-gray-600 px-4 py-3",
                   col.align === "right" && "text-right",
                   col.align === "center" && "text-center",
                 )}
@@ -74,6 +74,7 @@ export function DataTable<T>({
                     key={String(col.key)}
                     style={col.width ? { width: col.width } : undefined}
                     className={cn(
+                      "border border-gray-100",
                       col.align === "right" && "text-right",
                       col.align === "center" && "text-center",
                     )}
