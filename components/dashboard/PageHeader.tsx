@@ -27,22 +27,22 @@ export default function PageHeader({
   return (
     <div className={cn("flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6", className)}>
       <div>
-        <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
-        <p className="text-muted-foreground">{subtitle}</p>
+        <h2 className="text-lg font-bold tracking-tight">{title}</h2>
+        <p className="text-sm text-muted-foreground">{subtitle}</p>
         <p className="text-xs italic text-pink-500">{subtitleExtra}</p>
       </div>
       {(actionLabel && (actionHref || onActionClick)) && (
         onActionClick ? (
           <Button onClick={onActionClick} className="bg-pink-500 hover:bg-pink-600 text-white">
-             {icon === "default" && <Plus className="mr-2 h-4 w-4" />}
-             {icon === "back" && <ArrowLeft className="mr-2 h-4 w-4" />}
+             {icon === "default" && <Plus className="h-4 w-4" />}
+             {icon === "back" && <ArrowLeft className="h-4 w-4" />}
              {actionLabel}
           </Button>
         ) : (
           <Link href={actionHref!}>
             <Button>
-              {icon === "default" && <Plus className="mr-2 h-4 w-4" />}
-              {icon === "back" && <ArrowLeft className="mr-2 h-4 w-4" />}
+              {icon === "default" && <Plus className="h-4 w-4" />}
+              {icon === "back" && <ArrowLeft className="h-4 w-4" />}
               {actionLabel}
             </Button>
           </Link>

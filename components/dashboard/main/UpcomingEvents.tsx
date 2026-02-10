@@ -4,7 +4,7 @@ import { useCalendar } from "@/components/dashboard/settings/calendar/CalendarCo
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import { Clock, MapPin } from "lucide-react";
+import { Clock } from "lucide-react";
 
 // Swiper styles (make sure these are imported globally once)
 // import "swiper/css";
@@ -16,7 +16,7 @@ type Event = {
   title: string;
   date: string;
   time: string;
-  location: string;
+  description?: string;
 };
 
 
@@ -47,7 +47,7 @@ export default function UpcomingEvents({ events: propEvents }: Props) {
             hour: "numeric",
             minute: "2-digit",
           })}`,
-          location: e.location || "No location",
+          description: e.description,
         }))
     : [];
 
@@ -86,15 +86,16 @@ export default function UpcomingEvents({ events: propEvents }: Props) {
                   <span className="text-sm text-gray-500">{event.date}</span>
                 </div>
 
-                <div className="mt-2 flex gap-5 text-sm text-gray-600">
+                <div className="mt-2 text-sm text-gray-600 space-y-1">
                   <div className="flex items-center gap-1.5">
-                    <Clock className="h-4 w-4" />
+                    <Clock className="h-4 w-4 shrink-0" />
                     {event.time}
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <MapPin className="h-4 w-4" />
-                    {event.location}
-                  </div>
+                  {event.description && (
+                      <div className="text-gray-500 text-xs line-clamp-2">
+                        {event.description}
+                      </div>
+                  )}
                 </div>
               </div>
             </SwiperSlide>

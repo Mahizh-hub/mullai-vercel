@@ -2,7 +2,7 @@
 
 import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
 import SettingsSidebar from "@/components/dashboard/settings/SettingsSidebar";
-import PageHeader from "@/components/dashboard/PageHeader";
+import ExamSetupList from "@/components/dashboard/settings/exam/ExamSetupList";
 import { settingsMenuItems } from "@/components/dashboard/settings/data";
 
 export default function ExamSetup() {
@@ -21,12 +21,7 @@ export default function ExamSetup() {
 
         {/* Main Content */}
         <div className="md:col-span-9">
-          <div className="card-base">
-            <PageHeader
-              title="Exam Setup"
-              subtitle="Configure exam types, schedules, and grading systems"
-            />
-          </div>
+           <ExamSetupList />
         </div>
       </div>
     </div>

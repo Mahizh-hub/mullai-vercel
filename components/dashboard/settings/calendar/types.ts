@@ -6,11 +6,10 @@ export type CalendarEvent = {
   type: EventType;
   startDate: Date;
   endDate: Date;
-  location?: string; // Optional, required for 'meeting' and 'function'
-  description?: string;
+  description?: string; // Optional, available for all event types
 };
 
-export type ViewType = 'day' | 'week' | 'month' | 'year';
+export type ViewType = 'month' | 'year';
 
 export interface CalendarState {
   currentDate: Date;

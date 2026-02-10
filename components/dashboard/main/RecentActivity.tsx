@@ -19,7 +19,7 @@ const logs: Activity[] = [
 
 export default function RecentActivity() {
   return (
-    <div className="card-widget h-81.5">
+    <div className="card-widget">
       {/* Header */}
       <div className="mb-4 flex-center-between">
         <h5 className="font-semibold text-lg">Recent Activity Logs</h5>

@@ -38,7 +38,7 @@ export default function FeesSetupForm() {
         patterns: [
           {
             id: Date.now().toString(),
-            name: "Fee Structure", // Default name as we are moving away from multiple patterns
+            name: "", // Initialize empty
             components: [{ id: Date.now().toString(), name: "", amount: 0 }],
           },
         ],
@@ -146,7 +146,6 @@ export default function FeesSetupForm() {
                 title="Link Class / Grade"
                 subtitle="Link the fee structure to classes & Sections."
               />
-
               {/* Summary Table */}
               <div className="space-y-6">
                 {watchPatterns.map((pattern, idx) => {
@@ -305,17 +304,30 @@ function FeePatternBlock({
 
   return (
     <div className="relative pb-2 mb-6">
-      <div className="mb-4">
+      
+      {/* Fee Pattern Name Input */}
+      <div className="mb-6">
         <Label className="block mb-2">
             Fee Pattern Name <span className="text-destructive">*</span>
         </Label>
-        <div className="flex gap-4 items-center">
+        <Input
+            {...register(`patterns.${patternIndex}.name`, { required: true })}
+            placeholder="Enter fee pattern name (e.g. Term 1 Fees)"
+            className="w-full"
+        />
+      </div>
+
+      <div className="mb-4">
+        <Label className="block mb-2">
+            Fee Component Name <span className="text-destructive">*</span>
+        </Label>
+        <div className="flex gap-2 items-center">
             <div className="flex-1 flex gap-2 items-center">
                 <Input
                     value={newFeeTypeName}
                     onChange={(e) => setNewFeeTypeName(e.target.value)}
-                    placeholder="Enter new fee type name"
-                    className="flex-1"
+                    placeholder="Enter new fee component name"
+                    className="flex-1 max-w-md"
                 />
                  <Button
                     type="button"
@@ -328,7 +340,7 @@ function FeePatternBlock({
                 </Button>
             </div>
            
-            <div className="flex gap-2 shrink-0">
+            <div className="flex-1 gap-2 shrink-0">
                 <Button
                 type="button"
                 variant="outline"

@@ -116,10 +116,24 @@ export type FeeStructure = {
   class: string;
   section: string; // "A" or "A, B, C"
   group: string; // "CS" or "-"
+  patternName: string;
   breakdown: FeeComponent[];
   total: number;
 };
 
 export type FeePatternFormData = {
   patterns: FeePattern[];
+};
+
+// Exam Setup Types
+export type ExamType = {
+  id: string;
+  name: string;
+};
+
+export type ExamPattern = {
+  id: string;
+  classRange: string;
+  patternName: string; // e.g., "Primary", "Secondary"
+  examTypes: ExamType[]; // e.g., "Unit Test 1", "Term 1"
 };

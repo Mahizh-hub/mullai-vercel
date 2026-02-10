@@ -252,6 +252,7 @@ export const mockFeesData: import("./types").FeeStructure[] = [
     class: "11",
     section: "A",
     group: "CS",
+    patternName: "Term 1 Fees",
     breakdown: [
       { id: "1", name: "Tuition – Term 1", amount: 18000 },
       { id: "2", name: "Tuition – Term 2", amount: 18000 },
@@ -266,6 +267,7 @@ export const mockFeesData: import("./types").FeeStructure[] = [
     class: "11",
     section: "B",
     group: "Biology",
+    patternName: "Term 1 Fees",
     breakdown: [
       { id: "1", name: "Tuition – Term 1", amount: 17000 },
       { id: "2", name: "Tuition – Term 2", amount: 17000 },
@@ -281,6 +283,7 @@ export const mockFeesData: import("./types").FeeStructure[] = [
     class: "10",
     section: "A, B, C",
     group: "-",
+    patternName: "Annual Fees",
     breakdown: [
       { id: "1", name: "Tuition – Term 1", amount: 17000 },
       { id: "2", name: "Tuition – Term 2", amount: 17000 },
@@ -288,5 +291,23 @@ export const mockFeesData: import("./types").FeeStructure[] = [
       { id: "4", name: "Transport", amount: 6000 },
     ],
     total: 78500,
+  },
+];
+
+export const mockExamPatterns: import("./types").ExamPattern[] = [
+  {
+    id: "1",
+    classRange: "1 - 5",
+    patternName: "Primary",
+    examTypes: [
+      { id: "1", name: "Unit Test 1" },
+      { id: "2", name: "Unit Test 2" },
+      { id: "3", name: "Unit Test 3" },
+      { id: "4", name: "Term 1" },
+      { id: "5", name: "Term 2" },
+      { id: "6", name: "Term 3" },
+      { id: "7", name: "Final Exam/Term 3" },
+      { id: "8", name: "Pre-Board Exam" },
+    ],
   },
 ];

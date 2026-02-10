@@ -13,7 +13,7 @@ export const mockEvents: CalendarEvent[] = [
     type: "meeting",
     startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 10, 0),
     endDate: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 11, 0),
-    location: "Conference Room A",
+    description: "Conference Room A",
   },
   {
     id: "2",
@@ -21,6 +21,7 @@ export const mockEvents: CalendarEvent[] = [
     type: "holiday",
     startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2, 0, 0),
     endDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2, 23, 59),
+    description: "Office closed for Diwali celebrations",
   },
   {
     id: "3",
@@ -28,7 +29,7 @@ export const mockEvents: CalendarEvent[] = [
     type: "function",
     startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5, 18, 0),
     endDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5, 21, 0),
-    location: "Main Auditorium",
+    description: "Main Auditorium - Guests arriving by 5 PM",
   },
   {
       id: "4",
@@ -36,7 +37,7 @@ export const mockEvents: CalendarEvent[] = [
       type: "meeting",
       startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1, 14, 0),
       endDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1, 15, 0),
-      location: "Zoom",
+      description: "Zoom link: https://zoom.us/j/123456789",
   }
 ];
 

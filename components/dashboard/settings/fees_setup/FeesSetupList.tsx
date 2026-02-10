@@ -7,10 +7,17 @@ import { mockFeesData } from "../data";
 import { DataTable, DataTableColumn } from "../../DataTable";
 import PageHeader from "../../PageHeader";
 import ConfirmDeleteDialog from "../../ConfirmDeleteDialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export default function FeesSetupList() {
   const [data, setData] = useState<FeeStructure[]>(mockFeesData);
   const [deleteTarget, setDeleteTarget] = useState<FeeStructure | null>(null);
+  const [viewTarget, setViewTarget] = useState<FeeStructure | null>(null);
 
   const columns: DataTableColumn<FeeStructure>[] = useMemo(
     () => [
@@ -43,17 +50,8 @@ export default function FeesSetupList() {
         }
       },
       {
-        key: "breakdown" as keyof FeeStructure, // This key doesn't strictly match a simple string property, handled by cell
-        header: "Fee Breakdown",
-        cell: (row) => (
-          <ul className="mb-0 ps-3 list-none text-sm text-gray-500 space-y-1">
-            {row.breakdown.map((item) => (
-              <li key={item.id}>
-                {item.name}: {item.amount}
-              </li>
-            ))}
-          </ul>
-        ),
+        key: "patternName",
+        header: "Fee Pattern Name",
       },
       {
         key: "total",
@@ -66,7 +64,12 @@ export default function FeesSetupList() {
         align: "right",
         cell: (row) => (
           <div className="flex items-center justify-end gap-2">
-            
+            <button 
+              className="p-1 hover:bg-gray-100 rounded"
+              onClick={() => setViewTarget(row)}
+            >
+              <Eye className="size-4 text-gray-600" />
+            </button>
             <button className="p-1 hover:bg-gray-100 rounded">
               <Pencil className="size-4 text-gray-600" />
             </button>
@@ -110,6 +113,44 @@ export default function FeesSetupList() {
           setDeleteTarget(null);
         }}
       />
+
+      <Dialog open={!!viewTarget} onOpenChange={(open) => !open && setViewTarget(null)}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Fee Breakdown</DialogTitle>
+          </DialogHeader>
+          {viewTarget && (
+            <div className="space-y-4">
+              <div className="bg-gray-50 p-3 rounded-md mb-2">
+                 <div className="text-sm font-medium text-gray-500">Pattern Name</div>
+                 <div className="font-semibold">{viewTarget.patternName || "-"}</div>
+              </div>
+              <div className="border rounded-md overflow-hidden">
+                <table className="w-full text-sm">
+                  <thead className="bg-gray-50 text-gray-700 uppercase text-xs">
+                    <tr>
+                      <th className="px-4 py-2 text-left">Component</th>
+                      <th className="px-4 py-2 text-right">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    {viewTarget.breakdown.map((item) => (
+                      <tr key={item.id}>
+                        <td className="px-4 py-2">{item.name}</td>
+                        <td className="px-4 py-2 text-right">{item.amount}</td>
+                      </tr>
+                    ))}
+                    <tr className="bg-gray-50 font-semibold">
+                      <td className="px-4 py-2">Total</td>
+                      <td className="px-4 py-2 text-right">{viewTarget.total}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

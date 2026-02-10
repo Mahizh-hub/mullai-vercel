@@ -109,7 +109,7 @@ export default function AttendanceAnalytics() {
 
   /* ---------------- UI ---------------- */
   return (
-    <div className="card-widget">
+    <div className="card-widget h-full">
       {/* Header */}
       <div className="mb-5 flex-center-between">
         <h5 className="font-semibold text-lg">Attendance Analytics</h5>

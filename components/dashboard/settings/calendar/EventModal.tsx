@@ -52,7 +52,7 @@ export default function EventModal({
 }: Props) {
   const [title, setTitle] = useState("");
   const [type, setType] = useState<EventType>("meeting");
-  const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -65,7 +65,7 @@ export default function EventModal({
       if (initialData) {
         setTitle(initialData.title);
         setType(initialData.type);
-        setLocation(initialData.location || "");
+        setDescription(initialData.description || "");
         setStartDate(formatDate(initialData.startDate));
         setStartTime(formatTime(initialData.startDate));
         setEndDate(formatDate(initialData.endDate));
@@ -73,7 +73,7 @@ export default function EventModal({
       } else if (selectedDate) {
         setTitle("");
         setType("meeting");
-        setLocation("");
+        setDescription("");
         const dateStr = formatDate(selectedDate);
         setStartDate(dateStr);
         
@@ -88,7 +88,7 @@ export default function EventModal({
         // Default empty state
         setTitle("");
         setType("meeting");
-        setLocation("");
+        setDescription("");
         const today = new Date();
         const dateStr = formatDate(today);
         setStartDate(dateStr);
@@ -105,10 +105,12 @@ export default function EventModal({
       return;
     }
 
-    if ((type === "meeting" || type === "function") && !location) {
-      setError("Location is required for meetings and functions.");
+    if (!title || !startDate || !startTime || !endDate || !endTime) {
+      setError("Please fill in all required fields.");
       return;
     }
+
+    // Removed location check as description is optional
 
     const startDateTime = new Date(`${startDate}T${startTime}`);
     const endDateTime = new Date(`${endDate}T${endTime}`);
@@ -122,7 +124,7 @@ export default function EventModal({
       id: initialData?.id,
       title,
       type,
-      location: type === "holiday" ? undefined : location,
+      description,
       startDate: startDateTime,
       endDate: endDateTime,
     });
@@ -175,17 +177,16 @@ export default function EventModal({
             </div>
           </div>
 
-          {(type === "meeting" || type === "function") && (
-            <div className="space-y-2 animate-in fade-in slide-in-from-top-1 duration-200">
-              <Label htmlFor="location">Event Location</Label>
+          
+          <div className="space-y-2">
+              <Label htmlFor="description">Description (Optional)</Label>
               <Input
-                id="location"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                placeholder="Enter location"
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Enter description"
               />
-            </div>
-          )}
+          </div>
 
           <div className="flex flex-col gap-4">
             <div className="space-y-4">
