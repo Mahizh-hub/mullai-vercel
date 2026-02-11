@@ -34,7 +34,7 @@ export default function SettingsSidebar({ menuItems }: Props) {
   const pathname = usePathname();
 
   return (
-    <div className="rounded-lg bg-white border border-gray-100">
+    <div className="card-panel">
       <div className="px-4 py-5">
         <ul className="space-y-2">
           {menuItems.map((item) => {

@@ -3,10 +3,10 @@
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
-import PageHeader from "../PageHeader";
+import PageHeader from "@/components/layout/PageHeader";
 import { campusColumns } from "./campus-columns";
-import { DataTable } from "../DataTable";
-import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
+import { DataTable } from "@/components/shared/DataTable";
+import ConfirmDeleteDialog from "@/components/shared/ConfirmDeleteDialog";
 
 export type Campus = {
   id: number;

@@ -1,4 +1,4 @@
-import { DataTableColumn } from "../DataTable";
+import { DataTableColumn } from "@/components/shared/DataTable";
 
 export type FeeHistory = {
   id: number;

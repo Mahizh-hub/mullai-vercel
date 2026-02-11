@@ -1,4 +1,4 @@
-import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
+import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 import CreateEmployeeForm from "@/components/dashboard/employee/createEmployee/CreateEmployeeForm";
 
 export default function CreateEmployeePage() {

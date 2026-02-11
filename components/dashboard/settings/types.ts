@@ -14,7 +14,7 @@ export type ClassSection = {
   sections: string;
 };
 
-export type Teacher = {
+export type TeacherBasic = {
   id: string;
   name: string;
 };

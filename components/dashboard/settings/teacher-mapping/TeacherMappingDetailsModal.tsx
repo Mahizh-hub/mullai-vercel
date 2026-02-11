@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import {
   Dialog,
   DialogContent,
@@ -8,7 +8,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { TeacherMappingItem } from "../types";
+import { TeacherMappingItem } from "@/components/dashboard/settings/types";
 
 interface TeacherMappingDetailsModalProps {
   isOpen: boolean;
@@ -41,7 +41,7 @@ export default function TeacherMappingDetailsModal({
                   <div>
                     <span className="text-sm text-gray-500 block mb-1">Class & Section</span>
                     <h3 className="text-2xl font-semibold text-gray-900">
-                      {mapping.class} <span className="text-gray-400">"{mapping.section}"</span>
+                      {mapping.class} <span className="text-gray-400">&quot;{mapping.section}&quot;</span>
                     </h3>
                   </div>
                   <div>
@@ -57,13 +57,12 @@ export default function TeacherMappingDetailsModal({
                 <div className="text-center">
                   <div className="w-[85px] h-[85px] rounded-full overflow-hidden mx-auto mb-2 border-2 border-white shadow-sm">
                     {/* Placeholder for user image - using generic avatar if asset not found */}
-                    <img 
+                    <Image 
                       src="/teacher.svg" 
                       alt={mapping.classTeacher}
+                      width={85}
+                      height={85}
                       className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=" + mapping.classTeacher;
-                      }}
                     />
                   </div>
                   <p className="text-primary font-medium">{mapping.classTeacher}</p>
@@ -74,7 +73,7 @@ export default function TeacherMappingDetailsModal({
               <div className="flex flex-wrap items-center gap-8 md:gap-16">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 flex items-center justify-center bg-blue-50 rounded-full">
-                     <img src="/books.svg" alt="Subjects" className="w-6 h-6" />
+                     <Image src="/books.svg" alt="Subjects" width={24} height={24} className="w-6 h-6" />
                   </div>
                   <div>
                     <span className="text-xs text-gray-500 block">Total Subjects</span>
@@ -83,7 +82,7 @@ export default function TeacherMappingDetailsModal({
                 </div>
                 <div className="flex items-center gap-3">
                    <div className="w-10 h-10 flex items-center justify-center bg-purple-50 rounded-full">
-                     <img src="/teacher.svg" alt="Teachers" className="w-6 h-6" />
+                     <Image src="/teacher.svg" alt="Teachers" width={24} height={24} className="w-6 h-6" />
                    </div>
                   <div>
                     <span className="text-xs text-gray-500 block">Total Teacher</span>
@@ -106,14 +105,14 @@ export default function TeacherMappingDetailsModal({
                       <td className="p-4 text-right w-1/4">
                         <div className="flex items-center justify-end gap-2">
                           <span className="text-gray-900">S. Ramesh</span>
-                           <img src="/teacher.svg" className="w-8 h-8 rounded-full" alt="Teacher" />
+                           <Image src="/teacher.svg" alt="Teacher" width={32} height={32} className="rounded-full" />
                         </div>
                       </td>
                       <td className="p-4 text-gray-900 font-medium border-l w-1/4">English</td>
                       <td className="p-4 text-right w-1/4">
                         <div className="flex items-center justify-end gap-2">
                           <span className="text-gray-900">Anitha Devi</span>
-                          <img src="/teacher.svg" className="w-8 h-8 rounded-full" alt="Teacher" />
+                          <Image src="/teacher.svg" alt="Teacher" width={32} height={32} className="rounded-full" />
                         </div>
                       </td>
                     </tr>
@@ -123,14 +122,14 @@ export default function TeacherMappingDetailsModal({
                       <td className="p-4 text-right">
                         <div className="flex items-center justify-end gap-2">
                           <span className="text-gray-900">Karthik Raj</span>
-                          <img src="/teacher.svg" className="w-8 h-8 rounded-full" alt="Teacher" />
+                          <Image src="/teacher.svg" alt="Teacher" width={32} height={32} className="rounded-full" />
                         </div>
                       </td>
                       <td className="p-4 text-gray-900 font-medium border-l">Social Science</td>
                       <td className="p-4 text-right">
                         <div className="flex items-center justify-end gap-2">
                           <span className="text-gray-900">Meena Kumari</span>
-                          <img src="/teacher.svg" className="w-8 h-8 rounded-full" alt="Teacher" />
+                          <Image src="/teacher.svg" alt="Teacher" width={32} height={32} className="rounded-full" />
                         </div>
                       </td>
                     </tr>
@@ -140,14 +139,14 @@ export default function TeacherMappingDetailsModal({
                       <td className="p-4 text-right">
                         <div className="flex items-center justify-end gap-2">
                           <span className="text-gray-900">Vijay Anand</span>
-                           <img src="/teacher.svg" className="w-8 h-8 rounded-full" alt="Teacher" />
+                           <Image src="/teacher.svg" alt="Teacher" width={32} height={32} className="rounded-full" />
                         </div>
                       </td>
                       <td className="p-4 text-gray-900 font-medium border-l">Science · Physics (Practical)</td>
                       <td className="p-4 text-right">
                         <div className="flex items-center justify-end gap-2">
                            <span className="text-gray-900">Prakash Kumar</span>
-                           <img src="/teacher.svg" className="w-8 h-8 rounded-full" alt="Teacher" />
+                           <Image src="/teacher.svg" alt="Teacher" width={32} height={32} className="rounded-full" />
                         </div>
                       </td>
                     </tr>

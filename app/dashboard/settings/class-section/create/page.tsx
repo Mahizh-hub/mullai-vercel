@@ -1,11 +1,12 @@
 "use client";
 
-import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
+import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 import SettingsSidebar from "@/components/dashboard/settings/SettingsSidebar";
 
-import PageHeader from "@/components/dashboard/PageHeader";
+
 import { settingsMenuItems, mockTeachers } from "@/components/dashboard/settings/data";
 import ClassSectionForm from "@/components/dashboard/settings/class_sections_setup/ClassSectionForm";
+import PageHeader from "@/components/layout/PageHeader";
 
 export default function CreateClassSection() {
   return (

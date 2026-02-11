@@ -1,9 +1,9 @@
 "use client"
 
 import { useMemo, useState } from "react";
-import PageHeader from "../PageHeader";
-import { DataTable } from "../DataTable";
-import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
+import PageHeader from "@/components/layout/PageHeader";
+import { DataTable } from "@/components/shared/DataTable";
+import ConfirmDeleteDialog from "@/components/shared/ConfirmDeleteDialog";
 import { admissionsColumns } from "./admission-columns";
 import AdmissionFilters from "./AdmissionFilters";
 

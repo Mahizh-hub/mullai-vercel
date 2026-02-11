@@ -1,4 +1,4 @@
-import { ClassSection, Teacher, SettingsMenuItem, SubjectListItem } from "./types";
+import { ClassSection, TeacherBasic, SettingsMenuItem, SubjectListItem } from "./types";
 
 export const settingsMenuItems: SettingsMenuItem[] = [
   {
@@ -114,7 +114,7 @@ export const mockClassSections: ClassSection[] = [
   },
 ];
 
-export const mockTeachers: Teacher[] = [
+export const mockTeachers: TeacherBasic[] = [
   { id: "1", name: "Rajesh Kanna" },
   { id: "2", name: "Lalitha Banu" },
   { id: "3", name: "Suresh Kumar" },

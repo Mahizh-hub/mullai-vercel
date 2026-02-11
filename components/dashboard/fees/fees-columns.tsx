@@ -6,7 +6,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { DataTableColumn } from "../DataTable";
+import { DataTableColumn } from "@/components/shared/DataTable";
 import Link from "next/link";
 
 export type Fee = {

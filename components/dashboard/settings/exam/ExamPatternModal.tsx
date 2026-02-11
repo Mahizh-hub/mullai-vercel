@@ -42,7 +42,7 @@ export default function ExamPatternModal({ open, onOpenChange, patterns, onAdd, 
             <Label className="text-sm font-medium">
               Exam Pattern Name <span className="text-destructive">*</span>
             </Label>
-            <div className="flex items-center gap-2">
+            <div className="flex-center-gap-2">
               <Input
                 placeholder="Enter pattern name"
                 value={newPatternName}

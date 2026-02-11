@@ -51,6 +51,14 @@
            p-4 space-y-4;
   }
 
+  .card-panel {
+    @apply bg-white border border-gray-100 rounded-lg;
+  }
+
+  .table-cell {
+    @apply px-4 py-2;
+  }
+
   /* ========================================
      FORM PATTERNS
      ======================================== */

@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import PageHeader from "../PageHeader";
-import { DataTable } from "../DataTable";
+import PageHeader from "@/components/layout/PageHeader";
+import { DataTable } from "@/components/shared/DataTable";
 import { feeHistoryColumns } from "./fee-history-columns";
 import { feesData } from "./fees.data";
 import { Fee } from "./fees-columns";

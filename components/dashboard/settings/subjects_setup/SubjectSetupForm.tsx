@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import WizardTabs from "../WizardTabs";
-import PageHeader from "../../PageHeader";
+import WizardTabs from "@/components/dashboard/settings/WizardTabs";
+
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -19,9 +19,10 @@ import {
   mockCommonSubjects,
   mockGroupedSubjects,
   mockElectiveGroups,
-} from "../data";
+} from "@/components/dashboard/settings/data";
 import SubjectPill, { GroupedSubjects } from "./SubjectPill";
-import GroupCard from "../GroupCard";
+import GroupCard from "@/components/dashboard/settings/GroupCard";
+import PageHeader from "@/components/layout/PageHeader";
 
 const SubdivisionItem = ({
   subdivision,
@@ -43,7 +44,7 @@ const SubdivisionItem = ({
   const currentLevel = level || 1;
   return (
     <div className="space-y-2">
-      <div className="flex items-center gap-2">
+      <div className="flex-center-gap-2">
         <Input
           value={subdivision.name}
           onChange={(e) => onChange(subjectId, subdivision.id, e.target.value)}
@@ -398,7 +399,7 @@ export default function SubjectSetupForm() {
                     key={subject.id}
                     className="border rounded-lg p-4 space-y-3"
                   >
-                    <div className="flex items-center gap-2">
+                    <div className="flex-center-gap-2">
                       <Input
                         value={subject.name}
                         onChange={(e) =>
@@ -423,7 +424,7 @@ export default function SubjectSetupForm() {
 
                     {/* Common/Elective toggle */}
                     <div className="flex items-center gap-4">
-                      <label className="flex items-center gap-2 cursor-pointer">
+                      <label className="flex-center-gap-2 cursor-pointer">
                         <input
                           type="radio"
                           name={`type-${subject.id}`}
@@ -436,7 +437,7 @@ export default function SubjectSetupForm() {
                         />
                         <span className="text-sm">Common</span>
                       </label>
-                      <label className="flex items-center gap-2 cursor-pointer">
+                      <label className="flex-center-gap-2 cursor-pointer">
                         <input
                           type="radio"
                           name={`type-${subject.id}`}

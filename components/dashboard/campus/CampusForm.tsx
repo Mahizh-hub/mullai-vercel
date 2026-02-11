@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Camera } from "lucide-react";
-import { PasswordField } from "../form/PasswordField";
+import { PasswordField } from "@/components/dashboard/form/PasswordField";
 import {
   Select,
   SelectContent,
@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { INDIAN_CITIES, INDIAN_STATES, COUNTRIES } from "@/lib/constants/locations";
+import { INDIAN_CITIES, INDIAN_STATES, COUNTRIES } from "@/constants/locations";
 
 export default function CampusForm() {
   const {

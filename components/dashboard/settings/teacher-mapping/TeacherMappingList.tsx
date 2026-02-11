@@ -2,11 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { Eye, Trash2, Pencil } from "lucide-react";
-import { TeacherMappingItem } from "../types";
-import { DataTable, DataTableColumn } from "../../DataTable";
-import PageHeader from "../../PageHeader";
+import { TeacherMappingItem } from "@/components/dashboard/settings/types";
+import { DataTable, DataTableColumn } from "@/components/shared/DataTable";
 import { Button } from "@/components/ui/button";
 import TeacherMappingDetailsModal from "./TeacherMappingDetailsModal";
+import PageHeader from "@/components/layout/PageHeader";
 
 interface TeacherMappingListProps {
   mappings: TeacherMappingItem[];

@@ -1,6 +1,6 @@
 "use client";
 
-import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
+import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 import SettingsSidebar from "@/components/dashboard/settings/SettingsSidebar";
 import { settingsMenuItems } from "@/components/dashboard/settings/data";
 import AllClassSections from "@/components/dashboard/settings/class_sections_setup/AllClassSections";

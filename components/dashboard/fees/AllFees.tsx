@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import PageHeader from "../PageHeader";
+import PageHeader from "@/components/layout/PageHeader";
 import { Input } from "@/components/ui/input";
-import { DataTable } from "../DataTable";
-import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
+import { DataTable } from "@/components/shared/DataTable";
+import ConfirmDeleteDialog from "@/components/shared/ConfirmDeleteDialog";
 import { feesColumns, Fee, FeeRow } from "./fees-columns";
 import { feesData } from "./fees.data";
 import {

@@ -2,17 +2,17 @@
 
 import { useMemo, useState } from "react";
 import { Eye, Pencil, Trash2 } from "lucide-react";
-import { FeeStructure } from "../types";
-import { mockFeesData } from "../data";
-import { DataTable, DataTableColumn } from "../../DataTable";
-import PageHeader from "../../PageHeader";
-import ConfirmDeleteDialog from "../../ConfirmDeleteDialog";
+import { FeeStructure } from "@/components/dashboard/settings/types";
+import { mockFeesData } from "@/components/dashboard/settings/data";
+import { DataTable, DataTableColumn } from "@/components/shared/DataTable";
+import ConfirmDeleteDialog from "@/components/shared/ConfirmDeleteDialog";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import PageHeader from "@/components/layout/PageHeader";
 
 export default function FeesSetupList() {
   const [data, setData] = useState<FeeStructure[]>(mockFeesData);

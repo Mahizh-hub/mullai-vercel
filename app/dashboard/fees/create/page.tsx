@@ -1,5 +1,5 @@
 import FeeForm from "@/components/dashboard/fees/FeeForm";
-import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
+import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 
 export default function CreateFeePage() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import type { ComponentType, SVGProps } from "react";
@@ -42,13 +42,13 @@ export default function SidebarItem({
             "focus:outline-none focus:ring-2 focus:ring-pink-500",
             isActive
               ? "bg-pink-500 text-white"
-              : "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
+              : "text-gray-600 hover:bg-gray-100 hover:text-pink-500",
           )}
         >
           <Icon
             className={cn(
               "size-6 shrink-0 transition-colors",
-              isActive ? "text-white" : "text-gray-600 group-hover:text-gray-900",
+              isActive ? "text-white" : "text-gray-600 group-hover:text-pink-500",
             )}
           />
           <span

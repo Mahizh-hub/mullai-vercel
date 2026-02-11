@@ -123,7 +123,7 @@ export default function Stats() {
 
               {/* Trend */}
               {item.trend && (
-                <div className="mt-4 flex items-center gap-2 text-sm">
+                <div className="mt-4 flex-center-gap-2 text-sm">
                   <span
                     className={cn(
                       "flex size-6 items-center justify-center rounded-lg",

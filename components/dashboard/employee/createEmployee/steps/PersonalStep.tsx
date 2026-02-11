@@ -3,7 +3,7 @@ import { FileUploadField } from "@/components/dashboard/form/FileUploadField";
 import { Button } from "@/components/ui/button";
 import { EmployeeFormValues } from "@/lib/validations/employee.schema";
 import { Controller, useFormContext } from "react-hook-form";
-import { BLOOD_GROUPS, ID_PROOF_TYPES } from "@/lib/constants/locations";
+import { BLOOD_GROUPS, ID_PROOF_TYPES } from "@/constants/locations";
 
 export default function PersonalStep({ onNext }: { onNext: () => void }) {
   const { register, control, watch, setValue } =

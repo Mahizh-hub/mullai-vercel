@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Control, UseFormRegister } from "react-hook-form";
 import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,13 +13,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ClassSectionFormData, Teacher, TeacherAssignment } from "../types";
-import WizardTabs from "../WizardTabs";
-import PageHeader from "../../PageHeader";
+import { ClassSectionFormData, TeacherBasic, TeacherAssignment } from "@/components/dashboard/settings/types";
+import WizardTabs from "@/components/dashboard/settings/WizardTabs";
+import PageHeader from "@/components/layout/PageHeader";
 
 
 type Props = {
-  teachers: Teacher[];
+  teachers: TeacherBasic[];
 };
 
 const tabs = [
@@ -197,8 +197,8 @@ export default function ClassSectionForm({ teachers }: Props) {
 // Sub-components
 type ClassInputGroupProps = {
   classIndex: number;
-  control: any;
-  register: any;
+  control: Control<ClassSectionFormData>;
+  register: UseFormRegister<ClassSectionFormData>;
   canRemove: boolean;
   onRemove: () => void;
 };
@@ -279,7 +279,7 @@ function ClassInputGroup({
 
 type TeacherAssignmentRowProps = {
   section: { id: string; name: string };
-  teachers: Teacher[];
+  teachers: TeacherBasic[];
   isAssigned: boolean;
   onAssign: (teacherId: string) => void;
 };

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "../ui/button";
-import { MaximizeIcon, MinimizeIcon } from "../Icons";
+import { Button } from "@/components/ui/button";
+import { MaximizeIcon, MinimizeIcon } from "@/components/Icons";
 
 export default function Fullscreen() {
   const [isFullscreen, setIsFullscreen] = useState(false);

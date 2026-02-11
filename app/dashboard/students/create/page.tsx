@@ -1,4 +1,4 @@
-import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
+import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 import CreateStudentForm from "@/components/dashboard/students/createStudent/CreateStudentForm";
 
 export default function CreateStudentPage() {

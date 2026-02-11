@@ -1,11 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import PageHeader from "../PageHeader";
+import PageHeader from "@/components/layout/PageHeader";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
-import { DataTable } from "../DataTable";
+import ConfirmDeleteDialog from "@/components/shared/ConfirmDeleteDialog";
+import { DataTable } from "@/components/shared/DataTable";
 import { studentColumns } from "./student-columns";
 
 export type Student = {

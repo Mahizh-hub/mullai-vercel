@@ -2,7 +2,7 @@ import { Field } from "@/components/dashboard/form/Field";
 import { Button } from "@/components/ui/button";
 import { useFormContext, Controller } from "react-hook-form";
 import { AdmissionFormValues } from "../CreateAdmissionForm";
-import { INDIAN_CITIES, INDIAN_STATES, COUNTRIES } from "@/lib/constants/locations";
+import { INDIAN_CITIES, INDIAN_STATES, COUNTRIES } from "@/constants/locations";
 
 export default function ContactStep({
   onNext,

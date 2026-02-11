@@ -2,11 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { Eye, Pencil, Trash2 } from "lucide-react";
-import { ExamPattern } from "../types";
-import { mockExamPatterns } from "../data";
-import { DataTable, DataTableColumn } from "../../DataTable";
-import PageHeader from "../../PageHeader";
-import ConfirmDeleteDialog from "../../ConfirmDeleteDialog";
+import { ExamPattern } from "@/components/dashboard/settings/types";
+import { mockExamPatterns } from "@/components/dashboard/settings/data";
+import { DataTable, DataTableColumn } from "@/components/shared/DataTable";
+import ConfirmDeleteDialog from "@/components/shared/ConfirmDeleteDialog";
+import PageHeader from "@/components/layout/PageHeader";
 
 export default function ExamSetupList() {
   const [data, setData] = useState<ExamPattern[]>(mockExamPatterns);

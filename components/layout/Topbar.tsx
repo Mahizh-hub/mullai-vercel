@@ -1,17 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Calendar, ChevronDown, School } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { useSidebar } from "./SidebarContext";
 import Notifications from "../topbar/Notifications";
 import Fullscreen from "../topbar/Fullscreen";
-import { MenuIcon } from "../Icons";
+import { MenuIcon } from "@/components/Icons";
 import dynamic from "next/dynamic";
 
 const Profile = dynamic(() => import('../topbar/Profile'), { ssr: false });
-const CampusSelect = dynamic(() => import('./main/CampusSelect'), { ssr: false });
+const CampusSelect = dynamic(() => import('../dashboard/main/CampusSelect'), { ssr: false });
 
 export default function Topbar({
   variant = "contained",

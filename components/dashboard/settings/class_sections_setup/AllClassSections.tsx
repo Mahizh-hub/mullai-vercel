@@ -2,11 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { Eye, Pencil, Trash2 } from "lucide-react";
-import { ClassSection } from "../types";
-import { mockClassSections } from "../data";
-import { DataTable, DataTableColumn } from "../../DataTable";
-import PageHeader from "../../PageHeader";
-import ConfirmDeleteDialog from "../../ConfirmDeleteDialog";
+import { ClassSection } from "@/components/dashboard/settings/types";
+import { mockClassSections } from "@/components/dashboard/settings/data";
+import { DataTable, DataTableColumn } from "@/components/shared/DataTable";
+import ConfirmDeleteDialog from "@/components/shared/ConfirmDeleteDialog";
+import PageHeader from "@/components/layout/PageHeader";
 
 export default function AllClassSections() {
   const [data, setData] = useState<ClassSection[]>(mockClassSections);

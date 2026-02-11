@@ -1,4 +1,4 @@
-import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
+import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 import ExamsPage from "@/components/dashboard/exams/ExamsPage";
 
 export default function Campuses() {

@@ -11,7 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 
-type CellValue = ReactNode;
+
 
 export type DataTableColumn<T> = {
   key: keyof T;

@@ -1,5 +1,5 @@
 import FeeDetails from "@/components/dashboard/fees/FeeDetails";
-import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
+import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 
 type Props = {
   params: Promise<{ id: string }>;

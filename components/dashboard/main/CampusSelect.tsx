@@ -17,21 +17,21 @@ export default function CampusSelect() {
 
       <SelectContent className="bg-white">
         <SelectItem value="campus-1">
-          <div className="flex items-center gap-2">
+          <div className="flex-center-gap-2">
             <School className="h-4 w-4 text-gray-500" />
             <span>Campus 1</span>
           </div>
         </SelectItem>
 
         <SelectItem value="campus-2">
-          <div className="flex items-center gap-2">
+          <div className="flex-center-gap-2">
             <School className="h-4 w-4 text-gray-500" />
             <span>Campus 2</span>
           </div>
         </SelectItem>
 
         <SelectItem value="campus-3">
-          <div className="flex items-center gap-2">
+          <div className="flex-center-gap-2">
             <School className="h-4 w-4 text-gray-500" />
             <span>Campus 3</span>
           </div>

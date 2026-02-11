@@ -1,15 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
+import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 import SettingsSidebar from "@/components/dashboard/settings/SettingsSidebar";
-import PageHeader from "@/components/dashboard/PageHeader";
 import { settingsMenuItems } from "@/components/dashboard/settings/data";
 import CalendarView from "@/components/dashboard/settings/calendar/CalendarView";
 import UpcomingEvents from "@/components/dashboard/main/UpcomingEvents";
 import EventModal from "@/components/dashboard/settings/calendar/EventModal";
 import { CalendarEvent } from "@/components/dashboard/settings/calendar/types";
 import { useCalendar } from "@/components/dashboard/settings/calendar/CalendarContext";
+import PageHeader from "@/components/layout/PageHeader";
 
 export default function CalendarSettings() {
   const { events, addEvent, updateEvent, deleteEvent } = useCalendar();

@@ -1,11 +1,11 @@
 "use client";
 
 import Footer from "@/components/dashboard/main/Footer";
-import Sidebar from "@/components/dashboard/Sidebar";
-import SidebarProvider from "@/components/dashboard/SidebarContext";
-import Topbar from "@/components/dashboard/Topbar";
+import Sidebar from "@/components/layout/Sidebar";
+import SidebarProvider from "@/components/layout/SidebarContext";
+import Topbar from "@/components/layout/Topbar";
 import { usePathname } from "next/navigation";
-import { useSidebar } from "@/components/dashboard/SidebarContext";
+import { useSidebar } from "@/components/layout/SidebarContext";
 
 function DashboardLayoutInner({
   children,

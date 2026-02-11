@@ -2,7 +2,7 @@ import { Field } from "@/components/dashboard/form/Field";
 import { Button } from "@/components/ui/button";
 import { useFormContext, Controller } from "react-hook-form";
 import { StudentFormValues } from "../CreateStudentForm";
-import { ANNUAL_INCOME_RANGES } from "@/lib/constants/locations";
+import { ANNUAL_INCOME_RANGES } from "@/constants/locations";
 import { useState } from "react";
 import {
   Select,
@@ -43,7 +43,7 @@ const ParentBlock = ({
               <Label className="text-gray-700">
                 Phone Number <span className="text-red-500">*</span>
               </Label>
-              <label className="flex items-center gap-2 text-sm">
+              <label className="flex-center-gap-2 text-sm">
                 <input
                   type="checkbox"
                   {...register(`parents.${path}.allowAppAccess`)}

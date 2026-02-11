@@ -1,4 +1,4 @@
-import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
+import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 import AllEmployee from "@/components/dashboard/employee/AllEmployee";
 
 export default function AdminManagement() {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Control, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,9 +13,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FeePatternFormData } from "../types";
-import WizardTabs from "../WizardTabs";
-import PageHeader from "../../PageHeader";
+import { FeePatternFormData } from "@/components/dashboard/settings/types";
+import WizardTabs from "@/components/dashboard/settings/WizardTabs";
+import PageHeader from "@/components/layout/PageHeader";
 import FeePatternListModal from "./FeePatternListModal";
 
 const tabs = [
@@ -149,7 +149,7 @@ export default function FeesSetupForm() {
               {/* Summary Table */}
               <div className="space-y-6">
                 {watchPatterns.map((pattern, idx) => {
-                   const total = pattern.components.reduce((sum, comp) => sum + (Number(comp.amount) || 0), 0);
+                   const total = pattern.components.reduce((sum, comp: { amount: number }) => sum + (Number(comp.amount) || 0), 0);
                    return (
                     <div key={idx} className="border rounded-md overflow-hidden">
                         <div className="bg-gray-100 px-4 py-2 font-semibold text-sm border-b flex justify-between">
@@ -258,10 +258,10 @@ export default function FeesSetupForm() {
 // Sub-component for individual pattern block
 type FeePatternBlockProps = {
   patternIndex: number;
-  control: any;
-  register: any;
-  setValue: any;
-  watch: any;
+  control: Control<FeePatternFormData>;
+  register: UseFormRegister<FeePatternFormData>;
+  setValue: UseFormSetValue<FeePatternFormData>;
+  watch: UseFormWatch<FeePatternFormData>;
   activeFeeTypes: string[];
   onAddFeeType: (type: string) => void;
   onViewList: () => void;
@@ -291,7 +291,7 @@ function FeePatternBlock({
   // Calculate total for this pattern
   const components = watch(`patterns.${patternIndex}.components`);
   const patternTotal = components?.reduce(
-    (sum: number, comp: any) => sum + (Number(comp.amount) || 0),
+    (sum: number, comp: { amount: number }) => sum + (Number(comp.amount) || 0),
     0
   );
 

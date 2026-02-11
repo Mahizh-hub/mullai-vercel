@@ -1,12 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import PageHeader from "../PageHeader";
+import PageHeader from "@/components/layout/PageHeader";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { DataTable } from "../DataTable";
+import { DataTable } from "@/components/shared/DataTable";
 import { employeeColumns } from "./employee-columns";
-import ConfirmDeleteDialog from "../ConfirmDeleteDialog";
+import ConfirmDeleteDialog from "@/components/shared/ConfirmDeleteDialog";
 
 export type Employee = {
   id: number;

@@ -1,5 +1,5 @@
 import AllAdmissions from "@/components/dashboard/admissions/AllAdmissions";
-import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
+import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 
 export default function Admissions() {
   return (

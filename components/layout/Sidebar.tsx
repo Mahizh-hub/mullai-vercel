@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import SidebarItem from "./SidebarItem";
-import { useAppStore } from "@/lib/store";
-import { TooltipProvider } from "../ui/tooltip";
+import { useAppStore } from "@/store";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { useSidebar } from "./SidebarContext";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
@@ -17,7 +17,7 @@ import {
   SettingsIcon,
   TeachersIcon,
   TimetablesIcon,
-} from "../Icons";
+} from "@/components/Icons";
 
 const navigation = [
   {

@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Bell,
   LucideIcon,
   MessageSquareMore,
   MessageSquareDot,
@@ -9,8 +8,8 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Button } from "../ui/button";
-import { NotificationIcon } from "../Icons";
+import { Button } from "@/components/ui/button";
+import { NotificationIcon } from "@/components/Icons";
 
 type Notification = {
   id: string;

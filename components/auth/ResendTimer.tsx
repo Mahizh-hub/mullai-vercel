@@ -28,7 +28,7 @@ export default function ResendTimer({ initialSeconds = 30, onResend }: Props) {
   };
 
   return (
-    <div className="text-xs text-gray-500 flex items-center gap-2 mt-2">
+    <div className="text-xs text-gray-500 flex-center-gap-2 mt-2">
       {!isExpired ? (
         <>
           <span>Didn’t receive the code?</span>

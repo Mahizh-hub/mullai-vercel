@@ -2,7 +2,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { Field } from "@/components/dashboard/form/Field";
 import { FileUploadField } from "@/components/dashboard/form/FileUploadField";
 import { Button } from "@/components/ui/button";
-import { BLOOD_GROUPS, ID_PROOF_TYPES } from "@/lib/constants/locations";
+import { BLOOD_GROUPS, ID_PROOF_TYPES } from "@/constants/locations";
 import { AdmissionFormValues } from "../CreateAdmissionForm";
 
 export default function PersonalStep({ onNext }: { onNext: () => void }) {

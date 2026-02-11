@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { DataTableColumn } from "../DataTable";
+import { DataTableColumn } from "@/components/shared/DataTable";
 import { Eye, Pencil, Trash2 } from "lucide-react";
 import {
   Tooltip,

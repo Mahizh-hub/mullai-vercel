@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { mockClasses, mockTeachers } from "../data";
+import { mockClasses, mockTeachers } from "@/components/dashboard/settings/data";
 
 export default function TeacherMappingForm() {
   const [selectedClass, setSelectedClass] = useState<string>("");

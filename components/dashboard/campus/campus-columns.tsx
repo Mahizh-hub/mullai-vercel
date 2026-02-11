@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Eye, Pencil, Trash2 } from "lucide-react";
 import { Campus } from "./AllCampus";
-import { DataTableColumn } from "../DataTable";
+import { DataTableColumn } from "@/components/shared/DataTable";
 
 export const campusColumns = (
   onRequestDelete: (campus: Campus) => void,

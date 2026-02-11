@@ -1,10 +1,10 @@
 "use client";
 
-import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
+import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 import SettingsSidebar from "@/components/dashboard/settings/SettingsSidebar";
 import SubjectSetupForm from "@/components/dashboard/settings/subjects_setup/SubjectSetupForm";
-import PageHeader from "@/components/dashboard/PageHeader";
 import { settingsMenuItems } from "@/components/dashboard/settings/data";
+import PageHeader from "@/components/layout/PageHeader";
 
 export default function CreateSubjectSetup() {
   return (

@@ -1,5 +1,5 @@
 import CampusForm from "@/components/dashboard/campus/CampusForm";
-import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
+import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 
 export default function CreateCampusPage() {
   return (

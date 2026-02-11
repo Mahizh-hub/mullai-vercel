@@ -6,12 +6,12 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
-import { Avatar, AvatarFallback } from "../ui/avatar";
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Building2, ChevronDown, LogOut, UserCog } from "lucide-react";
-import { useAppStore } from "@/lib/store";
-import { Badge } from "../ui/badge";
+import { useAppStore } from "@/store";
+import { Badge } from "@/components/ui/badge";
 
 export default function Profile() {
   const { currentUserRole, setCurrentUserRole } = useAppStore();
@@ -21,7 +21,7 @@ export default function Profile() {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="flex items-center gap-2 h-9 px-2"
+          className="flex-center-gap-2 h-9 px-2"
         >
           <Avatar className="size-8">
             <AvatarFallback className="bg-primary/10 text-primary text-sm font-medium">

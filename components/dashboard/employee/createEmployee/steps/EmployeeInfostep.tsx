@@ -50,7 +50,7 @@ export default function EmployeeInfoStep({ onBack }: { onBack: () => void }) {
         <Label className="font-medium">Roles</Label>
         <div className="flex flex-wrap gap-4">
           {ROLES.map((role) => (
-            <label key={role} className="flex items-center gap-2 text-sm">
+            <label key={role} className="flex-center-gap-2 text-sm">
               <input type="checkbox" value={role} {...register("roles")} />
               {role}
             </label>

@@ -1,5 +1,5 @@
 import AllCampus from "@/components/dashboard/campus/AllCampus";
-import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
+import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 
 export default function Campuses() {
   return (

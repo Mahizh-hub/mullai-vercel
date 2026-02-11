@@ -3,7 +3,7 @@ import { StudentFormValues } from "../CreateStudentForm";
 import { Field } from "@/components/dashboard/form/Field";
 import { FileUploadField } from "@/components/dashboard/form/FileUploadField";
 import { Button } from "@/components/ui/button";
-import { BLOOD_GROUPS, ID_PROOF_TYPES } from "@/lib/constants/locations";
+import { BLOOD_GROUPS, ID_PROOF_TYPES } from "@/constants/locations";
 
 export default function PersonalStep({ onNext }: { onNext: () => void }) {
   const { register, watch, setValue, control } =
@@ -16,7 +16,7 @@ export default function PersonalStep({ onNext }: { onNext: () => void }) {
       <div>
         <h4 className="font-semibold">Personal Information</h4>
         <p className="text-sm text-muted-foreground">
-          Enter student's basic personal details for identification and records.
+          Enter student&apos;s basic personal details for identification and records.
         </p>
       </div>
 

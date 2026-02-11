@@ -9,7 +9,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "../ui/breadcrumb";
+} from "@/components/ui/breadcrumb";
 import { Home } from "lucide-react";
 
 const IGNORED_SEGMENT = ["dashboard"];

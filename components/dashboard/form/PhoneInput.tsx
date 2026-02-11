@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { COUNTRY_CODES } from "@/lib/constants/locations";
+import { COUNTRY_CODES } from "@/constants/locations";
 import { cn } from "@/lib/utils";
 
 type PhoneInputProps = {

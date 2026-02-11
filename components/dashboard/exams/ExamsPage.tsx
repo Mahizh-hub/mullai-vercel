@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import PageHeader from "../PageHeader";
+import PageHeader from "@/components/layout/PageHeader";
 import ExamFilters from "./ExamFilters";
 import ExamTable from "./ExamTable";
 

@@ -1,4 +1,4 @@
-import DynamicBreadcrumb from "@/components/dashboard/DynamicBreadcrumb";
+import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 import AllStudents from "@/components/dashboard/students/AllStudents";
 
 export default function Students() {

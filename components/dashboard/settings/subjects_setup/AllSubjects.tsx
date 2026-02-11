@@ -3,11 +3,12 @@
 import { useMemo, useState } from "react";
 
 import { Eye, Pencil, Trash2 } from "lucide-react";
-import { SubjectListItem } from "../types";
-import { mockSubjectsList } from "../data";
-import { DataTable, DataTableColumn } from "../../DataTable";
-import PageHeader from "../../PageHeader";
-import ConfirmDeleteDialog from "../../ConfirmDeleteDialog";
+import { SubjectListItem } from "@/components/dashboard/settings/types";
+import { mockSubjectsList } from "@/components/dashboard/settings/data";
+import { DataTable, DataTableColumn } from "@/components/shared/DataTable";
+
+import ConfirmDeleteDialog from "@/components/shared/ConfirmDeleteDialog";
+import PageHeader from "@/components/layout/PageHeader";
 
 export default function AllSubjects() {
   const [data, setData] = useState<SubjectListItem[]>(mockSubjectsList);
