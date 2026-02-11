@@ -13,7 +13,7 @@ import type {
   Admission,
   Event,
   UserRole,
-} from "./types";
+} from "@/types";
 
 interface AppState {
   // Current user context
