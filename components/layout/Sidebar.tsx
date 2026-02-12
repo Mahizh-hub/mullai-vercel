@@ -90,15 +90,15 @@ export default function Sidebar() {
     <TooltipProvider delayDuration={0}>
       <aside
         className={cn(
-          "fixed lg:static inset-y-0 left-0 z-50",
+          "fixed md:static inset-y-0 left-0 z-50",
           "bg-white flex flex-col border-r border-gray-100",
           "transition-all duration-300 ease-in-out",
           "will-change-[width,transform]",
-          "h-full",
-          collapsed ? "lg:w-20.5 w-0" : "lg:w-66 w-66",
-          !collapsed && "max-lg:shadow-xl",
+          "h-full overflow-hidden",
+          collapsed ? "md:w-20.5 w-66" : "md:w-66 w-66",
+          !collapsed && "max-md:shadow-xl",
           // Mobile handling: translate off-screen when collapsed on mobile
-          collapsed ? "max-lg:-translate-x-full" : "max-lg:translate-x-0",
+          collapsed ? "max-md:-translate-x-full" : "max-md:translate-x-0",
           isHome ? "" : "drop-shadow-sm",
         )}
         style={{ transform: "translateZ(0)" }}
@@ -153,7 +153,7 @@ export default function Sidebar() {
               collapsed ? "h-0 opacity-0 mb-0" : "h-5 opacity-100 mb-0",
             )}
           >
-            <p className="hidden lg:block uppercase text-xs font-medium text-gray-400 px-1 whitespace-nowrap">
+            <p className="hidden md:block uppercase text-xs font-medium text-gray-400 px-1 whitespace-nowrap">
               Menus
             </p>
           </div>

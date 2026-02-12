@@ -62,7 +62,10 @@ export default function SidebarItem({
         </Link>
       </TooltipTrigger>
       {collapsed && (
-        <TooltipContent className="bg-white text-gray-800" side="right">
+        <TooltipContent
+          className="bg-white text-gray-800 hidden md:block"
+          side="right"
+        >
           {label}
         </TooltipContent>
       )}

@@ -81,7 +81,7 @@ export default function Topbar({
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="hidden lg:flex text-wrap text-pink-600 border border-pink-200 bg-pink-50 text-sm rounded-md py-1 px-3 items-center gap-2.5">
+          <div className="hidden md:flex text-wrap text-pink-600 border border-pink-200 bg-pink-50 text-sm rounded-md py-1 px-3 items-center gap-2.5">
             <Calendar className="size-4" />
             {todayLabel}
           </div>

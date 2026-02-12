@@ -26,7 +26,7 @@ function DashboardLayoutInner({
       {!collapsed && (
         <div
           onClick={toggle}
-          className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/40 z-40 md:hidden"
         />
       )}
 
