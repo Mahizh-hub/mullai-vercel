@@ -14,6 +14,7 @@ import {
   DashboardIcon,
   ExamsIcon,
   FeesIcon,
+  LeaveManagementIcon,
   SettingsIcon,
   TeachersIcon,
   TimetablesIcon,
@@ -51,6 +52,11 @@ const navigation = [
     name: "Exams",
     href: "/dashboard/exams",
     icon: ExamsIcon,
+  },
+  {
+    name: "Leave Management",
+    href: "/dashboard/leave-management",
+    icon: LeaveManagementIcon,
   },
   {
     name: "Admissions",
