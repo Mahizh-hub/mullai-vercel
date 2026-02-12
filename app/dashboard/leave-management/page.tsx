@@ -1,4 +1,3 @@
-import AllCampus from "@/components/dashboard/campus/AllCampus";
 import AllLeaveManagement from "@/components/dashboard/leaveManagement/AllLeaveManagement";
 import DynamicBreadcrumb from "@/components/layout/DynamicBreadcrumb";
 
